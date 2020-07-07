@@ -15,7 +15,7 @@ public struct ASCAgeRatingDeclarationUpdateRequest: AppStoreConnectBaseModel {
             case ageRatingDeclarations = "ageRatingDeclarations"
         }
 
-        public var id: String
+        public var _id: String
 
         public var type: ASCType
 
@@ -174,8 +174,8 @@ public struct ASCAgeRatingDeclarationUpdateRequest: AppStoreConnectBaseModel {
 
         }
 
-        public init(id: String, type: ASCType, attributes: Attributes? = nil) {
-            self.id = id
+        public init(_id: String, type: ASCType, attributes: Attributes? = nil) {
+            self._id = _id
             self.type = type
             self.attributes = attributes
         }
@@ -183,7 +183,7 @@ public struct ASCAgeRatingDeclarationUpdateRequest: AppStoreConnectBaseModel {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-            id = try container.decode("id")
+            _id = try container.decode("id")
             type = try container.decode("type")
             attributes = try container.decodeIfPresent("attributes")
         }
@@ -191,7 +191,7 @@ public struct ASCAgeRatingDeclarationUpdateRequest: AppStoreConnectBaseModel {
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: StringCodingKey.self)
 
-            try container.encode(id, forKey: "id")
+            try container.encode(_id, forKey: "id")
             try container.encode(type, forKey: "type")
             try container.encodeIfPresent(attributes, forKey: "attributes")
         }

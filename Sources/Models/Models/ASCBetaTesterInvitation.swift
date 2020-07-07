@@ -13,13 +13,13 @@ public struct ASCBetaTesterInvitation: AppStoreConnectBaseModel {
 
     public var links: ASCResourceLinks
 
-    public var id: String
+    public var _id: String
 
     public var type: ASCType
 
-    public init(links: ASCResourceLinks, id: String, type: ASCType) {
+    public init(links: ASCResourceLinks, _id: String, type: ASCType) {
         self.links = links
-        self.id = id
+        self._id = _id
         self.type = type
     }
 
@@ -27,7 +27,7 @@ public struct ASCBetaTesterInvitation: AppStoreConnectBaseModel {
         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
         links = try container.decode("links")
-        id = try container.decode("id")
+        _id = try container.decode("id")
         type = try container.decode("type")
     }
 
@@ -35,7 +35,7 @@ public struct ASCBetaTesterInvitation: AppStoreConnectBaseModel {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
         try container.encode(links, forKey: "links")
-        try container.encode(id, forKey: "id")
+        try container.encode(_id, forKey: "id")
         try container.encode(type, forKey: "type")
     }
 

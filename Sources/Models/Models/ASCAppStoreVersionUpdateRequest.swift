@@ -15,7 +15,7 @@ public struct ASCAppStoreVersionUpdateRequest: AppStoreConnectBaseModel {
             case appStoreVersions = "appStoreVersions"
         }
 
-        public var id: String
+        public var _id: String
 
         public var type: ASCType
 
@@ -90,26 +90,26 @@ public struct ASCAppStoreVersionUpdateRequest: AppStoreConnectBaseModel {
                         case builds = "builds"
                     }
 
-                    public var id: String
+                    public var _id: String
 
                     public var type: ASCType
 
-                    public init(id: String, type: ASCType) {
-                        self.id = id
+                    public init(_id: String, type: ASCType) {
+                        self._id = _id
                         self.type = type
                     }
 
                     public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                        id = try container.decode("id")
+                        _id = try container.decode("id")
                         type = try container.decode("type")
                     }
 
                     public func encode(to encoder: Encoder) throws {
                         var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                        try container.encode(id, forKey: "id")
+                        try container.encode(_id, forKey: "id")
                         try container.encode(type, forKey: "type")
                     }
 
@@ -151,8 +151,8 @@ public struct ASCAppStoreVersionUpdateRequest: AppStoreConnectBaseModel {
 
         }
 
-        public init(id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
-            self.id = id
+        public init(_id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
+            self._id = _id
             self.type = type
             self.attributes = attributes
             self.relationships = relationships
@@ -161,7 +161,7 @@ public struct ASCAppStoreVersionUpdateRequest: AppStoreConnectBaseModel {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-            id = try container.decode("id")
+            _id = try container.decode("id")
             type = try container.decode("type")
             attributes = try container.decodeIfPresent("attributes")
             relationships = try container.decodeIfPresent("relationships")
@@ -170,7 +170,7 @@ public struct ASCAppStoreVersionUpdateRequest: AppStoreConnectBaseModel {
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: StringCodingKey.self)
 
-            try container.encode(id, forKey: "id")
+            try container.encode(_id, forKey: "id")
             try container.encode(type, forKey: "type")
             try container.encodeIfPresent(attributes, forKey: "attributes")
             try container.encodeIfPresent(relationships, forKey: "relationships")

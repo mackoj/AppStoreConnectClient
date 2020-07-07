@@ -13,7 +13,7 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
     public var links: ASCResourceLinks
 
-    public var id: String
+    public var _id: String
 
     public var type: ASCType
 
@@ -122,26 +122,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case appInfos = "appInfos"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -151,25 +151,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -212,26 +212,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case appStoreVersions = "appStoreVersions"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -241,25 +241,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -302,26 +302,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case territories = "territories"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -331,25 +331,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -392,26 +392,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case betaAppLocalizations = "betaAppLocalizations"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -421,25 +421,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -480,26 +480,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case betaAppReviewDetails = "betaAppReviewDetails"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -509,25 +509,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -567,26 +567,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case betaGroups = "betaGroups"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -596,25 +596,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -655,26 +655,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case betaLicenseAgreements = "betaLicenseAgreements"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -684,25 +684,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -742,26 +742,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case builds = "builds"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -771,25 +771,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -830,26 +830,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case endUserLicenseAgreements = "endUserLicenseAgreements"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -859,25 +859,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -917,26 +917,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case gameCenterEnabledVersions = "gameCenterEnabledVersions"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -946,25 +946,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -1007,26 +1007,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case inAppPurchases = "inAppPurchases"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -1036,25 +1036,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -1095,26 +1095,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case appPreOrders = "appPreOrders"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -1124,25 +1124,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -1182,26 +1182,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case preReleaseVersions = "preReleaseVersions"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -1211,25 +1211,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -1272,26 +1272,26 @@ public struct ASCApp: AppStoreConnectBaseModel {
                     case appPrices = "appPrices"
                 }
 
-                public var id: String
+                public var _id: String
 
                 public var type: ASCType
 
-                public init(id: String, type: ASCType) {
-                    self.id = id
+                public init(_id: String, type: ASCType) {
+                    self._id = _id
                     self.type = type
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                    id = try container.decode("id")
+                    _id = try container.decode("id")
                     type = try container.decode("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                    try container.encode(id, forKey: "id")
+                    try container.encode(_id, forKey: "id")
                     try container.encode(type, forKey: "type")
                 }
 
@@ -1301,25 +1301,25 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
                 public var related: String?
 
-                public var `self`: String?
+                public var _self: String?
 
-                public init(related: String? = nil, `self`: String? = nil) {
+                public init(related: String? = nil, _self: String? = nil) {
                     self.related = related
-                    self.`self` = `self`
+                    self._self = _self
                 }
 
                 public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
+                    _self = try container.decodeIfPresent("self")
                 }
 
                 public func encode(to encoder: Encoder) throws {
                     var container = encoder.container(keyedBy: StringCodingKey.self)
 
                     try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
+                    try container.encodeIfPresent(_self, forKey: "self")
                 }
 
             }
@@ -1405,9 +1405,9 @@ public struct ASCApp: AppStoreConnectBaseModel {
 
     }
 
-    public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
+    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
         self.links = links
-        self.id = id
+        self._id = _id
         self.type = type
         self.attributes = attributes
         self.relationships = relationships
@@ -1417,7 +1417,7 @@ public struct ASCApp: AppStoreConnectBaseModel {
         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
         links = try container.decode("links")
-        id = try container.decode("id")
+        _id = try container.decode("id")
         type = try container.decode("type")
         attributes = try container.decodeIfPresent("attributes")
         relationships = try container.decodeIfPresent("relationships")
@@ -1427,7 +1427,7 @@ public struct ASCApp: AppStoreConnectBaseModel {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
         try container.encode(links, forKey: "links")
-        try container.encode(id, forKey: "id")
+        try container.encode(_id, forKey: "id")
         try container.encode(type, forKey: "type")
         try container.encodeIfPresent(attributes, forKey: "attributes")
         try container.encodeIfPresent(relationships, forKey: "relationships")

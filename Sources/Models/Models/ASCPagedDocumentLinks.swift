@@ -7,14 +7,14 @@ import Foundation
 
 public struct ASCPagedDocumentLinks: AppStoreConnectBaseModel {
 
-    public var `self`: String
+    public var _self: String
 
     public var first: String?
 
     public var next: String?
 
-    public init(`self`: String, first: String? = nil, next: String? = nil) {
-        self.`self` = `self`
+    public init(_self: String, first: String? = nil, next: String? = nil) {
+        self._self = _self
         self.first = first
         self.next = next
     }
@@ -22,7 +22,7 @@ public struct ASCPagedDocumentLinks: AppStoreConnectBaseModel {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        `self` = try container.decode("self")
+        _self = try container.decode("self")
         first = try container.decodeIfPresent("first")
         next = try container.decodeIfPresent("next")
     }
@@ -30,7 +30,7 @@ public struct ASCPagedDocumentLinks: AppStoreConnectBaseModel {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(`self`, forKey: "self")
+        try container.encode(_self, forKey: "self")
         try container.encodeIfPresent(first, forKey: "first")
         try container.encodeIfPresent(next, forKey: "next")
     }

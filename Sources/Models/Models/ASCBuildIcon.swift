@@ -13,7 +13,7 @@ public struct ASCBuildIcon: AppStoreConnectBaseModel {
 
     public var links: ASCResourceLinks
 
-    public var id: String
+    public var _id: String
 
     public var type: ASCType
 
@@ -46,9 +46,9 @@ public struct ASCBuildIcon: AppStoreConnectBaseModel {
 
     }
 
-    public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil) {
+    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
         self.links = links
-        self.id = id
+        self._id = _id
         self.type = type
         self.attributes = attributes
     }
@@ -57,7 +57,7 @@ public struct ASCBuildIcon: AppStoreConnectBaseModel {
         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
         links = try container.decode("links")
-        id = try container.decode("id")
+        _id = try container.decode("id")
         type = try container.decode("type")
         attributes = try container.decodeIfPresent("attributes")
     }
@@ -66,7 +66,7 @@ public struct ASCBuildIcon: AppStoreConnectBaseModel {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
         try container.encode(links, forKey: "links")
-        try container.encode(id, forKey: "id")
+        try container.encode(_id, forKey: "id")
         try container.encode(type, forKey: "type")
         try container.encodeIfPresent(attributes, forKey: "attributes")
     }

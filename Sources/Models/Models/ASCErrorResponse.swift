@@ -19,16 +19,16 @@ public struct ASCErrorResponse: AppStoreConnectBaseModel {
 
         public var status: String
 
-        public var id: String?
+        public var _id: String?
 
         public var source: Source?
 
-        public init(code: String, detail: String, title: String, status: String, id: String? = nil, source: Source? = nil) {
+        public init(code: String, detail: String, title: String, status: String, _id: String? = nil, source: Source? = nil) {
             self.code = code
             self.detail = detail
             self.title = title
             self.status = status
-            self.id = id
+            self._id = _id
             self.source = source
         }
 
@@ -39,7 +39,7 @@ public struct ASCErrorResponse: AppStoreConnectBaseModel {
             detail = try container.decode("detail")
             title = try container.decode("title")
             status = try container.decode("status")
-            id = try container.decodeIfPresent("id")
+            _id = try container.decodeIfPresent("id")
             source = try container.decodeIfPresent("source")
         }
 
@@ -50,7 +50,7 @@ public struct ASCErrorResponse: AppStoreConnectBaseModel {
             try container.encode(detail, forKey: "detail")
             try container.encode(title, forKey: "title")
             try container.encode(status, forKey: "status")
-            try container.encodeIfPresent(id, forKey: "id")
+            try container.encodeIfPresent(_id, forKey: "id")
             try container.encodeIfPresent(source, forKey: "source")
         }
 
