@@ -4,154 +4,150 @@
 //
 
 import Foundation
-
 #if canImport(AppStoreConnectModels)
-  import AppStoreConnectModels
-  import AppStoreConnectSharedCode
+import AppStoreConnectModels
+import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.DiagnosticSignatures {
 
-  public enum DiagnosticSignaturesLogsGetToManyRelated {
+    public enum DiagnosticSignaturesLogsGetToManyRelated {
 
-    public static let service = APIService<Response>(
-      id: "diagnosticSignatures-logs-get_to_many_related", tag: "DiagnosticSignatures",
-      method: "GET", path: "/v1/diagnosticSignatures/{id}/logs", hasBody: false,
-      securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+        public static let service = APIService<Response>(id: "diagnosticSignatures-logs-get_to_many_related", tag: "DiagnosticSignatures", method: "GET", path: "/v1/diagnosticSignatures/{id}/logs", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
 
-    public final class Request: APIRequest<Response> {
+        public final class Request: APIRequest<Response> {
 
-      public struct Options {
+            public struct Options {
 
-        /** the id of the requested resource */
-        public var id: String
+                /** the id of the requested resource */
+                public var id: String
 
-        /** maximum resources per page */
-        public var limit: Int?
+                /** maximum resources per page */
+                public var limit: Int?
 
-        public init(id: String, limit: Int? = nil) {
-          self.id = id
-          self.limit = limit
+                public init(id: String, limit: Int? = nil) {
+                    self.id = id
+                    self.limit = limit
+                }
+            }
+
+            public var options: Options
+
+            public init(options: Options) {
+                self.options = options
+                super.init(service: DiagnosticSignaturesLogsGetToManyRelated.service)
+            }
+
+            /// convenience initialiser so an Option doesn't have to be created
+            public convenience init(id: String, limit: Int? = nil) {
+                let options = Options(id: id, limit: limit)
+                self.init(options: options)
+            }
+
+            public override var path: String {
+                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+            }
+
+            public override var queryParameters: [String: Any] {
+                var params: [String: Any] = [:]
+                if let limit = options.limit {
+                  params["limit"] = limit
+                }
+                return params
+            }
         }
-      }
 
-      public var options: Options
+        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+            public typealias SuccessType = ASCDiagnosticLogsResponse
 
-      public init(options: Options) {
-        self.options = options
-        super.init(service: DiagnosticSignaturesLogsGetToManyRelated.service)
-      }
+            /** List of related resources */
+            case status200(ASCDiagnosticLogsResponse)
 
-      /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(id: String, limit: Int? = nil) {
-        let options = Options(id: id, limit: limit)
-        self.init(options: options)
-      }
+            /** Parameter error(s) */
+            case status400(ASCErrorResponse)
 
-      public override var path: String {
-        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-      }
+            /** Forbidden error */
+            case status403(ASCErrorResponse)
 
-      public override var queryParameters: [String: Any] {
-        var params: [String: Any] = [:]
-        if let limit = options.limit {
-          params["limit"] = limit
+            /** Not found error */
+            case status404(ASCErrorResponse)
+
+            public var success: ASCDiagnosticLogsResponse? {
+                switch self {
+                case .status200(let response): return response
+                default: return nil
+                }
+            }
+
+            public var failure: ASCErrorResponse? {
+                switch self {
+                case .status400(let response): return response
+                case .status403(let response): return response
+                case .status404(let response): return response
+                default: return nil
+                }
+            }
+
+            /// either success or failure value. Success is anything in the 200..<300 status code range
+            public var responseResult: APIResponseResult<ASCDiagnosticLogsResponse, ASCErrorResponse> {
+                if let successValue = success {
+                    return .success(successValue)
+                } else if let failureValue = failure {
+                    return .failure(failureValue)
+                } else {
+                    fatalError("Response does not have success or failure response")
+                }
+            }
+
+            public var response: Any {
+                switch self {
+                case .status200(let response): return response
+                case .status400(let response): return response
+                case .status403(let response): return response
+                case .status404(let response): return response
+                }
+            }
+
+            public var statusCode: Int {
+                switch self {
+                case .status200: return 200
+                case .status400: return 400
+                case .status403: return 403
+                case .status404: return 404
+                }
+            }
+
+            public var successful: Bool {
+                switch self {
+                case .status200: return true
+                case .status400: return false
+                case .status403: return false
+                case .status404: return false
+                }
+            }
+
+            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+                switch statusCode {
+                case 200: self = try .status200(decoder.decode(ASCDiagnosticLogsResponse.self, from: data))
+                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+                }
+            }
+
+            public var description: String {
+                return "\(statusCode) \(successful ? "success" : "failure")"
+            }
+
+            public var debugDescription: String {
+                var string = description
+                let responseString = "\(response)"
+                if responseString != "()" {
+                    string += "\n\(responseString)"
+                }
+                return string
+            }
         }
-        return params
-      }
     }
-
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias SuccessType = ASCDiagnosticLogsResponse
-
-      /** List of related resources */
-      case status200(ASCDiagnosticLogsResponse)
-
-      /** Parameter error(s) */
-      case status400(ASCErrorResponse)
-
-      /** Forbidden error */
-      case status403(ASCErrorResponse)
-
-      /** Not found error */
-      case status404(ASCErrorResponse)
-
-      public var success: ASCDiagnosticLogsResponse? {
-        switch self {
-        case .status200(let response): return response
-        default: return nil
-        }
-      }
-
-      public var failure: ASCErrorResponse? {
-        switch self {
-        case .status400(let response): return response
-        case .status403(let response): return response
-        case .status404(let response): return response
-        default: return nil
-        }
-      }
-
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<ASCDiagnosticLogsResponse, ASCErrorResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
-
-      public var response: Any {
-        switch self {
-        case .status200(let response): return response
-        case .status400(let response): return response
-        case .status403(let response): return response
-        case .status404(let response): return response
-        }
-      }
-
-      public var statusCode: Int {
-        switch self {
-        case .status200: return 200
-        case .status400: return 400
-        case .status403: return 403
-        case .status404: return 404
-        }
-      }
-
-      public var successful: Bool {
-        switch self {
-        case .status200: return true
-        case .status400: return false
-        case .status403: return false
-        case .status404: return false
-        }
-      }
-
-      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-        switch statusCode {
-        case 200: self = try .status200(decoder.decode(ASCDiagnosticLogsResponse.self, from: data))
-        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-        }
-      }
-
-      public var description: String {
-        return "\(statusCode) \(successful ? "success" : "failure")"
-      }
-
-      public var debugDescription: String {
-        var string = description
-        let responseString = "\(response)"
-        if responseString != "()" {
-          string += "\n\(responseString)"
-        }
-        return string
-      }
-    }
-  }
 }

@@ -6,6 +6,6 @@
 import Foundation
 
 public enum ASCBetaInviteType: String, Codable, Equatable, CaseIterable {
-  case email = "EMAIL"
-  case publicLink = "PUBLIC_LINK"
+    case email = "EMAIL"
+    case publicLink = "PUBLIC_LINK"
 }

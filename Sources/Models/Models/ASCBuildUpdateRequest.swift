@@ -7,167 +7,165 @@ import Foundation
 
 public struct ASCBuildUpdateRequest: AppStoreConnectBaseModel {
 
-  public var data: DataType
+    public var data: DataType
 
-  public struct DataType: AppStoreConnectBaseModel {
+    public struct DataType: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-      case builds = "builds"
-    }
+        public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case builds = "builds"
+        }
 
-    public var id: String
+        public var _id: String
 
-    public var type: ASCType
+        public var type: ASCType
 
-    public var attributes: Attributes?
+        public var attributes: Attributes?
 
-    public var relationships: Relationships?
+        public var relationships: Relationships?
 
-    public struct Attributes: AppStoreConnectBaseModel {
+        public struct Attributes: AppStoreConnectBaseModel {
 
-      public var expired: Bool?
+            public var expired: Bool?
 
-      public var usesNonExemptEncryption: Bool?
+            public var usesNonExemptEncryption: Bool?
 
-      public init(expired: Bool? = nil, usesNonExemptEncryption: Bool? = nil) {
-        self.expired = expired
-        self.usesNonExemptEncryption = usesNonExemptEncryption
-      }
+            public init(expired: Bool? = nil, usesNonExemptEncryption: Bool? = nil) {
+                self.expired = expired
+                self.usesNonExemptEncryption = usesNonExemptEncryption
+            }
 
-      public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        expired = try container.decodeIfPresent("expired")
-        usesNonExemptEncryption = try container.decodeIfPresent("usesNonExemptEncryption")
-      }
+                expired = try container.decodeIfPresent("expired")
+                usesNonExemptEncryption = try container.decodeIfPresent("usesNonExemptEncryption")
+            }
 
-      public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+            public func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encodeIfPresent(expired, forKey: "expired")
-        try container.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
-      }
-
-    }
-
-    public struct Relationships: AppStoreConnectBaseModel {
-
-      public var appEncryptionDeclaration: AppEncryptionDeclaration?
-
-      public struct AppEncryptionDeclaration: AppStoreConnectBaseModel {
-
-        public var data: DataType?
-
-        public struct DataType: AppStoreConnectBaseModel {
-
-          public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case appEncryptionDeclarations = "appEncryptionDeclarations"
-          }
-
-          public var id: String
-
-          public var type: ASCType
-
-          public init(id: String, type: ASCType) {
-            self.id = id
-            self.type = type
-          }
-
-          public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            id = try container.decode("id")
-            type = try container.decode("type")
-          }
-
-          public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encode(id, forKey: "id")
-            try container.encode(type, forKey: "type")
-          }
+                try container.encodeIfPresent(expired, forKey: "expired")
+                try container.encodeIfPresent(usesNonExemptEncryption, forKey: "usesNonExemptEncryption")
+            }
 
         }
 
-        public init(data: DataType? = nil) {
-          self.data = data
+        public struct Relationships: AppStoreConnectBaseModel {
+
+            public var appEncryptionDeclaration: AppEncryptionDeclaration?
+
+            public struct AppEncryptionDeclaration: AppStoreConnectBaseModel {
+
+                public var data: DataType?
+
+                public struct DataType: AppStoreConnectBaseModel {
+
+                    public enum ASCType: String, Codable, Equatable, CaseIterable {
+                        case appEncryptionDeclarations = "appEncryptionDeclarations"
+                    }
+
+                    public var _id: String
+
+                    public var type: ASCType
+
+                    public init(_id: String, type: ASCType) {
+                        self._id = _id
+                        self.type = type
+                    }
+
+                    public init(from decoder: Decoder) throws {
+                        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                        _id = try container.decode("id")
+                        type = try container.decode("type")
+                    }
+
+                    public func encode(to encoder: Encoder) throws {
+                        var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                        try container.encode(_id, forKey: "id")
+                        try container.encode(type, forKey: "type")
+                    }
+
+                }
+
+                public init(data: DataType? = nil) {
+                    self.data = data
+                }
+
+                public init(from decoder: Decoder) throws {
+                    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                    data = try container.decodeIfPresent("data")
+                }
+
+                public func encode(to encoder: Encoder) throws {
+                    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                    try container.encodeIfPresent(data, forKey: "data")
+                }
+
+            }
+
+            public init(appEncryptionDeclaration: AppEncryptionDeclaration? = nil) {
+                self.appEncryptionDeclaration = appEncryptionDeclaration
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                appEncryptionDeclaration = try container.decodeIfPresent("appEncryptionDeclaration")
+            }
+
+            public func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                try container.encodeIfPresent(appEncryptionDeclaration, forKey: "appEncryptionDeclaration")
+            }
+
+        }
+
+        public init(_id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
+            self._id = _id
+            self.type = type
+            self.attributes = attributes
+            self.relationships = relationships
         }
 
         public init(from decoder: Decoder) throws {
-          let container = try decoder.container(keyedBy: StringCodingKey.self)
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-          data = try container.decodeIfPresent("data")
+            _id = try container.decode("id")
+            type = try container.decode("type")
+            attributes = try container.decodeIfPresent("attributes")
+            relationships = try container.decodeIfPresent("relationships")
         }
 
         public func encode(to encoder: Encoder) throws {
-          var container = encoder.container(keyedBy: StringCodingKey.self)
+            var container = encoder.container(keyedBy: StringCodingKey.self)
 
-          try container.encodeIfPresent(data, forKey: "data")
+            try container.encode(_id, forKey: "id")
+            try container.encode(type, forKey: "type")
+            try container.encodeIfPresent(attributes, forKey: "attributes")
+            try container.encodeIfPresent(relationships, forKey: "relationships")
         }
-
-      }
-
-      public init(appEncryptionDeclaration: AppEncryptionDeclaration? = nil) {
-        self.appEncryptionDeclaration = appEncryptionDeclaration
-      }
-
-      public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-        appEncryptionDeclaration = try container.decodeIfPresent("appEncryptionDeclaration")
-      }
-
-      public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-        try container.encodeIfPresent(appEncryptionDeclaration, forKey: "appEncryptionDeclaration")
-      }
 
     }
 
-    public init(
-      id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil
-    ) {
-      self.id = id
-      self.type = type
-      self.attributes = attributes
-      self.relationships = relationships
+    public init(data: DataType) {
+        self.data = data
     }
 
     public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: StringCodingKey.self)
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-      id = try container.decode("id")
-      type = try container.decode("type")
-      attributes = try container.decodeIfPresent("attributes")
-      relationships = try container.decodeIfPresent("relationships")
+        data = try container.decode("data")
     }
 
     public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: StringCodingKey.self)
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-      try container.encode(id, forKey: "id")
-      try container.encode(type, forKey: "type")
-      try container.encodeIfPresent(attributes, forKey: "attributes")
-      try container.encodeIfPresent(relationships, forKey: "relationships")
+        try container.encode(data, forKey: "data")
     }
-
-  }
-
-  public init(data: DataType) {
-    self.data = data
-  }
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-    data = try container.decode("data")
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-    try container.encode(data, forKey: "data")
-  }
 
 }

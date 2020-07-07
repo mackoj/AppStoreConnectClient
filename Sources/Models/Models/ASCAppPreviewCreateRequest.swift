@@ -7,173 +7,170 @@ import Foundation
 
 public struct ASCAppPreviewCreateRequest: AppStoreConnectBaseModel {
 
-  public var data: DataType
+    public var data: DataType
 
-  public struct DataType: AppStoreConnectBaseModel {
+    public struct DataType: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-      case appPreviews = "appPreviews"
-    }
+        public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case appPreviews = "appPreviews"
+        }
 
-    public var relationships: Relationships
+        public var relationships: Relationships
 
-    public var attributes: Attributes
+        public var attributes: Attributes
 
-    public var type: ASCType
+        public var type: ASCType
 
-    public struct Relationships: AppStoreConnectBaseModel {
+        public struct Relationships: AppStoreConnectBaseModel {
 
-      public var appPreviewSet: AppPreviewSet
+            public var appPreviewSet: AppPreviewSet
 
-      public struct AppPreviewSet: AppStoreConnectBaseModel {
+            public struct AppPreviewSet: AppStoreConnectBaseModel {
 
-        public var data: DataType
+                public var data: DataType
 
-        public struct DataType: AppStoreConnectBaseModel {
+                public struct DataType: AppStoreConnectBaseModel {
 
-          public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case appPreviewSets = "appPreviewSets"
-          }
+                    public enum ASCType: String, Codable, Equatable, CaseIterable {
+                        case appPreviewSets = "appPreviewSets"
+                    }
 
-          public var id: String
+                    public var _id: String
 
-          public var type: ASCType
+                    public var type: ASCType
 
-          public init(id: String, type: ASCType) {
-            self.id = id
-            self.type = type
-          }
+                    public init(_id: String, type: ASCType) {
+                        self._id = _id
+                        self.type = type
+                    }
 
-          public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
+                    public init(from decoder: Decoder) throws {
+                        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-            id = try container.decode("id")
-            type = try container.decode("type")
-          }
+                        _id = try container.decode("id")
+                        type = try container.decode("type")
+                    }
 
-          public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
+                    public func encode(to encoder: Encoder) throws {
+                        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-            try container.encode(id, forKey: "id")
-            try container.encode(type, forKey: "type")
-          }
+                        try container.encode(_id, forKey: "id")
+                        try container.encode(type, forKey: "type")
+                    }
+
+                }
+
+                public init(data: DataType) {
+                    self.data = data
+                }
+
+                public init(from decoder: Decoder) throws {
+                    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                    data = try container.decode("data")
+                }
+
+                public func encode(to encoder: Encoder) throws {
+                    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                    try container.encode(data, forKey: "data")
+                }
+
+            }
+
+            public init(appPreviewSet: AppPreviewSet) {
+                self.appPreviewSet = appPreviewSet
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                appPreviewSet = try container.decode("appPreviewSet")
+            }
+
+            public func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                try container.encode(appPreviewSet, forKey: "appPreviewSet")
+            }
 
         }
 
-        public init(data: DataType) {
-          self.data = data
+        public struct Attributes: AppStoreConnectBaseModel {
+
+            public var fileName: String
+
+            public var fileSize: Int
+
+            public var mimeType: String?
+
+            public var previewFrameTimeCode: String?
+
+            public init(fileName: String, fileSize: Int, mimeType: String? = nil, previewFrameTimeCode: String? = nil) {
+                self.fileName = fileName
+                self.fileSize = fileSize
+                self.mimeType = mimeType
+                self.previewFrameTimeCode = previewFrameTimeCode
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                fileName = try container.decode("fileName")
+                fileSize = try container.decode("fileSize")
+                mimeType = try container.decodeIfPresent("mimeType")
+                previewFrameTimeCode = try container.decodeIfPresent("previewFrameTimeCode")
+            }
+
+            public func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                try container.encode(fileName, forKey: "fileName")
+                try container.encode(fileSize, forKey: "fileSize")
+                try container.encodeIfPresent(mimeType, forKey: "mimeType")
+                try container.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+            }
+
+        }
+
+        public init(relationships: Relationships, attributes: Attributes, type: ASCType) {
+            self.relationships = relationships
+            self.attributes = attributes
+            self.type = type
         }
 
         public init(from decoder: Decoder) throws {
-          let container = try decoder.container(keyedBy: StringCodingKey.self)
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-          data = try container.decode("data")
+            relationships = try container.decode("relationships")
+            attributes = try container.decode("attributes")
+            type = try container.decode("type")
         }
 
         public func encode(to encoder: Encoder) throws {
-          var container = encoder.container(keyedBy: StringCodingKey.self)
+            var container = encoder.container(keyedBy: StringCodingKey.self)
 
-          try container.encode(data, forKey: "data")
+            try container.encode(relationships, forKey: "relationships")
+            try container.encode(attributes, forKey: "attributes")
+            try container.encode(type, forKey: "type")
         }
 
-      }
-
-      public init(appPreviewSet: AppPreviewSet) {
-        self.appPreviewSet = appPreviewSet
-      }
-
-      public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-        appPreviewSet = try container.decode("appPreviewSet")
-      }
-
-      public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-        try container.encode(appPreviewSet, forKey: "appPreviewSet")
-      }
-
     }
 
-    public struct Attributes: AppStoreConnectBaseModel {
-
-      public var fileName: String
-
-      public var fileSize: Int
-
-      public var mimeType: String?
-
-      public var previewFrameTimeCode: String?
-
-      public init(
-        fileName: String, fileSize: Int, mimeType: String? = nil,
-        previewFrameTimeCode: String? = nil
-      ) {
-        self.fileName = fileName
-        self.fileSize = fileSize
-        self.mimeType = mimeType
-        self.previewFrameTimeCode = previewFrameTimeCode
-      }
-
-      public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-        fileName = try container.decode("fileName")
-        fileSize = try container.decode("fileSize")
-        mimeType = try container.decodeIfPresent("mimeType")
-        previewFrameTimeCode = try container.decodeIfPresent("previewFrameTimeCode")
-      }
-
-      public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-        try container.encode(fileName, forKey: "fileName")
-        try container.encode(fileSize, forKey: "fileSize")
-        try container.encodeIfPresent(mimeType, forKey: "mimeType")
-        try container.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-      }
-
-    }
-
-    public init(relationships: Relationships, attributes: Attributes, type: ASCType) {
-      self.relationships = relationships
-      self.attributes = attributes
-      self.type = type
+    public init(data: DataType) {
+        self.data = data
     }
 
     public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: StringCodingKey.self)
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-      relationships = try container.decode("relationships")
-      attributes = try container.decode("attributes")
-      type = try container.decode("type")
+        data = try container.decode("data")
     }
 
     public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: StringCodingKey.self)
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-      try container.encode(relationships, forKey: "relationships")
-      try container.encode(attributes, forKey: "attributes")
-      try container.encode(type, forKey: "type")
+        try container.encode(data, forKey: "data")
     }
-
-  }
-
-  public init(data: DataType) {
-    self.data = data
-  }
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-    data = try container.decode("data")
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-    try container.encode(data, forKey: "data")
-  }
 
 }

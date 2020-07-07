@@ -7,119 +7,115 @@ import Foundation
 
 public struct ASCAppStoreReviewDetailUpdateRequest: AppStoreConnectBaseModel {
 
-  public var data: DataType
+    public var data: DataType
 
-  public struct DataType: AppStoreConnectBaseModel {
+    public struct DataType: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-      case appStoreReviewDetails = "appStoreReviewDetails"
+        public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case appStoreReviewDetails = "appStoreReviewDetails"
+        }
+
+        public var _id: String
+
+        public var type: ASCType
+
+        public var attributes: Attributes?
+
+        public struct Attributes: AppStoreConnectBaseModel {
+
+            public var contactEmail: String?
+
+            public var contactFirstName: String?
+
+            public var contactLastName: String?
+
+            public var contactPhone: String?
+
+            public var demoAccountName: String?
+
+            public var demoAccountPassword: String?
+
+            public var demoAccountRequired: Bool?
+
+            public var notes: String?
+
+            public init(contactEmail: String? = nil, contactFirstName: String? = nil, contactLastName: String? = nil, contactPhone: String? = nil, demoAccountName: String? = nil, demoAccountPassword: String? = nil, demoAccountRequired: Bool? = nil, notes: String? = nil) {
+                self.contactEmail = contactEmail
+                self.contactFirstName = contactFirstName
+                self.contactLastName = contactLastName
+                self.contactPhone = contactPhone
+                self.demoAccountName = demoAccountName
+                self.demoAccountPassword = demoAccountPassword
+                self.demoAccountRequired = demoAccountRequired
+                self.notes = notes
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+                contactEmail = try container.decodeIfPresent("contactEmail")
+                contactFirstName = try container.decodeIfPresent("contactFirstName")
+                contactLastName = try container.decodeIfPresent("contactLastName")
+                contactPhone = try container.decodeIfPresent("contactPhone")
+                demoAccountName = try container.decodeIfPresent("demoAccountName")
+                demoAccountPassword = try container.decodeIfPresent("demoAccountPassword")
+                demoAccountRequired = try container.decodeIfPresent("demoAccountRequired")
+                notes = try container.decodeIfPresent("notes")
+            }
+
+            public func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: StringCodingKey.self)
+
+                try container.encodeIfPresent(contactEmail, forKey: "contactEmail")
+                try container.encodeIfPresent(contactFirstName, forKey: "contactFirstName")
+                try container.encodeIfPresent(contactLastName, forKey: "contactLastName")
+                try container.encodeIfPresent(contactPhone, forKey: "contactPhone")
+                try container.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
+                try container.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
+                try container.encodeIfPresent(demoAccountRequired, forKey: "demoAccountRequired")
+                try container.encodeIfPresent(notes, forKey: "notes")
+            }
+
+        }
+
+        public init(_id: String, type: ASCType, attributes: Attributes? = nil) {
+            self._id = _id
+            self.type = type
+            self.attributes = attributes
+        }
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+            _id = try container.decode("id")
+            type = try container.decode("type")
+            attributes = try container.decodeIfPresent("attributes")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: StringCodingKey.self)
+
+            try container.encode(_id, forKey: "id")
+            try container.encode(type, forKey: "type")
+            try container.encodeIfPresent(attributes, forKey: "attributes")
+        }
+
     }
 
-    public var id: String
-
-    public var type: ASCType
-
-    public var attributes: Attributes?
-
-    public struct Attributes: AppStoreConnectBaseModel {
-
-      public var contactEmail: String?
-
-      public var contactFirstName: String?
-
-      public var contactLastName: String?
-
-      public var contactPhone: String?
-
-      public var demoAccountName: String?
-
-      public var demoAccountPassword: String?
-
-      public var demoAccountRequired: Bool?
-
-      public var notes: String?
-
-      public init(
-        contactEmail: String? = nil, contactFirstName: String? = nil,
-        contactLastName: String? = nil, contactPhone: String? = nil, demoAccountName: String? = nil,
-        demoAccountPassword: String? = nil, demoAccountRequired: Bool? = nil, notes: String? = nil
-      ) {
-        self.contactEmail = contactEmail
-        self.contactFirstName = contactFirstName
-        self.contactLastName = contactLastName
-        self.contactPhone = contactPhone
-        self.demoAccountName = demoAccountName
-        self.demoAccountPassword = demoAccountPassword
-        self.demoAccountRequired = demoAccountRequired
-        self.notes = notes
-      }
-
-      public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-        contactEmail = try container.decodeIfPresent("contactEmail")
-        contactFirstName = try container.decodeIfPresent("contactFirstName")
-        contactLastName = try container.decodeIfPresent("contactLastName")
-        contactPhone = try container.decodeIfPresent("contactPhone")
-        demoAccountName = try container.decodeIfPresent("demoAccountName")
-        demoAccountPassword = try container.decodeIfPresent("demoAccountPassword")
-        demoAccountRequired = try container.decodeIfPresent("demoAccountRequired")
-        notes = try container.decodeIfPresent("notes")
-      }
-
-      public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-        try container.encodeIfPresent(contactEmail, forKey: "contactEmail")
-        try container.encodeIfPresent(contactFirstName, forKey: "contactFirstName")
-        try container.encodeIfPresent(contactLastName, forKey: "contactLastName")
-        try container.encodeIfPresent(contactPhone, forKey: "contactPhone")
-        try container.encodeIfPresent(demoAccountName, forKey: "demoAccountName")
-        try container.encodeIfPresent(demoAccountPassword, forKey: "demoAccountPassword")
-        try container.encodeIfPresent(demoAccountRequired, forKey: "demoAccountRequired")
-        try container.encodeIfPresent(notes, forKey: "notes")
-      }
-
-    }
-
-    public init(id: String, type: ASCType, attributes: Attributes? = nil) {
-      self.id = id
-      self.type = type
-      self.attributes = attributes
+    public init(data: DataType) {
+        self.data = data
     }
 
     public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: StringCodingKey.self)
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-      id = try container.decode("id")
-      type = try container.decode("type")
-      attributes = try container.decodeIfPresent("attributes")
+        data = try container.decode("data")
     }
 
     public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: StringCodingKey.self)
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-      try container.encode(id, forKey: "id")
-      try container.encode(type, forKey: "type")
-      try container.encodeIfPresent(attributes, forKey: "attributes")
+        try container.encode(data, forKey: "data")
     }
-
-  }
-
-  public init(data: DataType) {
-    self.data = data
-  }
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-    data = try container.decode("data")
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-    try container.encode(data, forKey: "data")
-  }
 
 }

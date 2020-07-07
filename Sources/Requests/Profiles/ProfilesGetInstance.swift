@@ -4,276 +4,248 @@
 //
 
 import Foundation
-
 #if canImport(AppStoreConnectModels)
-  import AppStoreConnectModels
-  import AppStoreConnectSharedCode
+import AppStoreConnectModels
+import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.Profiles {
 
-  public enum ProfilesGetInstance {
+    public enum ProfilesGetInstance {
 
-    public static let service = APIService<Response>(
-      id: "profiles-get_instance", tag: "Profiles", method: "GET", path: "/v1/profiles/{id}",
-      hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: [])
-    )
-
-    /** the fields to include for returned resources of type profiles */
-    public enum ASCFieldsprofiles: String, Codable, Equatable, CaseIterable {
-      case bundleId = "bundleId"
-      case certificates = "certificates"
-      case createdDate = "createdDate"
-      case devices = "devices"
-      case expirationDate = "expirationDate"
-      case name = "name"
-      case platform = "platform"
-      case profileContent = "profileContent"
-      case profileState = "profileState"
-      case profileType = "profileType"
-      case uuid = "uuid"
-    }
-
-    /** comma-separated list of relationships to include */
-    public enum ASCInclude: String, Codable, Equatable, CaseIterable {
-      case bundleId = "bundleId"
-      case certificates = "certificates"
-      case devices = "devices"
-    }
-
-    /** the fields to include for returned resources of type certificates */
-    public enum ASCFieldscertificates: String, Codable, Equatable, CaseIterable {
-      case certificateContent = "certificateContent"
-      case certificateType = "certificateType"
-      case csrContent = "csrContent"
-      case displayName = "displayName"
-      case expirationDate = "expirationDate"
-      case name = "name"
-      case platform = "platform"
-      case serialNumber = "serialNumber"
-    }
-
-    /** the fields to include for returned resources of type devices */
-    public enum ASCFieldsdevices: String, Codable, Equatable, CaseIterable {
-      case addedDate = "addedDate"
-      case deviceClass = "deviceClass"
-      case model = "model"
-      case name = "name"
-      case platform = "platform"
-      case status = "status"
-      case udid = "udid"
-    }
-
-    /** the fields to include for returned resources of type bundleIds */
-    public enum ASCFieldsbundleIds: String, Codable, Equatable, CaseIterable {
-      case app = "app"
-      case bundleIdCapabilities = "bundleIdCapabilities"
-      case identifier = "identifier"
-      case name = "name"
-      case platform = "platform"
-      case profiles = "profiles"
-      case seedId = "seedId"
-    }
-
-    public final class Request: APIRequest<Response> {
-
-      public struct Options {
-
-        /** the id of the requested resource */
-        public var id: String
+        public static let service = APIService<Response>(id: "profiles-get_instance", tag: "Profiles", method: "GET", path: "/v1/profiles/{id}", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
 
         /** the fields to include for returned resources of type profiles */
-        public var fieldsprofiles: [ASCFieldsprofiles]?
+        public enum ASCFieldsprofiles: String, Codable, Equatable, CaseIterable {
+            case bundleId = "bundleId"
+            case certificates = "certificates"
+            case createdDate = "createdDate"
+            case devices = "devices"
+            case expirationDate = "expirationDate"
+            case name = "name"
+            case platform = "platform"
+            case profileContent = "profileContent"
+            case profileState = "profileState"
+            case profileType = "profileType"
+            case uuid = "uuid"
+        }
 
         /** comma-separated list of relationships to include */
-        public var include: [ASCInclude]?
+        public enum ASCInclude: String, Codable, Equatable, CaseIterable {
+            case bundleId = "bundleId"
+            case certificates = "certificates"
+            case devices = "devices"
+        }
 
         /** the fields to include for returned resources of type certificates */
-        public var fieldscertificates: [ASCFieldscertificates]?
+        public enum ASCFieldscertificates: String, Codable, Equatable, CaseIterable {
+            case certificateContent = "certificateContent"
+            case certificateType = "certificateType"
+            case csrContent = "csrContent"
+            case displayName = "displayName"
+            case expirationDate = "expirationDate"
+            case name = "name"
+            case platform = "platform"
+            case serialNumber = "serialNumber"
+        }
 
         /** the fields to include for returned resources of type devices */
-        public var fieldsdevices: [ASCFieldsdevices]?
+        public enum ASCFieldsdevices: String, Codable, Equatable, CaseIterable {
+            case addedDate = "addedDate"
+            case deviceClass = "deviceClass"
+            case model = "model"
+            case name = "name"
+            case platform = "platform"
+            case status = "status"
+            case udid = "udid"
+        }
 
         /** the fields to include for returned resources of type bundleIds */
-        public var fieldsbundleIds: [ASCFieldsbundleIds]?
-
-        /** maximum number of related certificates returned (when they are included) */
-        public var limitcertificates: Int?
-
-        /** maximum number of related devices returned (when they are included) */
-        public var limitdevices: Int?
-
-        public init(
-          id: String, fieldsprofiles: [ASCFieldsprofiles]? = nil, include: [ASCInclude]? = nil,
-          fieldscertificates: [ASCFieldscertificates]? = nil,
-          fieldsdevices: [ASCFieldsdevices]? = nil, fieldsbundleIds: [ASCFieldsbundleIds]? = nil,
-          limitcertificates: Int? = nil, limitdevices: Int? = nil
-        ) {
-          self.id = id
-          self.fieldsprofiles = fieldsprofiles
-          self.include = include
-          self.fieldscertificates = fieldscertificates
-          self.fieldsdevices = fieldsdevices
-          self.fieldsbundleIds = fieldsbundleIds
-          self.limitcertificates = limitcertificates
-          self.limitdevices = limitdevices
+        public enum ASCFieldsbundleIds: String, Codable, Equatable, CaseIterable {
+            case app = "app"
+            case bundleIdCapabilities = "bundleIdCapabilities"
+            case identifier = "identifier"
+            case name = "name"
+            case platform = "platform"
+            case profiles = "profiles"
+            case seedId = "seedId"
         }
-      }
 
-      public var options: Options
+        public final class Request: APIRequest<Response> {
 
-      public init(options: Options) {
-        self.options = options
-        super.init(service: ProfilesGetInstance.service)
-      }
+            public struct Options {
 
-      /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(
-        id: String, fieldsprofiles: [ASCFieldsprofiles]? = nil, include: [ASCInclude]? = nil,
-        fieldscertificates: [ASCFieldscertificates]? = nil,
-        fieldsdevices: [ASCFieldsdevices]? = nil, fieldsbundleIds: [ASCFieldsbundleIds]? = nil,
-        limitcertificates: Int? = nil, limitdevices: Int? = nil
-      ) {
-        let options = Options(
-          id: id, fieldsprofiles: fieldsprofiles, include: include,
-          fieldscertificates: fieldscertificates, fieldsdevices: fieldsdevices,
-          fieldsbundleIds: fieldsbundleIds, limitcertificates: limitcertificates,
-          limitdevices: limitdevices)
-        self.init(options: options)
-      }
+                /** the id of the requested resource */
+                public var id: String
 
-      public override var path: String {
-        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-      }
+                /** the fields to include for returned resources of type profiles */
+                public var fieldsprofiles: [ASCFieldsprofiles]?
 
-      public override var queryParameters: [String: Any] {
-        var params: [String: Any] = [:]
-        if let fieldsprofiles = options.fieldsprofiles?.encode().map({ String(describing: $0) })
-          .joined(separator: ",")
-        {
-          params["fields[profiles]"] = fieldsprofiles
+                /** comma-separated list of relationships to include */
+                public var include: [ASCInclude]?
+
+                /** the fields to include for returned resources of type certificates */
+                public var fieldscertificates: [ASCFieldscertificates]?
+
+                /** the fields to include for returned resources of type devices */
+                public var fieldsdevices: [ASCFieldsdevices]?
+
+                /** the fields to include for returned resources of type bundleIds */
+                public var fieldsbundleIds: [ASCFieldsbundleIds]?
+
+                /** maximum number of related certificates returned (when they are included) */
+                public var limitcertificates: Int?
+
+                /** maximum number of related devices returned (when they are included) */
+                public var limitdevices: Int?
+
+                public init(id: String, fieldsprofiles: [ASCFieldsprofiles]? = nil, include: [ASCInclude]? = nil, fieldscertificates: [ASCFieldscertificates]? = nil, fieldsdevices: [ASCFieldsdevices]? = nil, fieldsbundleIds: [ASCFieldsbundleIds]? = nil, limitcertificates: Int? = nil, limitdevices: Int? = nil) {
+                    self.id = id
+                    self.fieldsprofiles = fieldsprofiles
+                    self.include = include
+                    self.fieldscertificates = fieldscertificates
+                    self.fieldsdevices = fieldsdevices
+                    self.fieldsbundleIds = fieldsbundleIds
+                    self.limitcertificates = limitcertificates
+                    self.limitdevices = limitdevices
+                }
+            }
+
+            public var options: Options
+
+            public init(options: Options) {
+                self.options = options
+                super.init(service: ProfilesGetInstance.service)
+            }
+
+            /// convenience initialiser so an Option doesn't have to be created
+            public convenience init(id: String, fieldsprofiles: [ASCFieldsprofiles]? = nil, include: [ASCInclude]? = nil, fieldscertificates: [ASCFieldscertificates]? = nil, fieldsdevices: [ASCFieldsdevices]? = nil, fieldsbundleIds: [ASCFieldsbundleIds]? = nil, limitcertificates: Int? = nil, limitdevices: Int? = nil) {
+                let options = Options(id: id, fieldsprofiles: fieldsprofiles, include: include, fieldscertificates: fieldscertificates, fieldsdevices: fieldsdevices, fieldsbundleIds: fieldsbundleIds, limitcertificates: limitcertificates, limitdevices: limitdevices)
+                self.init(options: options)
+            }
+
+            public override var path: String {
+                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+            }
+
+            public override var queryParameters: [String: Any] {
+                var params: [String: Any] = [:]
+                if let fieldsprofiles = options.fieldsprofiles?.encode().map({ String(describing: $0) }).joined(separator: ",") {
+                  params["fields[profiles]"] = fieldsprofiles
+                }
+                if let include = options.include?.encode().map({ String(describing: $0) }).joined(separator: ",") {
+                  params["include"] = include
+                }
+                if let fieldscertificates = options.fieldscertificates?.encode().map({ String(describing: $0) }).joined(separator: ",") {
+                  params["fields[certificates]"] = fieldscertificates
+                }
+                if let fieldsdevices = options.fieldsdevices?.encode().map({ String(describing: $0) }).joined(separator: ",") {
+                  params["fields[devices]"] = fieldsdevices
+                }
+                if let fieldsbundleIds = options.fieldsbundleIds?.encode().map({ String(describing: $0) }).joined(separator: ",") {
+                  params["fields[bundleIds]"] = fieldsbundleIds
+                }
+                if let limitcertificates = options.limitcertificates {
+                  params["limit[certificates]"] = limitcertificates
+                }
+                if let limitdevices = options.limitdevices {
+                  params["limit[devices]"] = limitdevices
+                }
+                return params
+            }
         }
-        if let include = options.include?.encode().map({ String(describing: $0) }).joined(
-          separator: ",")
-        {
-          params["include"] = include
+
+        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+            public typealias SuccessType = ASCProfileResponse
+
+            /** Single Profile */
+            case status200(ASCProfileResponse)
+
+            /** Parameter error(s) */
+            case status400(ASCErrorResponse)
+
+            /** Forbidden error */
+            case status403(ASCErrorResponse)
+
+            /** Not found error */
+            case status404(ASCErrorResponse)
+
+            public var success: ASCProfileResponse? {
+                switch self {
+                case .status200(let response): return response
+                default: return nil
+                }
+            }
+
+            public var failure: ASCErrorResponse? {
+                switch self {
+                case .status400(let response): return response
+                case .status403(let response): return response
+                case .status404(let response): return response
+                default: return nil
+                }
+            }
+
+            /// either success or failure value. Success is anything in the 200..<300 status code range
+            public var responseResult: APIResponseResult<ASCProfileResponse, ASCErrorResponse> {
+                if let successValue = success {
+                    return .success(successValue)
+                } else if let failureValue = failure {
+                    return .failure(failureValue)
+                } else {
+                    fatalError("Response does not have success or failure response")
+                }
+            }
+
+            public var response: Any {
+                switch self {
+                case .status200(let response): return response
+                case .status400(let response): return response
+                case .status403(let response): return response
+                case .status404(let response): return response
+                }
+            }
+
+            public var statusCode: Int {
+                switch self {
+                case .status200: return 200
+                case .status400: return 400
+                case .status403: return 403
+                case .status404: return 404
+                }
+            }
+
+            public var successful: Bool {
+                switch self {
+                case .status200: return true
+                case .status400: return false
+                case .status403: return false
+                case .status404: return false
+                }
+            }
+
+            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+                switch statusCode {
+                case 200: self = try .status200(decoder.decode(ASCProfileResponse.self, from: data))
+                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+                }
+            }
+
+            public var description: String {
+                return "\(statusCode) \(successful ? "success" : "failure")"
+            }
+
+            public var debugDescription: String {
+                var string = description
+                let responseString = "\(response)"
+                if responseString != "()" {
+                    string += "\n\(responseString)"
+                }
+                return string
+            }
         }
-        if let fieldscertificates = options.fieldscertificates?.encode().map({
-          String(describing: $0)
-        }).joined(separator: ",") {
-          params["fields[certificates]"] = fieldscertificates
-        }
-        if let fieldsdevices = options.fieldsdevices?.encode().map({ String(describing: $0) })
-          .joined(separator: ",")
-        {
-          params["fields[devices]"] = fieldsdevices
-        }
-        if let fieldsbundleIds = options.fieldsbundleIds?.encode().map({ String(describing: $0) })
-          .joined(separator: ",")
-        {
-          params["fields[bundleIds]"] = fieldsbundleIds
-        }
-        if let limitcertificates = options.limitcertificates {
-          params["limit[certificates]"] = limitcertificates
-        }
-        if let limitdevices = options.limitdevices {
-          params["limit[devices]"] = limitdevices
-        }
-        return params
-      }
     }
-
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias SuccessType = ASCProfileResponse
-
-      /** Single Profile */
-      case status200(ASCProfileResponse)
-
-      /** Parameter error(s) */
-      case status400(ASCErrorResponse)
-
-      /** Forbidden error */
-      case status403(ASCErrorResponse)
-
-      /** Not found error */
-      case status404(ASCErrorResponse)
-
-      public var success: ASCProfileResponse? {
-        switch self {
-        case .status200(let response): return response
-        default: return nil
-        }
-      }
-
-      public var failure: ASCErrorResponse? {
-        switch self {
-        case .status400(let response): return response
-        case .status403(let response): return response
-        case .status404(let response): return response
-        default: return nil
-        }
-      }
-
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<ASCProfileResponse, ASCErrorResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
-
-      public var response: Any {
-        switch self {
-        case .status200(let response): return response
-        case .status400(let response): return response
-        case .status403(let response): return response
-        case .status404(let response): return response
-        }
-      }
-
-      public var statusCode: Int {
-        switch self {
-        case .status200: return 200
-        case .status400: return 400
-        case .status403: return 403
-        case .status404: return 404
-        }
-      }
-
-      public var successful: Bool {
-        switch self {
-        case .status200: return true
-        case .status400: return false
-        case .status403: return false
-        case .status404: return false
-        }
-      }
-
-      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-        switch statusCode {
-        case 200: self = try .status200(decoder.decode(ASCProfileResponse.self, from: data))
-        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-        }
-      }
-
-      public var description: String {
-        return "\(statusCode) \(successful ? "success" : "failure")"
-      }
-
-      public var debugDescription: String {
-        var string = description
-        let responseString = "\(response)"
-        if responseString != "()" {
-          string += "\n\(responseString)"
-        }
-        return string
-      }
-    }
-  }
 }

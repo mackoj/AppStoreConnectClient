@@ -3,7 +3,7 @@
 // https://github.com/yonaskolb/SwagGen
 //
 
-extension Never: Codable {
+extension Never : Codable {
   public init(from decoder: Decoder) throws {
     fatalError("This should never happen")
   }
@@ -12,3 +12,4 @@ extension Never: Codable {
     fatalError("This should never happen")
   }
 }
+

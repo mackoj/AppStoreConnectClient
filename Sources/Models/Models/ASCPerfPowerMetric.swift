@@ -7,88 +7,86 @@ import Foundation
 
 public struct ASCPerfPowerMetric: AppStoreConnectBaseModel {
 
-  public enum ASCType: String, Codable, Equatable, CaseIterable {
-    case perfPowerMetrics = "perfPowerMetrics"
-  }
-
-  public var links: ASCResourceLinks
-
-  public var id: String
-
-  public var type: ASCType
-
-  public var attributes: Attributes?
-
-  public struct Attributes: AppStoreConnectBaseModel {
-
-    public enum ASCMetricType: String, Codable, Equatable, CaseIterable {
-      case disk = "DISK"
-      case hang = "HANG"
-      case battery = "BATTERY"
-      case launch = "LAUNCH"
-      case memory = "MEMORY"
-      case animation = "ANIMATION"
+    public enum ASCType: String, Codable, Equatable, CaseIterable {
+        case perfPowerMetrics = "perfPowerMetrics"
     }
 
-    public enum ASCPlatform: String, Codable, Equatable, CaseIterable {
-      case ios = "IOS"
+    public var links: ASCResourceLinks
+
+    public var _id: String
+
+    public var type: ASCType
+
+    public var attributes: Attributes?
+
+    public struct Attributes: AppStoreConnectBaseModel {
+
+        public enum ASCMetricType: String, Codable, Equatable, CaseIterable {
+            case disk = "DISK"
+            case hang = "HANG"
+            case battery = "BATTERY"
+            case launch = "LAUNCH"
+            case memory = "MEMORY"
+            case animation = "ANIMATION"
+        }
+
+        public enum ASCPlatform: String, Codable, Equatable, CaseIterable {
+            case ios = "IOS"
+        }
+
+        public var deviceType: String?
+
+        public var metricType: ASCMetricType?
+
+        public var platform: ASCPlatform?
+
+        public init(deviceType: String? = nil, metricType: ASCMetricType? = nil, platform: ASCPlatform? = nil) {
+            self.deviceType = deviceType
+            self.metricType = metricType
+            self.platform = platform
+        }
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+            deviceType = try container.decodeIfPresent("deviceType")
+            metricType = try container.decodeIfPresent("metricType")
+            platform = try container.decodeIfPresent("platform")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: StringCodingKey.self)
+
+            try container.encodeIfPresent(deviceType, forKey: "deviceType")
+            try container.encodeIfPresent(metricType, forKey: "metricType")
+            try container.encodeIfPresent(platform, forKey: "platform")
+        }
+
     }
 
-    public var deviceType: String?
-
-    public var metricType: ASCMetricType?
-
-    public var platform: ASCPlatform?
-
-    public init(
-      deviceType: String? = nil, metricType: ASCMetricType? = nil, platform: ASCPlatform? = nil
-    ) {
-      self.deviceType = deviceType
-      self.metricType = metricType
-      self.platform = platform
+    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
+        self.links = links
+        self._id = _id
+        self.type = type
+        self.attributes = attributes
     }
 
     public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: StringCodingKey.self)
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-      deviceType = try container.decodeIfPresent("deviceType")
-      metricType = try container.decodeIfPresent("metricType")
-      platform = try container.decodeIfPresent("platform")
+        links = try container.decode("links")
+        _id = try container.decode("id")
+        type = try container.decode("type")
+        attributes = try container.decodeIfPresent("attributes")
     }
 
     public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: StringCodingKey.self)
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-      try container.encodeIfPresent(deviceType, forKey: "deviceType")
-      try container.encodeIfPresent(metricType, forKey: "metricType")
-      try container.encodeIfPresent(platform, forKey: "platform")
+        try container.encode(links, forKey: "links")
+        try container.encode(_id, forKey: "id")
+        try container.encode(type, forKey: "type")
+        try container.encodeIfPresent(attributes, forKey: "attributes")
     }
-
-  }
-
-  public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil) {
-    self.links = links
-    self.id = id
-    self.type = type
-    self.attributes = attributes
-  }
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-    links = try container.decode("links")
-    id = try container.decode("id")
-    type = try container.decode("type")
-    attributes = try container.decodeIfPresent("attributes")
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-    try container.encode(links, forKey: "links")
-    try container.encode(id, forKey: "id")
-    try container.encode(type, forKey: "type")
-    try container.encodeIfPresent(attributes, forKey: "attributes")
-  }
 
 }

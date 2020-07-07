@@ -7,27 +7,27 @@ import Foundation
 
 public struct ASCUploadOperationHeader: AppStoreConnectBaseModel {
 
-  public var name: String?
+    public var name: String?
 
-  public var value: String?
+    public var value: String?
 
-  public init(name: String? = nil, value: String? = nil) {
-    self.name = name
-    self.value = value
-  }
+    public init(name: String? = nil, value: String? = nil) {
+        self.name = name
+        self.value = value
+    }
 
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-    name = try container.decodeIfPresent("name")
-    value = try container.decodeIfPresent("value")
-  }
+        name = try container.decodeIfPresent("name")
+        value = try container.decodeIfPresent("value")
+    }
 
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-    try container.encodeIfPresent(name, forKey: "name")
-    try container.encodeIfPresent(value, forKey: "value")
-  }
+        try container.encodeIfPresent(name, forKey: "name")
+        try container.encodeIfPresent(value, forKey: "value")
+    }
 
 }

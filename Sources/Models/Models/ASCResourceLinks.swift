@@ -7,22 +7,22 @@ import Foundation
 
 public struct ASCResourceLinks: AppStoreConnectBaseModel {
 
-  public var `self`: String
+    public var _self: String
 
-  public init(`self`: String) {
-    self.`self` = `self`
-  }
+    public init(_self: String) {
+        self._self = _self
+    }
 
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: StringCodingKey.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-    `self` = try container.decode("self")
-  }
+        _self = try container.decode("self")
+    }
 
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: StringCodingKey.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-    try container.encode(`self`, forKey: "self")
-  }
+        try container.encode(_self, forKey: "self")
+    }
 
 }

@@ -6,8 +6,8 @@
 import Foundation
 
 public enum ASCPhasedReleaseState: String, Codable, Equatable, CaseIterable {
-  case inactive = "INACTIVE"
-  case active = "ACTIVE"
-  case paused = "PAUSED"
-  case complete = "COMPLETE"
+    case inactive = "INACTIVE"
+    case active = "ACTIVE"
+    case paused = "PAUSED"
+    case complete = "COMPLETE"
 }
