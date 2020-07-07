@@ -4,449 +4,518 @@
 //
 
 import Foundation
+
 #if canImport(AppStoreConnectModels)
-import AppStoreConnectModels
-import AppStoreConnectSharedCode
+  import AppStoreConnectModels
+  import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.Apps {
 
-    public enum AppsAppStoreVersionsGetToManyRelated {
+  public enum AppsAppStoreVersionsGetToManyRelated {
 
-        public static let service = APIService<Response>(id: "apps-appStoreVersions-get_to_many_related", tag: "Apps", method: "GET", path: "/v1/apps/{id}/appStoreVersions", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+    public static let service = APIService<Response>(
+      id: "apps-appStoreVersions-get_to_many_related", tag: "Apps", method: "GET",
+      path: "/v1/apps/{id}/appStoreVersions", hasBody: false,
+      securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+
+    /** filter by attribute 'appStoreState' */
+    public enum ASCFilterappStoreState: String, Codable, Equatable, CaseIterable {
+      case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
+      case developerRejected = "DEVELOPER_REJECTED"
+      case inReview = "IN_REVIEW"
+      case invalidBinary = "INVALID_BINARY"
+      case metadataRejected = "METADATA_REJECTED"
+      case pendingAppleRelease = "PENDING_APPLE_RELEASE"
+      case pendingContract = "PENDING_CONTRACT"
+      case pendingDeveloperRelease = "PENDING_DEVELOPER_RELEASE"
+      case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
+      case preorderReadyForSale = "PREORDER_READY_FOR_SALE"
+      case processingForAppStore = "PROCESSING_FOR_APP_STORE"
+      case readyForSale = "READY_FOR_SALE"
+      case rejected = "REJECTED"
+      case removedFromSale = "REMOVED_FROM_SALE"
+      case waitingForExportCompliance = "WAITING_FOR_EXPORT_COMPLIANCE"
+      case waitingForReview = "WAITING_FOR_REVIEW"
+      case replacedWithNewVersion = "REPLACED_WITH_NEW_VERSION"
+    }
+
+    /** filter by attribute 'platform' */
+    public enum ASCFilterplatform: String, Codable, Equatable, CaseIterable {
+      case ios = "IOS"
+      case macOs = "MAC_OS"
+      case tvOs = "TV_OS"
+    }
+
+    /** the fields to include for returned resources of type idfaDeclarations */
+    public enum ASCFieldsidfaDeclarations: String, Codable, Equatable, CaseIterable {
+      case appStoreVersion = "appStoreVersion"
+      case attributesActionWithPreviousAd = "attributesActionWithPreviousAd"
+      case attributesAppInstallationToPreviousAd = "attributesAppInstallationToPreviousAd"
+      case honorsLimitedAdTracking = "honorsLimitedAdTracking"
+      case servesAds = "servesAds"
+    }
+
+    /** the fields to include for returned resources of type appStoreVersionLocalizations */
+    public enum ASCFieldsappStoreVersionLocalizations: String, Codable, Equatable, CaseIterable {
+      case appPreviewSets = "appPreviewSets"
+      case appScreenshotSets = "appScreenshotSets"
+      case appStoreVersion = "appStoreVersion"
+      case description = "description"
+      case keywords = "keywords"
+      case locale = "locale"
+      case marketingUrl = "marketingUrl"
+      case promotionalText = "promotionalText"
+      case supportUrl = "supportUrl"
+      case whatsNew = "whatsNew"
+    }
+
+    /** the fields to include for returned resources of type routingAppCoverages */
+    public enum ASCFieldsroutingAppCoverages: String, Codable, Equatable, CaseIterable {
+      case appStoreVersion = "appStoreVersion"
+      case assetDeliveryState = "assetDeliveryState"
+      case fileName = "fileName"
+      case fileSize = "fileSize"
+      case sourceFileChecksum = "sourceFileChecksum"
+      case uploadOperations = "uploadOperations"
+      case uploaded = "uploaded"
+    }
+
+    /** the fields to include for returned resources of type appStoreVersionPhasedReleases */
+    public enum ASCFieldsappStoreVersionPhasedReleases: String, Codable, Equatable, CaseIterable {
+      case appStoreVersion = "appStoreVersion"
+      case currentDayNumber = "currentDayNumber"
+      case phasedReleaseState = "phasedReleaseState"
+      case startDate = "startDate"
+      case totalPauseDuration = "totalPauseDuration"
+    }
+
+    /** the fields to include for returned resources of type ageRatingDeclarations */
+    public enum ASCFieldsageRatingDeclarations: String, Codable, Equatable, CaseIterable {
+      case alcoholTobaccoOrDrugUseOrReferences = "alcoholTobaccoOrDrugUseOrReferences"
+      case gamblingAndContests = "gamblingAndContests"
+      case gamblingSimulated = "gamblingSimulated"
+      case horrorOrFearThemes = "horrorOrFearThemes"
+      case kidsAgeBand = "kidsAgeBand"
+      case matureOrSuggestiveThemes = "matureOrSuggestiveThemes"
+      case medicalOrTreatmentInformation = "medicalOrTreatmentInformation"
+      case profanityOrCrudeHumor = "profanityOrCrudeHumor"
+      case sexualContentGraphicAndNudity = "sexualContentGraphicAndNudity"
+      case sexualContentOrNudity = "sexualContentOrNudity"
+      case unrestrictedWebAccess = "unrestrictedWebAccess"
+      case violenceCartoonOrFantasy = "violenceCartoonOrFantasy"
+      case violenceRealistic = "violenceRealistic"
+      case violenceRealisticProlongedGraphicOrSadistic =
+        "violenceRealisticProlongedGraphicOrSadistic"
+    }
+
+    /** the fields to include for returned resources of type appStoreReviewDetails */
+    public enum ASCFieldsappStoreReviewDetails: String, Codable, Equatable, CaseIterable {
+      case appStoreReviewAttachments = "appStoreReviewAttachments"
+      case appStoreVersion = "appStoreVersion"
+      case contactEmail = "contactEmail"
+      case contactFirstName = "contactFirstName"
+      case contactLastName = "contactLastName"
+      case contactPhone = "contactPhone"
+      case demoAccountName = "demoAccountName"
+      case demoAccountPassword = "demoAccountPassword"
+      case demoAccountRequired = "demoAccountRequired"
+      case notes = "notes"
+    }
+
+    /** the fields to include for returned resources of type appStoreVersions */
+    public enum ASCFieldsappStoreVersions: String, Codable, Equatable, CaseIterable {
+      case ageRatingDeclaration = "ageRatingDeclaration"
+      case app = "app"
+      case appStoreReviewDetail = "appStoreReviewDetail"
+      case appStoreState = "appStoreState"
+      case appStoreVersionLocalizations = "appStoreVersionLocalizations"
+      case appStoreVersionPhasedRelease = "appStoreVersionPhasedRelease"
+      case appStoreVersionSubmission = "appStoreVersionSubmission"
+      case build = "build"
+      case copyright = "copyright"
+      case createdDate = "createdDate"
+      case downloadable = "downloadable"
+      case earliestReleaseDate = "earliestReleaseDate"
+      case idfaDeclaration = "idfaDeclaration"
+      case platform = "platform"
+      case releaseType = "releaseType"
+      case routingAppCoverage = "routingAppCoverage"
+      case usesIdfa = "usesIdfa"
+      case versionString = "versionString"
+    }
+
+    /** the fields to include for returned resources of type builds */
+    public enum ASCFieldsbuilds: String, Codable, Equatable, CaseIterable {
+      case app = "app"
+      case appEncryptionDeclaration = "appEncryptionDeclaration"
+      case appStoreVersion = "appStoreVersion"
+      case betaAppReviewSubmission = "betaAppReviewSubmission"
+      case betaBuildLocalizations = "betaBuildLocalizations"
+      case betaGroups = "betaGroups"
+      case buildBetaDetail = "buildBetaDetail"
+      case diagnosticSignatures = "diagnosticSignatures"
+      case expirationDate = "expirationDate"
+      case expired = "expired"
+      case iconAssetToken = "iconAssetToken"
+      case icons = "icons"
+      case individualTesters = "individualTesters"
+      case minOsVersion = "minOsVersion"
+      case perfPowerMetrics = "perfPowerMetrics"
+      case preReleaseVersion = "preReleaseVersion"
+      case processingState = "processingState"
+      case uploadedDate = "uploadedDate"
+      case usesNonExemptEncryption = "usesNonExemptEncryption"
+      case version = "version"
+    }
+
+    /** the fields to include for returned resources of type appStoreVersionSubmissions */
+    public enum ASCFieldsappStoreVersionSubmissions: String, Codable, Equatable, CaseIterable {
+      case appStoreVersion = "appStoreVersion"
+    }
+
+    /** the fields to include for returned resources of type apps */
+    public enum ASCFieldsapps: String, Codable, Equatable, CaseIterable {
+      case appInfos = "appInfos"
+      case appStoreVersions = "appStoreVersions"
+      case availableInNewTerritories = "availableInNewTerritories"
+      case availableTerritories = "availableTerritories"
+      case betaAppLocalizations = "betaAppLocalizations"
+      case betaAppReviewDetail = "betaAppReviewDetail"
+      case betaGroups = "betaGroups"
+      case betaLicenseAgreement = "betaLicenseAgreement"
+      case betaTesters = "betaTesters"
+      case builds = "builds"
+      case bundleId = "bundleId"
+      case contentRightsDeclaration = "contentRightsDeclaration"
+      case endUserLicenseAgreement = "endUserLicenseAgreement"
+      case gameCenterEnabledVersions = "gameCenterEnabledVersions"
+      case inAppPurchases = "inAppPurchases"
+      case isOrEverWasMadeForKids = "isOrEverWasMadeForKids"
+      case name = "name"
+      case perfPowerMetrics = "perfPowerMetrics"
+      case preOrder = "preOrder"
+      case preReleaseVersions = "preReleaseVersions"
+      case prices = "prices"
+      case primaryLocale = "primaryLocale"
+      case sku = "sku"
+    }
+
+    /** comma-separated list of relationships to include */
+    public enum ASCInclude: String, Codable, Equatable, CaseIterable {
+      case ageRatingDeclaration = "ageRatingDeclaration"
+      case app = "app"
+      case appStoreReviewDetail = "appStoreReviewDetail"
+      case appStoreVersionLocalizations = "appStoreVersionLocalizations"
+      case appStoreVersionPhasedRelease = "appStoreVersionPhasedRelease"
+      case appStoreVersionSubmission = "appStoreVersionSubmission"
+      case build = "build"
+      case idfaDeclaration = "idfaDeclaration"
+      case routingAppCoverage = "routingAppCoverage"
+    }
+
+    public final class Request: APIRequest<Response> {
+
+      public struct Options {
+
+        /** the id of the requested resource */
+        public var id: String
 
         /** filter by attribute 'appStoreState' */
-        public enum ASCFilterappStoreState: String, Codable, Equatable, CaseIterable {
-            case developerRemovedFromSale = "DEVELOPER_REMOVED_FROM_SALE"
-            case developerRejected = "DEVELOPER_REJECTED"
-            case inReview = "IN_REVIEW"
-            case invalidBinary = "INVALID_BINARY"
-            case metadataRejected = "METADATA_REJECTED"
-            case pendingAppleRelease = "PENDING_APPLE_RELEASE"
-            case pendingContract = "PENDING_CONTRACT"
-            case pendingDeveloperRelease = "PENDING_DEVELOPER_RELEASE"
-            case prepareForSubmission = "PREPARE_FOR_SUBMISSION"
-            case preorderReadyForSale = "PREORDER_READY_FOR_SALE"
-            case processingForAppStore = "PROCESSING_FOR_APP_STORE"
-            case readyForSale = "READY_FOR_SALE"
-            case rejected = "REJECTED"
-            case removedFromSale = "REMOVED_FROM_SALE"
-            case waitingForExportCompliance = "WAITING_FOR_EXPORT_COMPLIANCE"
-            case waitingForReview = "WAITING_FOR_REVIEW"
-            case replacedWithNewVersion = "REPLACED_WITH_NEW_VERSION"
-        }
+        public var filterappStoreState: [ASCFilterappStoreState]?
 
         /** filter by attribute 'platform' */
-        public enum ASCFilterplatform: String, Codable, Equatable, CaseIterable {
-            case ios = "IOS"
-            case macOs = "MAC_OS"
-            case tvOs = "TV_OS"
-        }
+        public var filterplatform: [ASCFilterplatform]?
+
+        /** filter by attribute 'versionString' */
+        public var filterversionString: [String]?
+
+        /** filter by id(s) */
+        public var filterid: [String]?
 
         /** the fields to include for returned resources of type idfaDeclarations */
-        public enum ASCFieldsidfaDeclarations: String, Codable, Equatable, CaseIterable {
-            case appStoreVersion = "appStoreVersion"
-            case attributesActionWithPreviousAd = "attributesActionWithPreviousAd"
-            case attributesAppInstallationToPreviousAd = "attributesAppInstallationToPreviousAd"
-            case honorsLimitedAdTracking = "honorsLimitedAdTracking"
-            case servesAds = "servesAds"
-        }
+        public var fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]?
 
         /** the fields to include for returned resources of type appStoreVersionLocalizations */
-        public enum ASCFieldsappStoreVersionLocalizations: String, Codable, Equatable, CaseIterable {
-            case appPreviewSets = "appPreviewSets"
-            case appScreenshotSets = "appScreenshotSets"
-            case appStoreVersion = "appStoreVersion"
-            case description = "description"
-            case keywords = "keywords"
-            case locale = "locale"
-            case marketingUrl = "marketingUrl"
-            case promotionalText = "promotionalText"
-            case supportUrl = "supportUrl"
-            case whatsNew = "whatsNew"
-        }
+        public var fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]?
 
         /** the fields to include for returned resources of type routingAppCoverages */
-        public enum ASCFieldsroutingAppCoverages: String, Codable, Equatable, CaseIterable {
-            case appStoreVersion = "appStoreVersion"
-            case assetDeliveryState = "assetDeliveryState"
-            case fileName = "fileName"
-            case fileSize = "fileSize"
-            case sourceFileChecksum = "sourceFileChecksum"
-            case uploadOperations = "uploadOperations"
-            case uploaded = "uploaded"
-        }
+        public var fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]?
 
         /** the fields to include for returned resources of type appStoreVersionPhasedReleases */
-        public enum ASCFieldsappStoreVersionPhasedReleases: String, Codable, Equatable, CaseIterable {
-            case appStoreVersion = "appStoreVersion"
-            case currentDayNumber = "currentDayNumber"
-            case phasedReleaseState = "phasedReleaseState"
-            case startDate = "startDate"
-            case totalPauseDuration = "totalPauseDuration"
-        }
+        public var fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]?
 
         /** the fields to include for returned resources of type ageRatingDeclarations */
-        public enum ASCFieldsageRatingDeclarations: String, Codable, Equatable, CaseIterable {
-            case alcoholTobaccoOrDrugUseOrReferences = "alcoholTobaccoOrDrugUseOrReferences"
-            case gamblingAndContests = "gamblingAndContests"
-            case gamblingSimulated = "gamblingSimulated"
-            case horrorOrFearThemes = "horrorOrFearThemes"
-            case kidsAgeBand = "kidsAgeBand"
-            case matureOrSuggestiveThemes = "matureOrSuggestiveThemes"
-            case medicalOrTreatmentInformation = "medicalOrTreatmentInformation"
-            case profanityOrCrudeHumor = "profanityOrCrudeHumor"
-            case sexualContentGraphicAndNudity = "sexualContentGraphicAndNudity"
-            case sexualContentOrNudity = "sexualContentOrNudity"
-            case unrestrictedWebAccess = "unrestrictedWebAccess"
-            case violenceCartoonOrFantasy = "violenceCartoonOrFantasy"
-            case violenceRealistic = "violenceRealistic"
-            case violenceRealisticProlongedGraphicOrSadistic = "violenceRealisticProlongedGraphicOrSadistic"
-        }
+        public var fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]?
 
         /** the fields to include for returned resources of type appStoreReviewDetails */
-        public enum ASCFieldsappStoreReviewDetails: String, Codable, Equatable, CaseIterable {
-            case appStoreReviewAttachments = "appStoreReviewAttachments"
-            case appStoreVersion = "appStoreVersion"
-            case contactEmail = "contactEmail"
-            case contactFirstName = "contactFirstName"
-            case contactLastName = "contactLastName"
-            case contactPhone = "contactPhone"
-            case demoAccountName = "demoAccountName"
-            case demoAccountPassword = "demoAccountPassword"
-            case demoAccountRequired = "demoAccountRequired"
-            case notes = "notes"
-        }
+        public var fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]?
 
         /** the fields to include for returned resources of type appStoreVersions */
-        public enum ASCFieldsappStoreVersions: String, Codable, Equatable, CaseIterable {
-            case ageRatingDeclaration = "ageRatingDeclaration"
-            case app = "app"
-            case appStoreReviewDetail = "appStoreReviewDetail"
-            case appStoreState = "appStoreState"
-            case appStoreVersionLocalizations = "appStoreVersionLocalizations"
-            case appStoreVersionPhasedRelease = "appStoreVersionPhasedRelease"
-            case appStoreVersionSubmission = "appStoreVersionSubmission"
-            case build = "build"
-            case copyright = "copyright"
-            case createdDate = "createdDate"
-            case downloadable = "downloadable"
-            case earliestReleaseDate = "earliestReleaseDate"
-            case idfaDeclaration = "idfaDeclaration"
-            case platform = "platform"
-            case releaseType = "releaseType"
-            case routingAppCoverage = "routingAppCoverage"
-            case usesIdfa = "usesIdfa"
-            case versionString = "versionString"
-        }
+        public var fieldsappStoreVersions: [ASCFieldsappStoreVersions]?
 
         /** the fields to include for returned resources of type builds */
-        public enum ASCFieldsbuilds: String, Codable, Equatable, CaseIterable {
-            case app = "app"
-            case appEncryptionDeclaration = "appEncryptionDeclaration"
-            case appStoreVersion = "appStoreVersion"
-            case betaAppReviewSubmission = "betaAppReviewSubmission"
-            case betaBuildLocalizations = "betaBuildLocalizations"
-            case betaGroups = "betaGroups"
-            case buildBetaDetail = "buildBetaDetail"
-            case diagnosticSignatures = "diagnosticSignatures"
-            case expirationDate = "expirationDate"
-            case expired = "expired"
-            case iconAssetToken = "iconAssetToken"
-            case icons = "icons"
-            case individualTesters = "individualTesters"
-            case minOsVersion = "minOsVersion"
-            case perfPowerMetrics = "perfPowerMetrics"
-            case preReleaseVersion = "preReleaseVersion"
-            case processingState = "processingState"
-            case uploadedDate = "uploadedDate"
-            case usesNonExemptEncryption = "usesNonExemptEncryption"
-            case version = "version"
-        }
+        public var fieldsbuilds: [ASCFieldsbuilds]?
 
         /** the fields to include for returned resources of type appStoreVersionSubmissions */
-        public enum ASCFieldsappStoreVersionSubmissions: String, Codable, Equatable, CaseIterable {
-            case appStoreVersion = "appStoreVersion"
-        }
+        public var fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]?
 
         /** the fields to include for returned resources of type apps */
-        public enum ASCFieldsapps: String, Codable, Equatable, CaseIterable {
-            case appInfos = "appInfos"
-            case appStoreVersions = "appStoreVersions"
-            case availableInNewTerritories = "availableInNewTerritories"
-            case availableTerritories = "availableTerritories"
-            case betaAppLocalizations = "betaAppLocalizations"
-            case betaAppReviewDetail = "betaAppReviewDetail"
-            case betaGroups = "betaGroups"
-            case betaLicenseAgreement = "betaLicenseAgreement"
-            case betaTesters = "betaTesters"
-            case builds = "builds"
-            case bundleId = "bundleId"
-            case contentRightsDeclaration = "contentRightsDeclaration"
-            case endUserLicenseAgreement = "endUserLicenseAgreement"
-            case gameCenterEnabledVersions = "gameCenterEnabledVersions"
-            case inAppPurchases = "inAppPurchases"
-            case isOrEverWasMadeForKids = "isOrEverWasMadeForKids"
-            case name = "name"
-            case perfPowerMetrics = "perfPowerMetrics"
-            case preOrder = "preOrder"
-            case preReleaseVersions = "preReleaseVersions"
-            case prices = "prices"
-            case primaryLocale = "primaryLocale"
-            case sku = "sku"
-        }
+        public var fieldsapps: [ASCFieldsapps]?
+
+        /** maximum resources per page */
+        public var limit: Int?
 
         /** comma-separated list of relationships to include */
-        public enum ASCInclude: String, Codable, Equatable, CaseIterable {
-            case ageRatingDeclaration = "ageRatingDeclaration"
-            case app = "app"
-            case appStoreReviewDetail = "appStoreReviewDetail"
-            case appStoreVersionLocalizations = "appStoreVersionLocalizations"
-            case appStoreVersionPhasedRelease = "appStoreVersionPhasedRelease"
-            case appStoreVersionSubmission = "appStoreVersionSubmission"
-            case build = "build"
-            case idfaDeclaration = "idfaDeclaration"
-            case routingAppCoverage = "routingAppCoverage"
+        public var include: [ASCInclude]?
+
+        public init(
+          id: String, filterappStoreState: [ASCFilterappStoreState]? = nil,
+          filterplatform: [ASCFilterplatform]? = nil, filterversionString: [String]? = nil,
+          filterid: [String]? = nil, fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]? = nil,
+          fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil,
+          fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]? = nil,
+          fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]? = nil,
+          fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]? = nil,
+          fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]? = nil,
+          fieldsappStoreVersions: [ASCFieldsappStoreVersions]? = nil,
+          fieldsbuilds: [ASCFieldsbuilds]? = nil,
+          fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]? = nil,
+          fieldsapps: [ASCFieldsapps]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil
+        ) {
+          self.id = id
+          self.filterappStoreState = filterappStoreState
+          self.filterplatform = filterplatform
+          self.filterversionString = filterversionString
+          self.filterid = filterid
+          self.fieldsidfaDeclarations = fieldsidfaDeclarations
+          self.fieldsappStoreVersionLocalizations = fieldsappStoreVersionLocalizations
+          self.fieldsroutingAppCoverages = fieldsroutingAppCoverages
+          self.fieldsappStoreVersionPhasedReleases = fieldsappStoreVersionPhasedReleases
+          self.fieldsageRatingDeclarations = fieldsageRatingDeclarations
+          self.fieldsappStoreReviewDetails = fieldsappStoreReviewDetails
+          self.fieldsappStoreVersions = fieldsappStoreVersions
+          self.fieldsbuilds = fieldsbuilds
+          self.fieldsappStoreVersionSubmissions = fieldsappStoreVersionSubmissions
+          self.fieldsapps = fieldsapps
+          self.limit = limit
+          self.include = include
         }
+      }
 
-        public final class Request: APIRequest<Response> {
+      public var options: Options
 
-            public struct Options {
+      public init(options: Options) {
+        self.options = options
+        super.init(service: AppsAppStoreVersionsGetToManyRelated.service)
+      }
 
-                /** the id of the requested resource */
-                public var id: String
+      /// convenience initialiser so an Option doesn't have to be created
+      public convenience init(
+        id: String, filterappStoreState: [ASCFilterappStoreState]? = nil,
+        filterplatform: [ASCFilterplatform]? = nil, filterversionString: [String]? = nil,
+        filterid: [String]? = nil, fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]? = nil,
+        fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil,
+        fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]? = nil,
+        fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]? = nil,
+        fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]? = nil,
+        fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]? = nil,
+        fieldsappStoreVersions: [ASCFieldsappStoreVersions]? = nil,
+        fieldsbuilds: [ASCFieldsbuilds]? = nil,
+        fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]? = nil,
+        fieldsapps: [ASCFieldsapps]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil
+      ) {
+        let options = Options(
+          id: id, filterappStoreState: filterappStoreState, filterplatform: filterplatform,
+          filterversionString: filterversionString, filterid: filterid,
+          fieldsidfaDeclarations: fieldsidfaDeclarations,
+          fieldsappStoreVersionLocalizations: fieldsappStoreVersionLocalizations,
+          fieldsroutingAppCoverages: fieldsroutingAppCoverages,
+          fieldsappStoreVersionPhasedReleases: fieldsappStoreVersionPhasedReleases,
+          fieldsageRatingDeclarations: fieldsageRatingDeclarations,
+          fieldsappStoreReviewDetails: fieldsappStoreReviewDetails,
+          fieldsappStoreVersions: fieldsappStoreVersions, fieldsbuilds: fieldsbuilds,
+          fieldsappStoreVersionSubmissions: fieldsappStoreVersionSubmissions,
+          fieldsapps: fieldsapps, limit: limit, include: include)
+        self.init(options: options)
+      }
 
-                /** filter by attribute 'appStoreState' */
-                public var filterappStoreState: [ASCFilterappStoreState]?
+      public override var path: String {
+        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+      }
 
-                /** filter by attribute 'platform' */
-                public var filterplatform: [ASCFilterplatform]?
-
-                /** filter by attribute 'versionString' */
-                public var filterversionString: [String]?
-
-                /** filter by id(s) */
-                public var filterid: [String]?
-
-                /** the fields to include for returned resources of type idfaDeclarations */
-                public var fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]?
-
-                /** the fields to include for returned resources of type appStoreVersionLocalizations */
-                public var fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]?
-
-                /** the fields to include for returned resources of type routingAppCoverages */
-                public var fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]?
-
-                /** the fields to include for returned resources of type appStoreVersionPhasedReleases */
-                public var fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]?
-
-                /** the fields to include for returned resources of type ageRatingDeclarations */
-                public var fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]?
-
-                /** the fields to include for returned resources of type appStoreReviewDetails */
-                public var fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]?
-
-                /** the fields to include for returned resources of type appStoreVersions */
-                public var fieldsappStoreVersions: [ASCFieldsappStoreVersions]?
-
-                /** the fields to include for returned resources of type builds */
-                public var fieldsbuilds: [ASCFieldsbuilds]?
-
-                /** the fields to include for returned resources of type appStoreVersionSubmissions */
-                public var fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]?
-
-                /** the fields to include for returned resources of type apps */
-                public var fieldsapps: [ASCFieldsapps]?
-
-                /** maximum resources per page */
-                public var limit: Int?
-
-                /** comma-separated list of relationships to include */
-                public var include: [ASCInclude]?
-
-                public init(id: String, filterappStoreState: [ASCFilterappStoreState]? = nil, filterplatform: [ASCFilterplatform]? = nil, filterversionString: [String]? = nil, filterid: [String]? = nil, fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]? = nil, fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil, fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]? = nil, fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]? = nil, fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]? = nil, fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]? = nil, fieldsappStoreVersions: [ASCFieldsappStoreVersions]? = nil, fieldsbuilds: [ASCFieldsbuilds]? = nil, fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]? = nil, fieldsapps: [ASCFieldsapps]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                    self.id = id
-                    self.filterappStoreState = filterappStoreState
-                    self.filterplatform = filterplatform
-                    self.filterversionString = filterversionString
-                    self.filterid = filterid
-                    self.fieldsidfaDeclarations = fieldsidfaDeclarations
-                    self.fieldsappStoreVersionLocalizations = fieldsappStoreVersionLocalizations
-                    self.fieldsroutingAppCoverages = fieldsroutingAppCoverages
-                    self.fieldsappStoreVersionPhasedReleases = fieldsappStoreVersionPhasedReleases
-                    self.fieldsageRatingDeclarations = fieldsageRatingDeclarations
-                    self.fieldsappStoreReviewDetails = fieldsappStoreReviewDetails
-                    self.fieldsappStoreVersions = fieldsappStoreVersions
-                    self.fieldsbuilds = fieldsbuilds
-                    self.fieldsappStoreVersionSubmissions = fieldsappStoreVersionSubmissions
-                    self.fieldsapps = fieldsapps
-                    self.limit = limit
-                    self.include = include
-                }
-            }
-
-            public var options: Options
-
-            public init(options: Options) {
-                self.options = options
-                super.init(service: AppsAppStoreVersionsGetToManyRelated.service)
-            }
-
-            /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(id: String, filterappStoreState: [ASCFilterappStoreState]? = nil, filterplatform: [ASCFilterplatform]? = nil, filterversionString: [String]? = nil, filterid: [String]? = nil, fieldsidfaDeclarations: [ASCFieldsidfaDeclarations]? = nil, fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil, fieldsroutingAppCoverages: [ASCFieldsroutingAppCoverages]? = nil, fieldsappStoreVersionPhasedReleases: [ASCFieldsappStoreVersionPhasedReleases]? = nil, fieldsageRatingDeclarations: [ASCFieldsageRatingDeclarations]? = nil, fieldsappStoreReviewDetails: [ASCFieldsappStoreReviewDetails]? = nil, fieldsappStoreVersions: [ASCFieldsappStoreVersions]? = nil, fieldsbuilds: [ASCFieldsbuilds]? = nil, fieldsappStoreVersionSubmissions: [ASCFieldsappStoreVersionSubmissions]? = nil, fieldsapps: [ASCFieldsapps]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                let options = Options(id: id, filterappStoreState: filterappStoreState, filterplatform: filterplatform, filterversionString: filterversionString, filterid: filterid, fieldsidfaDeclarations: fieldsidfaDeclarations, fieldsappStoreVersionLocalizations: fieldsappStoreVersionLocalizations, fieldsroutingAppCoverages: fieldsroutingAppCoverages, fieldsappStoreVersionPhasedReleases: fieldsappStoreVersionPhasedReleases, fieldsageRatingDeclarations: fieldsageRatingDeclarations, fieldsappStoreReviewDetails: fieldsappStoreReviewDetails, fieldsappStoreVersions: fieldsappStoreVersions, fieldsbuilds: fieldsbuilds, fieldsappStoreVersionSubmissions: fieldsappStoreVersionSubmissions, fieldsapps: fieldsapps, limit: limit, include: include)
-                self.init(options: options)
-            }
-
-            public override var path: String {
-                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-            }
-
-            public override var queryParameters: [String: Any] {
-                var params: [String: Any] = [:]
-                if let filterappStoreState = options.filterappStoreState?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["filter[appStoreState]"] = filterappStoreState
-                }
-                if let filterplatform = options.filterplatform?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["filter[platform]"] = filterplatform
-                }
-                if let filterversionString = options.filterversionString?.joined(separator: ",") {
-                  params["filter[versionString]"] = filterversionString
-                }
-                if let filterid = options.filterid?.joined(separator: ",") {
-                  params["filter[id]"] = filterid
-                }
-                if let fieldsidfaDeclarations = options.fieldsidfaDeclarations?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[idfaDeclarations]"] = fieldsidfaDeclarations
-                }
-                if let fieldsappStoreVersionLocalizations = options.fieldsappStoreVersionLocalizations?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreVersionLocalizations]"] = fieldsappStoreVersionLocalizations
-                }
-                if let fieldsroutingAppCoverages = options.fieldsroutingAppCoverages?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[routingAppCoverages]"] = fieldsroutingAppCoverages
-                }
-                if let fieldsappStoreVersionPhasedReleases = options.fieldsappStoreVersionPhasedReleases?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreVersionPhasedReleases]"] = fieldsappStoreVersionPhasedReleases
-                }
-                if let fieldsageRatingDeclarations = options.fieldsageRatingDeclarations?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[ageRatingDeclarations]"] = fieldsageRatingDeclarations
-                }
-                if let fieldsappStoreReviewDetails = options.fieldsappStoreReviewDetails?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreReviewDetails]"] = fieldsappStoreReviewDetails
-                }
-                if let fieldsappStoreVersions = options.fieldsappStoreVersions?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreVersions]"] = fieldsappStoreVersions
-                }
-                if let fieldsbuilds = options.fieldsbuilds?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[builds]"] = fieldsbuilds
-                }
-                if let fieldsappStoreVersionSubmissions = options.fieldsappStoreVersionSubmissions?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreVersionSubmissions]"] = fieldsappStoreVersionSubmissions
-                }
-                if let fieldsapps = options.fieldsapps?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[apps]"] = fieldsapps
-                }
-                if let limit = options.limit {
-                  params["limit"] = limit
-                }
-                if let include = options.include?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["include"] = include
-                }
-                return params
-            }
+      public override var queryParameters: [String: Any] {
+        var params: [String: Any] = [:]
+        if let filterappStoreState = options.filterappStoreState?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["filter[appStoreState]"] = filterappStoreState
         }
-
-        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = ASCAppStoreVersionsResponse
-
-            /** List of related resources */
-            case status200(ASCAppStoreVersionsResponse)
-
-            /** Parameter error(s) */
-            case status400(ASCErrorResponse)
-
-            /** Forbidden error */
-            case status403(ASCErrorResponse)
-
-            /** Not found error */
-            case status404(ASCErrorResponse)
-
-            public var success: ASCAppStoreVersionsResponse? {
-                switch self {
-                case .status200(let response): return response
-                default: return nil
-                }
-            }
-
-            public var failure: ASCErrorResponse? {
-                switch self {
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                default: return nil
-                }
-            }
-
-            /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<ASCAppStoreVersionsResponse, ASCErrorResponse> {
-                if let successValue = success {
-                    return .success(successValue)
-                } else if let failureValue = failure {
-                    return .failure(failureValue)
-                } else {
-                    fatalError("Response does not have success or failure response")
-                }
-            }
-
-            public var response: Any {
-                switch self {
-                case .status200(let response): return response
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                }
-            }
-
-            public var statusCode: Int {
-                switch self {
-                case .status200: return 200
-                case .status400: return 400
-                case .status403: return 403
-                case .status404: return 404
-                }
-            }
-
-            public var successful: Bool {
-                switch self {
-                case .status200: return true
-                case .status400: return false
-                case .status403: return false
-                case .status404: return false
-                }
-            }
-
-            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-                switch statusCode {
-                case 200: self = try .status200(decoder.decode(ASCAppStoreVersionsResponse.self, from: data))
-                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-                }
-            }
-
-            public var description: String {
-                return "\(statusCode) \(successful ? "success" : "failure")"
-            }
-
-            public var debugDescription: String {
-                var string = description
-                let responseString = "\(response)"
-                if responseString != "()" {
-                    string += "\n\(responseString)"
-                }
-                return string
-            }
+        if let filterplatform = options.filterplatform?.encode().map({ String(describing: $0) })
+          .joined(separator: ",")
+        {
+          params["filter[platform]"] = filterplatform
         }
+        if let filterversionString = options.filterversionString?.joined(separator: ",") {
+          params["filter[versionString]"] = filterversionString
+        }
+        if let filterid = options.filterid?.joined(separator: ",") {
+          params["filter[id]"] = filterid
+        }
+        if let fieldsidfaDeclarations = options.fieldsidfaDeclarations?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[idfaDeclarations]"] = fieldsidfaDeclarations
+        }
+        if let fieldsappStoreVersionLocalizations = options.fieldsappStoreVersionLocalizations?
+          .encode().map({ String(describing: $0) }).joined(separator: ",")
+        {
+          params["fields[appStoreVersionLocalizations]"] = fieldsappStoreVersionLocalizations
+        }
+        if let fieldsroutingAppCoverages = options.fieldsroutingAppCoverages?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[routingAppCoverages]"] = fieldsroutingAppCoverages
+        }
+        if let fieldsappStoreVersionPhasedReleases = options.fieldsappStoreVersionPhasedReleases?
+          .encode().map({ String(describing: $0) }).joined(separator: ",")
+        {
+          params["fields[appStoreVersionPhasedReleases]"] = fieldsappStoreVersionPhasedReleases
+        }
+        if let fieldsageRatingDeclarations = options.fieldsageRatingDeclarations?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[ageRatingDeclarations]"] = fieldsageRatingDeclarations
+        }
+        if let fieldsappStoreReviewDetails = options.fieldsappStoreReviewDetails?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appStoreReviewDetails]"] = fieldsappStoreReviewDetails
+        }
+        if let fieldsappStoreVersions = options.fieldsappStoreVersions?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appStoreVersions]"] = fieldsappStoreVersions
+        }
+        if let fieldsbuilds = options.fieldsbuilds?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["fields[builds]"] = fieldsbuilds
+        }
+        if let fieldsappStoreVersionSubmissions = options.fieldsappStoreVersionSubmissions?.encode()
+          .map({ String(describing: $0) }).joined(separator: ",")
+        {
+          params["fields[appStoreVersionSubmissions]"] = fieldsappStoreVersionSubmissions
+        }
+        if let fieldsapps = options.fieldsapps?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["fields[apps]"] = fieldsapps
+        }
+        if let limit = options.limit {
+          params["limit"] = limit
+        }
+        if let include = options.include?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["include"] = include
+        }
+        return params
+      }
     }
+
+    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias SuccessType = ASCAppStoreVersionsResponse
+
+      /** List of related resources */
+      case status200(ASCAppStoreVersionsResponse)
+
+      /** Parameter error(s) */
+      case status400(ASCErrorResponse)
+
+      /** Forbidden error */
+      case status403(ASCErrorResponse)
+
+      /** Not found error */
+      case status404(ASCErrorResponse)
+
+      public var success: ASCAppStoreVersionsResponse? {
+        switch self {
+        case .status200(let response): return response
+        default: return nil
+        }
+      }
+
+      public var failure: ASCErrorResponse? {
+        switch self {
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        default: return nil
+        }
+      }
+
+      /// either success or failure value. Success is anything in the 200..<300 status code range
+      public var responseResult: APIResponseResult<ASCAppStoreVersionsResponse, ASCErrorResponse> {
+        if let successValue = success {
+          return .success(successValue)
+        } else if let failureValue = failure {
+          return .failure(failureValue)
+        } else {
+          fatalError("Response does not have success or failure response")
+        }
+      }
+
+      public var response: Any {
+        switch self {
+        case .status200(let response): return response
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        }
+      }
+
+      public var statusCode: Int {
+        switch self {
+        case .status200: return 200
+        case .status400: return 400
+        case .status403: return 403
+        case .status404: return 404
+        }
+      }
+
+      public var successful: Bool {
+        switch self {
+        case .status200: return true
+        case .status400: return false
+        case .status403: return false
+        case .status404: return false
+        }
+      }
+
+      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+        switch statusCode {
+        case 200:
+          self = try .status200(decoder.decode(ASCAppStoreVersionsResponse.self, from: data))
+        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        }
+      }
+
+      public var description: String {
+        return "\(statusCode) \(successful ? "success" : "failure")"
+      }
+
+      public var debugDescription: String {
+        var string = description
+        let responseString = "\(response)"
+        if responseString != "()" {
+          string += "\n\(responseString)"
+        }
+        return string
+      }
+    }
+  }
 }

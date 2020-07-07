@@ -7,291 +7,294 @@ import Foundation
 
 public struct ASCBetaGroupCreateRequest: AppStoreConnectBaseModel {
 
-    public var data: DataType
+  public var data: DataType
 
-    public struct DataType: AppStoreConnectBaseModel {
+  public struct DataType: AppStoreConnectBaseModel {
 
-        public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case betaGroups = "betaGroups"
-        }
+    public enum ASCType: String, Codable, Equatable, CaseIterable {
+      case betaGroups = "betaGroups"
+    }
 
-        public var relationships: Relationships
+    public var relationships: Relationships
 
-        public var attributes: Attributes
+    public var attributes: Attributes
 
-        public var type: ASCType
+    public var type: ASCType
 
-        public struct Relationships: AppStoreConnectBaseModel {
+    public struct Relationships: AppStoreConnectBaseModel {
 
-            public var app: App
+      public var app: App
 
-            public var betaTesters: BetaTesters?
+      public var betaTesters: BetaTesters?
 
-            public var builds: Builds?
+      public var builds: Builds?
 
-            public struct App: AppStoreConnectBaseModel {
+      public struct App: AppStoreConnectBaseModel {
 
-                public var data: DataType
+        public var data: DataType
 
-                public struct DataType: AppStoreConnectBaseModel {
+        public struct DataType: AppStoreConnectBaseModel {
 
-                    public enum ASCType: String, Codable, Equatable, CaseIterable {
-                        case apps = "apps"
-                    }
+          public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case apps = "apps"
+          }
 
-                    public var id: String
+          public var id: String
 
-                    public var type: ASCType
+          public var type: ASCType
 
-                    public init(id: String, type: ASCType) {
-                        self.id = id
-                        self.type = type
-                    }
-
-                    public init(from decoder: Decoder) throws {
-                        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                        id = try container.decode("id")
-                        type = try container.decode("type")
-                    }
-
-                    public func encode(to encoder: Encoder) throws {
-                        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                        try container.encode(id, forKey: "id")
-                        try container.encode(type, forKey: "type")
-                    }
-
-                }
-
-                public init(data: DataType) {
-                    self.data = data
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    data = try container.decode("data")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encode(data, forKey: "data")
-                }
-
-            }
-
-            public struct BetaTesters: AppStoreConnectBaseModel {
-
-                public var data: [DataType]?
-
-                public struct DataType: AppStoreConnectBaseModel {
-
-                    public enum ASCType: String, Codable, Equatable, CaseIterable {
-                        case betaTesters = "betaTesters"
-                    }
-
-                    public var id: String
-
-                    public var type: ASCType
-
-                    public init(id: String, type: ASCType) {
-                        self.id = id
-                        self.type = type
-                    }
-
-                    public init(from decoder: Decoder) throws {
-                        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                        id = try container.decode("id")
-                        type = try container.decode("type")
-                    }
-
-                    public func encode(to encoder: Encoder) throws {
-                        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                        try container.encode(id, forKey: "id")
-                        try container.encode(type, forKey: "type")
-                    }
-
-                }
-
-                public init(data: [DataType]? = nil) {
-                    self.data = data
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    data = try container.decodeArrayIfPresent("data")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encodeIfPresent(data, forKey: "data")
-                }
-
-            }
-
-            public struct Builds: AppStoreConnectBaseModel {
-
-                public var data: [DataType]?
-
-                public struct DataType: AppStoreConnectBaseModel {
-
-                    public enum ASCType: String, Codable, Equatable, CaseIterable {
-                        case builds = "builds"
-                    }
-
-                    public var id: String
-
-                    public var type: ASCType
-
-                    public init(id: String, type: ASCType) {
-                        self.id = id
-                        self.type = type
-                    }
-
-                    public init(from decoder: Decoder) throws {
-                        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                        id = try container.decode("id")
-                        type = try container.decode("type")
-                    }
-
-                    public func encode(to encoder: Encoder) throws {
-                        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                        try container.encode(id, forKey: "id")
-                        try container.encode(type, forKey: "type")
-                    }
-
-                }
-
-                public init(data: [DataType]? = nil) {
-                    self.data = data
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    data = try container.decodeArrayIfPresent("data")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encodeIfPresent(data, forKey: "data")
-                }
-
-            }
-
-            public init(app: App, betaTesters: BetaTesters? = nil, builds: Builds? = nil) {
-                self.app = app
-                self.betaTesters = betaTesters
-                self.builds = builds
-            }
-
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                app = try container.decode("app")
-                betaTesters = try container.decodeIfPresent("betaTesters")
-                builds = try container.decodeIfPresent("builds")
-            }
-
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                try container.encode(app, forKey: "app")
-                try container.encodeIfPresent(betaTesters, forKey: "betaTesters")
-                try container.encodeIfPresent(builds, forKey: "builds")
-            }
-
-        }
-
-        public struct Attributes: AppStoreConnectBaseModel {
-
-            public var name: String
-
-            public var feedbackEnabled: Bool?
-
-            public var publicLinkEnabled: Bool?
-
-            public var publicLinkLimit: Int?
-
-            public var publicLinkLimitEnabled: Bool?
-
-            public init(name: String, feedbackEnabled: Bool? = nil, publicLinkEnabled: Bool? = nil, publicLinkLimit: Int? = nil, publicLinkLimitEnabled: Bool? = nil) {
-                self.name = name
-                self.feedbackEnabled = feedbackEnabled
-                self.publicLinkEnabled = publicLinkEnabled
-                self.publicLinkLimit = publicLinkLimit
-                self.publicLinkLimitEnabled = publicLinkLimitEnabled
-            }
-
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                name = try container.decode("name")
-                feedbackEnabled = try container.decodeIfPresent("feedbackEnabled")
-                publicLinkEnabled = try container.decodeIfPresent("publicLinkEnabled")
-                publicLinkLimit = try container.decodeIfPresent("publicLinkLimit")
-                publicLinkLimitEnabled = try container.decodeIfPresent("publicLinkLimitEnabled")
-            }
-
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                try container.encode(name, forKey: "name")
-                try container.encodeIfPresent(feedbackEnabled, forKey: "feedbackEnabled")
-                try container.encodeIfPresent(publicLinkEnabled, forKey: "publicLinkEnabled")
-                try container.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
-                try container.encodeIfPresent(publicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
-            }
-
-        }
-
-        public init(relationships: Relationships, attributes: Attributes, type: ASCType) {
-            self.relationships = relationships
-            self.attributes = attributes
+          public init(id: String, type: ASCType) {
+            self.id = id
             self.type = type
+          }
+
+          public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+            id = try container.decode("id")
+            type = try container.decode("type")
+          }
+
+          public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: StringCodingKey.self)
+
+            try container.encode(id, forKey: "id")
+            try container.encode(type, forKey: "type")
+          }
+
+        }
+
+        public init(data: DataType) {
+          self.data = data
         }
 
         public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-            relationships = try container.decode("relationships")
-            attributes = try container.decode("attributes")
-            type = try container.decode("type")
+          data = try container.decode("data")
         }
 
         public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encode(data, forKey: "data")
+        }
+
+      }
+
+      public struct BetaTesters: AppStoreConnectBaseModel {
+
+        public var data: [DataType]?
+
+        public struct DataType: AppStoreConnectBaseModel {
+
+          public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case betaTesters = "betaTesters"
+          }
+
+          public var id: String
+
+          public var type: ASCType
+
+          public init(id: String, type: ASCType) {
+            self.id = id
+            self.type = type
+          }
+
+          public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+            id = try container.decode("id")
+            type = try container.decode("type")
+          }
+
+          public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: StringCodingKey.self)
 
-            try container.encode(relationships, forKey: "relationships")
-            try container.encode(attributes, forKey: "attributes")
+            try container.encode(id, forKey: "id")
             try container.encode(type, forKey: "type")
+          }
+
         }
+
+        public init(data: [DataType]? = nil) {
+          self.data = data
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          data = try container.decodeArrayIfPresent("data")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encodeIfPresent(data, forKey: "data")
+        }
+
+      }
+
+      public struct Builds: AppStoreConnectBaseModel {
+
+        public var data: [DataType]?
+
+        public struct DataType: AppStoreConnectBaseModel {
+
+          public enum ASCType: String, Codable, Equatable, CaseIterable {
+            case builds = "builds"
+          }
+
+          public var id: String
+
+          public var type: ASCType
+
+          public init(id: String, type: ASCType) {
+            self.id = id
+            self.type = type
+          }
+
+          public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+            id = try container.decode("id")
+            type = try container.decode("type")
+          }
+
+          public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: StringCodingKey.self)
+
+            try container.encode(id, forKey: "id")
+            try container.encode(type, forKey: "type")
+          }
+
+        }
+
+        public init(data: [DataType]? = nil) {
+          self.data = data
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          data = try container.decodeArrayIfPresent("data")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encodeIfPresent(data, forKey: "data")
+        }
+
+      }
+
+      public init(app: App, betaTesters: BetaTesters? = nil, builds: Builds? = nil) {
+        self.app = app
+        self.betaTesters = betaTesters
+        self.builds = builds
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+        app = try container.decode("app")
+        betaTesters = try container.decodeIfPresent("betaTesters")
+        builds = try container.decodeIfPresent("builds")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
+
+        try container.encode(app, forKey: "app")
+        try container.encodeIfPresent(betaTesters, forKey: "betaTesters")
+        try container.encodeIfPresent(builds, forKey: "builds")
+      }
 
     }
 
-    public init(data: DataType) {
-        self.data = data
+    public struct Attributes: AppStoreConnectBaseModel {
+
+      public var name: String
+
+      public var feedbackEnabled: Bool?
+
+      public var publicLinkEnabled: Bool?
+
+      public var publicLinkLimit: Int?
+
+      public var publicLinkLimitEnabled: Bool?
+
+      public init(
+        name: String, feedbackEnabled: Bool? = nil, publicLinkEnabled: Bool? = nil,
+        publicLinkLimit: Int? = nil, publicLinkLimitEnabled: Bool? = nil
+      ) {
+        self.name = name
+        self.feedbackEnabled = feedbackEnabled
+        self.publicLinkEnabled = publicLinkEnabled
+        self.publicLinkLimit = publicLinkLimit
+        self.publicLinkLimitEnabled = publicLinkLimitEnabled
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+        name = try container.decode("name")
+        feedbackEnabled = try container.decodeIfPresent("feedbackEnabled")
+        publicLinkEnabled = try container.decodeIfPresent("publicLinkEnabled")
+        publicLinkLimit = try container.decodeIfPresent("publicLinkLimit")
+        publicLinkLimitEnabled = try container.decodeIfPresent("publicLinkLimitEnabled")
+      }
+
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
+
+        try container.encode(name, forKey: "name")
+        try container.encodeIfPresent(feedbackEnabled, forKey: "feedbackEnabled")
+        try container.encodeIfPresent(publicLinkEnabled, forKey: "publicLinkEnabled")
+        try container.encodeIfPresent(publicLinkLimit, forKey: "publicLinkLimit")
+        try container.encodeIfPresent(publicLinkLimitEnabled, forKey: "publicLinkLimitEnabled")
+      }
+
+    }
+
+    public init(relationships: Relationships, attributes: Attributes, type: ASCType) {
+      self.relationships = relationships
+      self.attributes = attributes
+      self.type = type
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        data = try container.decode("data")
+      relationships = try container.decode("relationships")
+      attributes = try container.decode("attributes")
+      type = try container.decode("type")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(data, forKey: "data")
+      try container.encode(relationships, forKey: "relationships")
+      try container.encode(attributes, forKey: "attributes")
+      try container.encode(type, forKey: "type")
     }
+
+  }
+
+  public init(data: DataType) {
+    self.data = data
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    data = try container.decode("data")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(data, forKey: "data")
+  }
 
 }

@@ -4,173 +4,193 @@
 //
 
 import Foundation
+
 #if canImport(AppStoreConnectModels)
-import AppStoreConnectModels
-import AppStoreConnectSharedCode
+  import AppStoreConnectModels
+  import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.AppStoreReviewAttachments {
 
-    public enum AppStoreReviewAttachmentsGetInstance {
+  public enum AppStoreReviewAttachmentsGetInstance {
 
-        public static let service = APIService<Response>(id: "appStoreReviewAttachments-get_instance", tag: "AppStoreReviewAttachments", method: "GET", path: "/v1/appStoreReviewAttachments/{id}", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+    public static let service = APIService<Response>(
+      id: "appStoreReviewAttachments-get_instance", tag: "AppStoreReviewAttachments", method: "GET",
+      path: "/v1/appStoreReviewAttachments/{id}", hasBody: false,
+      securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+
+    /** the fields to include for returned resources of type appStoreReviewAttachments */
+    public enum ASCFieldsappStoreReviewAttachments: String, Codable, Equatable, CaseIterable {
+      case appStoreReviewDetail = "appStoreReviewDetail"
+      case assetDeliveryState = "assetDeliveryState"
+      case fileName = "fileName"
+      case fileSize = "fileSize"
+      case sourceFileChecksum = "sourceFileChecksum"
+      case uploadOperations = "uploadOperations"
+      case uploaded = "uploaded"
+    }
+
+    /** comma-separated list of relationships to include */
+    public enum ASCInclude: String, Codable, Equatable, CaseIterable {
+      case appStoreReviewDetail = "appStoreReviewDetail"
+    }
+
+    public final class Request: APIRequest<Response> {
+
+      public struct Options {
+
+        /** the id of the requested resource */
+        public var id: String
 
         /** the fields to include for returned resources of type appStoreReviewAttachments */
-        public enum ASCFieldsappStoreReviewAttachments: String, Codable, Equatable, CaseIterable {
-            case appStoreReviewDetail = "appStoreReviewDetail"
-            case assetDeliveryState = "assetDeliveryState"
-            case fileName = "fileName"
-            case fileSize = "fileSize"
-            case sourceFileChecksum = "sourceFileChecksum"
-            case uploadOperations = "uploadOperations"
-            case uploaded = "uploaded"
-        }
+        public var fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]?
 
         /** comma-separated list of relationships to include */
-        public enum ASCInclude: String, Codable, Equatable, CaseIterable {
-            case appStoreReviewDetail = "appStoreReviewDetail"
+        public var include: [ASCInclude]?
+
+        public init(
+          id: String, fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]? = nil,
+          include: [ASCInclude]? = nil
+        ) {
+          self.id = id
+          self.fieldsappStoreReviewAttachments = fieldsappStoreReviewAttachments
+          self.include = include
         }
+      }
 
-        public final class Request: APIRequest<Response> {
+      public var options: Options
 
-            public struct Options {
+      public init(options: Options) {
+        self.options = options
+        super.init(service: AppStoreReviewAttachmentsGetInstance.service)
+      }
 
-                /** the id of the requested resource */
-                public var id: String
+      /// convenience initialiser so an Option doesn't have to be created
+      public convenience init(
+        id: String, fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]? = nil,
+        include: [ASCInclude]? = nil
+      ) {
+        let options = Options(
+          id: id, fieldsappStoreReviewAttachments: fieldsappStoreReviewAttachments, include: include
+        )
+        self.init(options: options)
+      }
 
-                /** the fields to include for returned resources of type appStoreReviewAttachments */
-                public var fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]?
+      public override var path: String {
+        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+      }
 
-                /** comma-separated list of relationships to include */
-                public var include: [ASCInclude]?
-
-                public init(id: String, fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]? = nil, include: [ASCInclude]? = nil) {
-                    self.id = id
-                    self.fieldsappStoreReviewAttachments = fieldsappStoreReviewAttachments
-                    self.include = include
-                }
-            }
-
-            public var options: Options
-
-            public init(options: Options) {
-                self.options = options
-                super.init(service: AppStoreReviewAttachmentsGetInstance.service)
-            }
-
-            /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(id: String, fieldsappStoreReviewAttachments: [ASCFieldsappStoreReviewAttachments]? = nil, include: [ASCInclude]? = nil) {
-                let options = Options(id: id, fieldsappStoreReviewAttachments: fieldsappStoreReviewAttachments, include: include)
-                self.init(options: options)
-            }
-
-            public override var path: String {
-                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-            }
-
-            public override var queryParameters: [String: Any] {
-                var params: [String: Any] = [:]
-                if let fieldsappStoreReviewAttachments = options.fieldsappStoreReviewAttachments?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreReviewAttachments]"] = fieldsappStoreReviewAttachments
-                }
-                if let include = options.include?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["include"] = include
-                }
-                return params
-            }
+      public override var queryParameters: [String: Any] {
+        var params: [String: Any] = [:]
+        if let fieldsappStoreReviewAttachments = options.fieldsappStoreReviewAttachments?.encode()
+          .map({ String(describing: $0) }).joined(separator: ",")
+        {
+          params["fields[appStoreReviewAttachments]"] = fieldsappStoreReviewAttachments
         }
-
-        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = ASCAppStoreReviewAttachmentResponse
-
-            /** Single AppStoreReviewAttachment */
-            case status200(ASCAppStoreReviewAttachmentResponse)
-
-            /** Parameter error(s) */
-            case status400(ASCErrorResponse)
-
-            /** Forbidden error */
-            case status403(ASCErrorResponse)
-
-            /** Not found error */
-            case status404(ASCErrorResponse)
-
-            public var success: ASCAppStoreReviewAttachmentResponse? {
-                switch self {
-                case .status200(let response): return response
-                default: return nil
-                }
-            }
-
-            public var failure: ASCErrorResponse? {
-                switch self {
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                default: return nil
-                }
-            }
-
-            /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<ASCAppStoreReviewAttachmentResponse, ASCErrorResponse> {
-                if let successValue = success {
-                    return .success(successValue)
-                } else if let failureValue = failure {
-                    return .failure(failureValue)
-                } else {
-                    fatalError("Response does not have success or failure response")
-                }
-            }
-
-            public var response: Any {
-                switch self {
-                case .status200(let response): return response
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                }
-            }
-
-            public var statusCode: Int {
-                switch self {
-                case .status200: return 200
-                case .status400: return 400
-                case .status403: return 403
-                case .status404: return 404
-                }
-            }
-
-            public var successful: Bool {
-                switch self {
-                case .status200: return true
-                case .status400: return false
-                case .status403: return false
-                case .status404: return false
-                }
-            }
-
-            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-                switch statusCode {
-                case 200: self = try .status200(decoder.decode(ASCAppStoreReviewAttachmentResponse.self, from: data))
-                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-                }
-            }
-
-            public var description: String {
-                return "\(statusCode) \(successful ? "success" : "failure")"
-            }
-
-            public var debugDescription: String {
-                var string = description
-                let responseString = "\(response)"
-                if responseString != "()" {
-                    string += "\n\(responseString)"
-                }
-                return string
-            }
+        if let include = options.include?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["include"] = include
         }
+        return params
+      }
     }
+
+    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias SuccessType = ASCAppStoreReviewAttachmentResponse
+
+      /** Single AppStoreReviewAttachment */
+      case status200(ASCAppStoreReviewAttachmentResponse)
+
+      /** Parameter error(s) */
+      case status400(ASCErrorResponse)
+
+      /** Forbidden error */
+      case status403(ASCErrorResponse)
+
+      /** Not found error */
+      case status404(ASCErrorResponse)
+
+      public var success: ASCAppStoreReviewAttachmentResponse? {
+        switch self {
+        case .status200(let response): return response
+        default: return nil
+        }
+      }
+
+      public var failure: ASCErrorResponse? {
+        switch self {
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        default: return nil
+        }
+      }
+
+      /// either success or failure value. Success is anything in the 200..<300 status code range
+      public var responseResult:
+        APIResponseResult<ASCAppStoreReviewAttachmentResponse, ASCErrorResponse>
+      {
+        if let successValue = success {
+          return .success(successValue)
+        } else if let failureValue = failure {
+          return .failure(failureValue)
+        } else {
+          fatalError("Response does not have success or failure response")
+        }
+      }
+
+      public var response: Any {
+        switch self {
+        case .status200(let response): return response
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        }
+      }
+
+      public var statusCode: Int {
+        switch self {
+        case .status200: return 200
+        case .status400: return 400
+        case .status403: return 403
+        case .status404: return 404
+        }
+      }
+
+      public var successful: Bool {
+        switch self {
+        case .status200: return true
+        case .status400: return false
+        case .status403: return false
+        case .status404: return false
+        }
+      }
+
+      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+        switch statusCode {
+        case 200:
+          self = try .status200(
+            decoder.decode(ASCAppStoreReviewAttachmentResponse.self, from: data))
+        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        }
+      }
+
+      public var description: String {
+        return "\(statusCode) \(successful ? "success" : "failure")"
+      }
+
+      public var debugDescription: String {
+        var string = description
+        let responseString = "\(response)"
+        if responseString != "()" {
+          string += "\n\(responseString)"
+        }
+        return string
+      }
+    }
+  }
 }

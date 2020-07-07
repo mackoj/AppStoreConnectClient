@@ -7,69 +7,73 @@ import Foundation
 
 public struct ASCCapabilitySetting: AppStoreConnectBaseModel {
 
-    public enum ASCAllowedInstances: String, Codable, Equatable, CaseIterable {
-        case entry = "ENTRY"
-        case single = "SINGLE"
-        case multiple = "MULTIPLE"
-    }
+  public enum ASCAllowedInstances: String, Codable, Equatable, CaseIterable {
+    case entry = "ENTRY"
+    case single = "SINGLE"
+    case multiple = "MULTIPLE"
+  }
 
-    public enum ASCKey: String, Codable, Equatable, CaseIterable {
-        case icloudVersion = "ICLOUD_VERSION"
-        case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
-        case appleIdAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
-    }
+  public enum ASCKey: String, Codable, Equatable, CaseIterable {
+    case icloudVersion = "ICLOUD_VERSION"
+    case dataProtectionPermissionLevel = "DATA_PROTECTION_PERMISSION_LEVEL"
+    case appleIdAuthAppConsent = "APPLE_ID_AUTH_APP_CONSENT"
+  }
 
-    public var allowedInstances: ASCAllowedInstances?
+  public var allowedInstances: ASCAllowedInstances?
 
-    public var description: String?
+  public var description: String?
 
-    public var enabledByDefault: Bool?
+  public var enabledByDefault: Bool?
 
-    public var key: ASCKey?
+  public var key: ASCKey?
 
-    public var minInstances: Int?
+  public var minInstances: Int?
 
-    public var name: String?
+  public var name: String?
 
-    public var options: [ASCCapabilityOption]?
+  public var options: [ASCCapabilityOption]?
 
-    public var visible: Bool?
+  public var visible: Bool?
 
-    public init(allowedInstances: ASCAllowedInstances? = nil, description: String? = nil, enabledByDefault: Bool? = nil, key: ASCKey? = nil, minInstances: Int? = nil, name: String? = nil, options: [ASCCapabilityOption]? = nil, visible: Bool? = nil) {
-        self.allowedInstances = allowedInstances
-        self.description = description
-        self.enabledByDefault = enabledByDefault
-        self.key = key
-        self.minInstances = minInstances
-        self.name = name
-        self.options = options
-        self.visible = visible
-    }
+  public init(
+    allowedInstances: ASCAllowedInstances? = nil, description: String? = nil,
+    enabledByDefault: Bool? = nil, key: ASCKey? = nil, minInstances: Int? = nil,
+    name: String? = nil, options: [ASCCapabilityOption]? = nil, visible: Bool? = nil
+  ) {
+    self.allowedInstances = allowedInstances
+    self.description = description
+    self.enabledByDefault = enabledByDefault
+    self.key = key
+    self.minInstances = minInstances
+    self.name = name
+    self.options = options
+    self.visible = visible
+  }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        allowedInstances = try container.decodeIfPresent("allowedInstances")
-        description = try container.decodeIfPresent("description")
-        enabledByDefault = try container.decodeIfPresent("enabledByDefault")
-        key = try container.decodeIfPresent("key")
-        minInstances = try container.decodeIfPresent("minInstances")
-        name = try container.decodeIfPresent("name")
-        options = try container.decodeArrayIfPresent("options")
-        visible = try container.decodeIfPresent("visible")
-    }
+    allowedInstances = try container.decodeIfPresent("allowedInstances")
+    description = try container.decodeIfPresent("description")
+    enabledByDefault = try container.decodeIfPresent("enabledByDefault")
+    key = try container.decodeIfPresent("key")
+    minInstances = try container.decodeIfPresent("minInstances")
+    name = try container.decodeIfPresent("name")
+    options = try container.decodeArrayIfPresent("options")
+    visible = try container.decodeIfPresent("visible")
+  }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
-        try container.encodeIfPresent(description, forKey: "description")
-        try container.encodeIfPresent(enabledByDefault, forKey: "enabledByDefault")
-        try container.encodeIfPresent(key, forKey: "key")
-        try container.encodeIfPresent(minInstances, forKey: "minInstances")
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(options, forKey: "options")
-        try container.encodeIfPresent(visible, forKey: "visible")
-    }
+    try container.encodeIfPresent(allowedInstances, forKey: "allowedInstances")
+    try container.encodeIfPresent(description, forKey: "description")
+    try container.encodeIfPresent(enabledByDefault, forKey: "enabledByDefault")
+    try container.encodeIfPresent(key, forKey: "key")
+    try container.encodeIfPresent(minInstances, forKey: "minInstances")
+    try container.encodeIfPresent(name, forKey: "name")
+    try container.encodeIfPresent(options, forKey: "options")
+    try container.encodeIfPresent(visible, forKey: "visible")
+  }
 
 }

@@ -7,85 +7,86 @@ import Foundation
 
 public struct ASCBundleIdCapabilityUpdateRequest: AppStoreConnectBaseModel {
 
-    public var data: DataType
+  public var data: DataType
 
-    public struct DataType: AppStoreConnectBaseModel {
+  public struct DataType: AppStoreConnectBaseModel {
 
-        public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case bundleIdCapabilities = "bundleIdCapabilities"
-        }
+    public enum ASCType: String, Codable, Equatable, CaseIterable {
+      case bundleIdCapabilities = "bundleIdCapabilities"
+    }
 
-        public var id: String
+    public var id: String
 
-        public var type: ASCType
+    public var type: ASCType
 
-        public var attributes: Attributes?
+    public var attributes: Attributes?
 
-        public struct Attributes: AppStoreConnectBaseModel {
+    public struct Attributes: AppStoreConnectBaseModel {
 
-            public var capabilityType: ASCCapabilityType?
+      public var capabilityType: ASCCapabilityType?
 
-            public var settings: [ASCCapabilitySetting]?
+      public var settings: [ASCCapabilitySetting]?
 
-            public init(capabilityType: ASCCapabilityType? = nil, settings: [ASCCapabilitySetting]? = nil) {
-                self.capabilityType = capabilityType
-                self.settings = settings
-            }
+      public init(capabilityType: ASCCapabilityType? = nil, settings: [ASCCapabilitySetting]? = nil)
+      {
+        self.capabilityType = capabilityType
+        self.settings = settings
+      }
 
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                capabilityType = try container.decodeIfPresent("capabilityType")
-                settings = try container.decodeArrayIfPresent("settings")
-            }
+        capabilityType = try container.decodeIfPresent("capabilityType")
+        settings = try container.decodeArrayIfPresent("settings")
+      }
 
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                try container.encodeIfPresent(capabilityType, forKey: "capabilityType")
-                try container.encodeIfPresent(settings, forKey: "settings")
-            }
-
-        }
-
-        public init(id: String, type: ASCType, attributes: Attributes? = nil) {
-            self.id = id
-            self.type = type
-            self.attributes = attributes
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            id = try container.decode("id")
-            type = try container.decode("type")
-            attributes = try container.decodeIfPresent("attributes")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encode(id, forKey: "id")
-            try container.encode(type, forKey: "type")
-            try container.encodeIfPresent(attributes, forKey: "attributes")
-        }
+        try container.encodeIfPresent(capabilityType, forKey: "capabilityType")
+        try container.encodeIfPresent(settings, forKey: "settings")
+      }
 
     }
 
-    public init(data: DataType) {
-        self.data = data
+    public init(id: String, type: ASCType, attributes: Attributes? = nil) {
+      self.id = id
+      self.type = type
+      self.attributes = attributes
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        data = try container.decode("data")
+      id = try container.decode("id")
+      type = try container.decode("type")
+      attributes = try container.decodeIfPresent("attributes")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(data, forKey: "data")
+      try container.encode(id, forKey: "id")
+      try container.encode(type, forKey: "type")
+      try container.encodeIfPresent(attributes, forKey: "attributes")
     }
+
+  }
+
+  public init(data: DataType) {
+    self.data = data
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    data = try container.decode("data")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(data, forKey: "data")
+  }
 
 }

@@ -6,9 +6,9 @@
 import Foundation
 
 public enum ASCAppEncryptionDeclarationState: String, Codable, Equatable, CaseIterable {
-    case inReview = "IN_REVIEW"
-    case approved = "APPROVED"
-    case rejected = "REJECTED"
-    case invalid = "INVALID"
-    case expired = "EXPIRED"
+  case inReview = "IN_REVIEW"
+  case approved = "APPROVED"
+  case rejected = "REJECTED"
+  case invalid = "INVALID"
+  case expired = "EXPIRED"
 }

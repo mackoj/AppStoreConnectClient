@@ -4,197 +4,217 @@
 //
 
 import Foundation
+
 #if canImport(AppStoreConnectModels)
-import AppStoreConnectModels
-import AppStoreConnectSharedCode
+  import AppStoreConnectModels
+  import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.AppScreenshotSets {
 
-    public enum AppScreenshotSetsAppScreenshotsGetToManyRelated {
+  public enum AppScreenshotSetsAppScreenshotsGetToManyRelated {
 
-        public static let service = APIService<Response>(id: "appScreenshotSets-appScreenshots-get_to_many_related", tag: "AppScreenshotSets", method: "GET", path: "/v1/appScreenshotSets/{id}/appScreenshots", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+    public static let service = APIService<Response>(
+      id: "appScreenshotSets-appScreenshots-get_to_many_related", tag: "AppScreenshotSets",
+      method: "GET", path: "/v1/appScreenshotSets/{id}/appScreenshots", hasBody: false,
+      securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+
+    /** the fields to include for returned resources of type appScreenshotSets */
+    public enum ASCFieldsappScreenshotSets: String, Codable, Equatable, CaseIterable {
+      case appScreenshots = "appScreenshots"
+      case appStoreVersionLocalization = "appStoreVersionLocalization"
+      case screenshotDisplayType = "screenshotDisplayType"
+    }
+
+    /** the fields to include for returned resources of type appScreenshots */
+    public enum ASCFieldsappScreenshots: String, Codable, Equatable, CaseIterable {
+      case appScreenshotSet = "appScreenshotSet"
+      case assetDeliveryState = "assetDeliveryState"
+      case assetToken = "assetToken"
+      case assetType = "assetType"
+      case fileName = "fileName"
+      case fileSize = "fileSize"
+      case imageAsset = "imageAsset"
+      case sourceFileChecksum = "sourceFileChecksum"
+      case uploadOperations = "uploadOperations"
+      case uploaded = "uploaded"
+    }
+
+    /** comma-separated list of relationships to include */
+    public enum ASCInclude: String, Codable, Equatable, CaseIterable {
+      case appScreenshotSet = "appScreenshotSet"
+    }
+
+    public final class Request: APIRequest<Response> {
+
+      public struct Options {
+
+        /** the id of the requested resource */
+        public var id: String
 
         /** the fields to include for returned resources of type appScreenshotSets */
-        public enum ASCFieldsappScreenshotSets: String, Codable, Equatable, CaseIterable {
-            case appScreenshots = "appScreenshots"
-            case appStoreVersionLocalization = "appStoreVersionLocalization"
-            case screenshotDisplayType = "screenshotDisplayType"
-        }
+        public var fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]?
 
         /** the fields to include for returned resources of type appScreenshots */
-        public enum ASCFieldsappScreenshots: String, Codable, Equatable, CaseIterable {
-            case appScreenshotSet = "appScreenshotSet"
-            case assetDeliveryState = "assetDeliveryState"
-            case assetToken = "assetToken"
-            case assetType = "assetType"
-            case fileName = "fileName"
-            case fileSize = "fileSize"
-            case imageAsset = "imageAsset"
-            case sourceFileChecksum = "sourceFileChecksum"
-            case uploadOperations = "uploadOperations"
-            case uploaded = "uploaded"
-        }
+        public var fieldsappScreenshots: [ASCFieldsappScreenshots]?
+
+        /** maximum resources per page */
+        public var limit: Int?
 
         /** comma-separated list of relationships to include */
-        public enum ASCInclude: String, Codable, Equatable, CaseIterable {
-            case appScreenshotSet = "appScreenshotSet"
+        public var include: [ASCInclude]?
+
+        public init(
+          id: String, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil,
+          fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil,
+          include: [ASCInclude]? = nil
+        ) {
+          self.id = id
+          self.fieldsappScreenshotSets = fieldsappScreenshotSets
+          self.fieldsappScreenshots = fieldsappScreenshots
+          self.limit = limit
+          self.include = include
         }
+      }
 
-        public final class Request: APIRequest<Response> {
+      public var options: Options
 
-            public struct Options {
+      public init(options: Options) {
+        self.options = options
+        super.init(service: AppScreenshotSetsAppScreenshotsGetToManyRelated.service)
+      }
 
-                /** the id of the requested resource */
-                public var id: String
+      /// convenience initialiser so an Option doesn't have to be created
+      public convenience init(
+        id: String, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil,
+        fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil,
+        include: [ASCInclude]? = nil
+      ) {
+        let options = Options(
+          id: id, fieldsappScreenshotSets: fieldsappScreenshotSets,
+          fieldsappScreenshots: fieldsappScreenshots, limit: limit, include: include)
+        self.init(options: options)
+      }
 
-                /** the fields to include for returned resources of type appScreenshotSets */
-                public var fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]?
+      public override var path: String {
+        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+      }
 
-                /** the fields to include for returned resources of type appScreenshots */
-                public var fieldsappScreenshots: [ASCFieldsappScreenshots]?
-
-                /** maximum resources per page */
-                public var limit: Int?
-
-                /** comma-separated list of relationships to include */
-                public var include: [ASCInclude]?
-
-                public init(id: String, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil, fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                    self.id = id
-                    self.fieldsappScreenshotSets = fieldsappScreenshotSets
-                    self.fieldsappScreenshots = fieldsappScreenshots
-                    self.limit = limit
-                    self.include = include
-                }
-            }
-
-            public var options: Options
-
-            public init(options: Options) {
-                self.options = options
-                super.init(service: AppScreenshotSetsAppScreenshotsGetToManyRelated.service)
-            }
-
-            /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(id: String, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil, fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                let options = Options(id: id, fieldsappScreenshotSets: fieldsappScreenshotSets, fieldsappScreenshots: fieldsappScreenshots, limit: limit, include: include)
-                self.init(options: options)
-            }
-
-            public override var path: String {
-                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-            }
-
-            public override var queryParameters: [String: Any] {
-                var params: [String: Any] = [:]
-                if let fieldsappScreenshotSets = options.fieldsappScreenshotSets?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appScreenshotSets]"] = fieldsappScreenshotSets
-                }
-                if let fieldsappScreenshots = options.fieldsappScreenshots?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appScreenshots]"] = fieldsappScreenshots
-                }
-                if let limit = options.limit {
-                  params["limit"] = limit
-                }
-                if let include = options.include?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["include"] = include
-                }
-                return params
-            }
+      public override var queryParameters: [String: Any] {
+        var params: [String: Any] = [:]
+        if let fieldsappScreenshotSets = options.fieldsappScreenshotSets?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appScreenshotSets]"] = fieldsappScreenshotSets
         }
-
-        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = ASCAppScreenshotsResponse
-
-            /** List of related resources */
-            case status200(ASCAppScreenshotsResponse)
-
-            /** Parameter error(s) */
-            case status400(ASCErrorResponse)
-
-            /** Forbidden error */
-            case status403(ASCErrorResponse)
-
-            /** Not found error */
-            case status404(ASCErrorResponse)
-
-            public var success: ASCAppScreenshotsResponse? {
-                switch self {
-                case .status200(let response): return response
-                default: return nil
-                }
-            }
-
-            public var failure: ASCErrorResponse? {
-                switch self {
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                default: return nil
-                }
-            }
-
-            /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<ASCAppScreenshotsResponse, ASCErrorResponse> {
-                if let successValue = success {
-                    return .success(successValue)
-                } else if let failureValue = failure {
-                    return .failure(failureValue)
-                } else {
-                    fatalError("Response does not have success or failure response")
-                }
-            }
-
-            public var response: Any {
-                switch self {
-                case .status200(let response): return response
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                }
-            }
-
-            public var statusCode: Int {
-                switch self {
-                case .status200: return 200
-                case .status400: return 400
-                case .status403: return 403
-                case .status404: return 404
-                }
-            }
-
-            public var successful: Bool {
-                switch self {
-                case .status200: return true
-                case .status400: return false
-                case .status403: return false
-                case .status404: return false
-                }
-            }
-
-            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-                switch statusCode {
-                case 200: self = try .status200(decoder.decode(ASCAppScreenshotsResponse.self, from: data))
-                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-                }
-            }
-
-            public var description: String {
-                return "\(statusCode) \(successful ? "success" : "failure")"
-            }
-
-            public var debugDescription: String {
-                var string = description
-                let responseString = "\(response)"
-                if responseString != "()" {
-                    string += "\n\(responseString)"
-                }
-                return string
-            }
+        if let fieldsappScreenshots = options.fieldsappScreenshots?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appScreenshots]"] = fieldsappScreenshots
         }
+        if let limit = options.limit {
+          params["limit"] = limit
+        }
+        if let include = options.include?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["include"] = include
+        }
+        return params
+      }
     }
+
+    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias SuccessType = ASCAppScreenshotsResponse
+
+      /** List of related resources */
+      case status200(ASCAppScreenshotsResponse)
+
+      /** Parameter error(s) */
+      case status400(ASCErrorResponse)
+
+      /** Forbidden error */
+      case status403(ASCErrorResponse)
+
+      /** Not found error */
+      case status404(ASCErrorResponse)
+
+      public var success: ASCAppScreenshotsResponse? {
+        switch self {
+        case .status200(let response): return response
+        default: return nil
+        }
+      }
+
+      public var failure: ASCErrorResponse? {
+        switch self {
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        default: return nil
+        }
+      }
+
+      /// either success or failure value. Success is anything in the 200..<300 status code range
+      public var responseResult: APIResponseResult<ASCAppScreenshotsResponse, ASCErrorResponse> {
+        if let successValue = success {
+          return .success(successValue)
+        } else if let failureValue = failure {
+          return .failure(failureValue)
+        } else {
+          fatalError("Response does not have success or failure response")
+        }
+      }
+
+      public var response: Any {
+        switch self {
+        case .status200(let response): return response
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        }
+      }
+
+      public var statusCode: Int {
+        switch self {
+        case .status200: return 200
+        case .status400: return 400
+        case .status403: return 403
+        case .status404: return 404
+        }
+      }
+
+      public var successful: Bool {
+        switch self {
+        case .status200: return true
+        case .status400: return false
+        case .status403: return false
+        case .status404: return false
+        }
+      }
+
+      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+        switch statusCode {
+        case 200: self = try .status200(decoder.decode(ASCAppScreenshotsResponse.self, from: data))
+        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        }
+      }
+
+      public var description: String {
+        return "\(statusCode) \(successful ? "success" : "failure")"
+      }
+
+      public var debugDescription: String {
+        var string = description
+        let responseString = "\(response)"
+        if responseString != "()" {
+          string += "\n\(responseString)"
+        }
+        return string
+      }
+    }
+  }
 }

@@ -7,32 +7,32 @@ import Foundation
 
 public struct ASCBuildBetaDetailResponse: AppStoreConnectBaseModel {
 
-    public var data: ASCBuildBetaDetail
+  public var data: ASCBuildBetaDetail
 
-    public var links: ASCDocumentLinks
+  public var links: ASCDocumentLinks
 
-    public var included: [ASCBuild]?
+  public var included: [ASCBuild]?
 
-    public init(data: ASCBuildBetaDetail, links: ASCDocumentLinks, included: [ASCBuild]? = nil) {
-        self.data = data
-        self.links = links
-        self.included = included
-    }
+  public init(data: ASCBuildBetaDetail, links: ASCDocumentLinks, included: [ASCBuild]? = nil) {
+    self.data = data
+    self.links = links
+    self.included = included
+  }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        data = try container.decode("data")
-        links = try container.decode("links")
-        included = try container.decodeArrayIfPresent("included")
-    }
+    data = try container.decode("data")
+    links = try container.decode("links")
+    included = try container.decodeArrayIfPresent("included")
+  }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(data, forKey: "data")
-        try container.encode(links, forKey: "links")
-        try container.encodeIfPresent(included, forKey: "included")
-    }
+    try container.encode(data, forKey: "data")
+    try container.encode(links, forKey: "links")
+    try container.encodeIfPresent(included, forKey: "included")
+  }
 
 }

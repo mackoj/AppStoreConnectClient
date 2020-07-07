@@ -6,9 +6,9 @@
 import Foundation
 
 public enum ASCIconAssetType: String, Codable, Equatable, CaseIterable {
-    case appStore = "APP_STORE"
-    case messagesAppStore = "MESSAGES_APP_STORE"
-    case watchAppStore = "WATCH_APP_STORE"
-    case tvOsHomeScreen = "TV_OS_HOME_SCREEN"
-    case tvOsTopShelf = "TV_OS_TOP_SHELF"
+  case appStore = "APP_STORE"
+  case messagesAppStore = "MESSAGES_APP_STORE"
+  case watchAppStore = "WATCH_APP_STORE"
+  case tvOsHomeScreen = "TV_OS_HOME_SCREEN"
+  case tvOsTopShelf = "TV_OS_TOP_SHELF"
 }

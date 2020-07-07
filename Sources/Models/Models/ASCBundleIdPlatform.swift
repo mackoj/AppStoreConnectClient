@@ -6,6 +6,6 @@
 import Foundation
 
 public enum ASCBundleIdPlatform: String, Codable, Equatable, CaseIterable {
-    case ios = "IOS"
-    case macOs = "MAC_OS"
+  case ios = "IOS"
+  case macOs = "MAC_OS"
 }

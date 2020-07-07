@@ -6,8 +6,8 @@
 import Foundation
 
 public enum ASCBetaReviewState: String, Codable, Equatable, CaseIterable {
-    case waitingForReview = "WAITING_FOR_REVIEW"
-    case inReview = "IN_REVIEW"
-    case rejected = "REJECTED"
-    case approved = "APPROVED"
+  case waitingForReview = "WAITING_FOR_REVIEW"
+  case inReview = "IN_REVIEW"
+  case rejected = "REJECTED"
+  case approved = "APPROVED"
 }

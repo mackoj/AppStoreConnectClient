@@ -7,185 +7,191 @@ import Foundation
 
 public struct ASCBuildBetaDetail: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-        case buildBetaDetails = "buildBetaDetails"
-    }
+  public enum ASCType: String, Codable, Equatable, CaseIterable {
+    case buildBetaDetails = "buildBetaDetails"
+  }
 
-    public var links: ASCResourceLinks
+  public var links: ASCResourceLinks
 
-    public var id: String
+  public var id: String
 
-    public var type: ASCType
+  public var type: ASCType
 
-    public var attributes: Attributes?
+  public var attributes: Attributes?
 
-    public var relationships: Relationships?
+  public var relationships: Relationships?
 
-    public struct Attributes: AppStoreConnectBaseModel {
+  public struct Attributes: AppStoreConnectBaseModel {
 
-        public var autoNotifyEnabled: Bool?
+    public var autoNotifyEnabled: Bool?
 
-        public var externalBuildState: ASCExternalBetaState?
+    public var externalBuildState: ASCExternalBetaState?
 
-        public var internalBuildState: ASCInternalBetaState?
+    public var internalBuildState: ASCInternalBetaState?
 
-        public init(autoNotifyEnabled: Bool? = nil, externalBuildState: ASCExternalBetaState? = nil, internalBuildState: ASCInternalBetaState? = nil) {
-            self.autoNotifyEnabled = autoNotifyEnabled
-            self.externalBuildState = externalBuildState
-            self.internalBuildState = internalBuildState
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            autoNotifyEnabled = try container.decodeIfPresent("autoNotifyEnabled")
-            externalBuildState = try container.decodeIfPresent("externalBuildState")
-            internalBuildState = try container.decodeIfPresent("internalBuildState")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(autoNotifyEnabled, forKey: "autoNotifyEnabled")
-            try container.encodeIfPresent(externalBuildState, forKey: "externalBuildState")
-            try container.encodeIfPresent(internalBuildState, forKey: "internalBuildState")
-        }
-
-    }
-
-    public struct Relationships: AppStoreConnectBaseModel {
-
-        public var build: Build?
-
-        public struct Build: AppStoreConnectBaseModel {
-
-            public var data: DataType?
-
-            public var links: Links?
-
-            public struct DataType: AppStoreConnectBaseModel {
-
-                public enum ASCType: String, Codable, Equatable, CaseIterable {
-                    case builds = "builds"
-                }
-
-                public var id: String
-
-                public var type: ASCType
-
-                public init(id: String, type: ASCType) {
-                    self.id = id
-                    self.type = type
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    id = try container.decode("id")
-                    type = try container.decode("type")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encode(id, forKey: "id")
-                    try container.encode(type, forKey: "type")
-                }
-
-            }
-
-            public struct Links: AppStoreConnectBaseModel {
-
-                public var related: String?
-
-                public var `self`: String?
-
-                public init(related: String? = nil, `self`: String? = nil) {
-                    self.related = related
-                    self.`self` = `self`
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    related = try container.decodeIfPresent("related")
-                    `self` = try container.decodeIfPresent("self")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(`self`, forKey: "self")
-                }
-
-            }
-
-            public init(data: DataType? = nil, links: Links? = nil) {
-                self.data = data
-                self.links = links
-            }
-
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                data = try container.decodeIfPresent("data")
-                links = try container.decodeIfPresent("links")
-            }
-
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                try container.encodeIfPresent(data, forKey: "data")
-                try container.encodeIfPresent(links, forKey: "links")
-            }
-
-        }
-
-        public init(build: Build? = nil) {
-            self.build = build
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            build = try container.decodeIfPresent("build")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(build, forKey: "build")
-        }
-
-    }
-
-    public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
-        self.links = links
-        self.id = id
-        self.type = type
-        self.attributes = attributes
-        self.relationships = relationships
+    public init(
+      autoNotifyEnabled: Bool? = nil, externalBuildState: ASCExternalBetaState? = nil,
+      internalBuildState: ASCInternalBetaState? = nil
+    ) {
+      self.autoNotifyEnabled = autoNotifyEnabled
+      self.externalBuildState = externalBuildState
+      self.internalBuildState = internalBuildState
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        links = try container.decode("links")
-        id = try container.decode("id")
-        type = try container.decode("type")
-        attributes = try container.decodeIfPresent("attributes")
-        relationships = try container.decodeIfPresent("relationships")
+      autoNotifyEnabled = try container.decodeIfPresent("autoNotifyEnabled")
+      externalBuildState = try container.decodeIfPresent("externalBuildState")
+      internalBuildState = try container.decodeIfPresent("internalBuildState")
     }
 
     public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: StringCodingKey.self)
+
+      try container.encodeIfPresent(autoNotifyEnabled, forKey: "autoNotifyEnabled")
+      try container.encodeIfPresent(externalBuildState, forKey: "externalBuildState")
+      try container.encodeIfPresent(internalBuildState, forKey: "internalBuildState")
+    }
+
+  }
+
+  public struct Relationships: AppStoreConnectBaseModel {
+
+    public var build: Build?
+
+    public struct Build: AppStoreConnectBaseModel {
+
+      public var data: DataType?
+
+      public var links: Links?
+
+      public struct DataType: AppStoreConnectBaseModel {
+
+        public enum ASCType: String, Codable, Equatable, CaseIterable {
+          case builds = "builds"
+        }
+
+        public var id: String
+
+        public var type: ASCType
+
+        public init(id: String, type: ASCType) {
+          self.id = id
+          self.type = type
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          id = try container.decode("id")
+          type = try container.decode("type")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encode(id, forKey: "id")
+          try container.encode(type, forKey: "type")
+        }
+
+      }
+
+      public struct Links: AppStoreConnectBaseModel {
+
+        public var related: String?
+
+        public var `self`: String?
+
+        public init(related: String? = nil, `self`: String? = nil) {
+          self.related = related
+          self.`self` = `self`
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          related = try container.decodeIfPresent("related")
+          `self` = try container.decodeIfPresent("self")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encodeIfPresent(related, forKey: "related")
+          try container.encodeIfPresent(`self`, forKey: "self")
+        }
+
+      }
+
+      public init(data: DataType? = nil, links: Links? = nil) {
+        self.data = data
+        self.links = links
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+        data = try container.decodeIfPresent("data")
+        links = try container.decodeIfPresent("links")
+      }
+
+      public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(links, forKey: "links")
-        try container.encode(id, forKey: "id")
-        try container.encode(type, forKey: "type")
-        try container.encodeIfPresent(attributes, forKey: "attributes")
-        try container.encodeIfPresent(relationships, forKey: "relationships")
+        try container.encodeIfPresent(data, forKey: "data")
+        try container.encodeIfPresent(links, forKey: "links")
+      }
+
     }
+
+    public init(build: Build? = nil) {
+      self.build = build
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+      build = try container.decodeIfPresent("build")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: StringCodingKey.self)
+
+      try container.encodeIfPresent(build, forKey: "build")
+    }
+
+  }
+
+  public init(
+    links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil,
+    relationships: Relationships? = nil
+  ) {
+    self.links = links
+    self.id = id
+    self.type = type
+    self.attributes = attributes
+    self.relationships = relationships
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    links = try container.decode("links")
+    id = try container.decode("id")
+    type = try container.decode("type")
+    attributes = try container.decodeIfPresent("attributes")
+    relationships = try container.decodeIfPresent("relationships")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(links, forKey: "links")
+    try container.encode(id, forKey: "id")
+    try container.encode(type, forKey: "type")
+    try container.encodeIfPresent(attributes, forKey: "attributes")
+    try container.encodeIfPresent(relationships, forKey: "relationships")
+  }
 
 }

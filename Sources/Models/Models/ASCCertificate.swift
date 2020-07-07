@@ -7,93 +7,97 @@ import Foundation
 
 public struct ASCCertificate: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-        case certificates = "certificates"
-    }
+  public enum ASCType: String, Codable, Equatable, CaseIterable {
+    case certificates = "certificates"
+  }
 
-    public var links: ASCResourceLinks
+  public var links: ASCResourceLinks
 
-    public var id: String
+  public var id: String
 
-    public var type: ASCType
+  public var type: ASCType
 
-    public var attributes: Attributes?
+  public var attributes: Attributes?
 
-    public struct Attributes: AppStoreConnectBaseModel {
+  public struct Attributes: AppStoreConnectBaseModel {
 
-        public var certificateContent: String?
+    public var certificateContent: String?
 
-        public var certificateType: ASCCertificateType?
+    public var certificateType: ASCCertificateType?
 
-        public var displayName: String?
+    public var displayName: String?
 
-        public var expirationDate: DateTime?
+    public var expirationDate: DateTime?
 
-        public var name: String?
+    public var name: String?
 
-        public var platform: ASCBundleIdPlatform?
+    public var platform: ASCBundleIdPlatform?
 
-        public var serialNumber: String?
+    public var serialNumber: String?
 
-        public init(certificateContent: String? = nil, certificateType: ASCCertificateType? = nil, displayName: String? = nil, expirationDate: DateTime? = nil, name: String? = nil, platform: ASCBundleIdPlatform? = nil, serialNumber: String? = nil) {
-            self.certificateContent = certificateContent
-            self.certificateType = certificateType
-            self.displayName = displayName
-            self.expirationDate = expirationDate
-            self.name = name
-            self.platform = platform
-            self.serialNumber = serialNumber
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            certificateContent = try container.decodeIfPresent("certificateContent")
-            certificateType = try container.decodeIfPresent("certificateType")
-            displayName = try container.decodeIfPresent("displayName")
-            expirationDate = try container.decodeIfPresent("expirationDate")
-            name = try container.decodeIfPresent("name")
-            platform = try container.decodeIfPresent("platform")
-            serialNumber = try container.decodeIfPresent("serialNumber")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(certificateContent, forKey: "certificateContent")
-            try container.encodeIfPresent(certificateType, forKey: "certificateType")
-            try container.encodeIfPresent(displayName, forKey: "displayName")
-            try container.encodeIfPresent(expirationDate, forKey: "expirationDate")
-            try container.encodeIfPresent(name, forKey: "name")
-            try container.encodeIfPresent(platform, forKey: "platform")
-            try container.encodeIfPresent(serialNumber, forKey: "serialNumber")
-        }
-
-    }
-
-    public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil) {
-        self.links = links
-        self.id = id
-        self.type = type
-        self.attributes = attributes
+    public init(
+      certificateContent: String? = nil, certificateType: ASCCertificateType? = nil,
+      displayName: String? = nil, expirationDate: DateTime? = nil, name: String? = nil,
+      platform: ASCBundleIdPlatform? = nil, serialNumber: String? = nil
+    ) {
+      self.certificateContent = certificateContent
+      self.certificateType = certificateType
+      self.displayName = displayName
+      self.expirationDate = expirationDate
+      self.name = name
+      self.platform = platform
+      self.serialNumber = serialNumber
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        links = try container.decode("links")
-        id = try container.decode("id")
-        type = try container.decode("type")
-        attributes = try container.decodeIfPresent("attributes")
+      certificateContent = try container.decodeIfPresent("certificateContent")
+      certificateType = try container.decodeIfPresent("certificateType")
+      displayName = try container.decodeIfPresent("displayName")
+      expirationDate = try container.decodeIfPresent("expirationDate")
+      name = try container.decodeIfPresent("name")
+      platform = try container.decodeIfPresent("platform")
+      serialNumber = try container.decodeIfPresent("serialNumber")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(links, forKey: "links")
-        try container.encode(id, forKey: "id")
-        try container.encode(type, forKey: "type")
-        try container.encodeIfPresent(attributes, forKey: "attributes")
+      try container.encodeIfPresent(certificateContent, forKey: "certificateContent")
+      try container.encodeIfPresent(certificateType, forKey: "certificateType")
+      try container.encodeIfPresent(displayName, forKey: "displayName")
+      try container.encodeIfPresent(expirationDate, forKey: "expirationDate")
+      try container.encodeIfPresent(name, forKey: "name")
+      try container.encodeIfPresent(platform, forKey: "platform")
+      try container.encodeIfPresent(serialNumber, forKey: "serialNumber")
     }
+
+  }
+
+  public init(links: ASCResourceLinks, id: String, type: ASCType, attributes: Attributes? = nil) {
+    self.links = links
+    self.id = id
+    self.type = type
+    self.attributes = attributes
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    links = try container.decode("links")
+    id = try container.decode("id")
+    type = try container.decode("type")
+    attributes = try container.decodeIfPresent("attributes")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(links, forKey: "links")
+    try container.encode(id, forKey: "id")
+    try container.encode(type, forKey: "type")
+    try container.encodeIfPresent(attributes, forKey: "attributes")
+  }
 
 }
