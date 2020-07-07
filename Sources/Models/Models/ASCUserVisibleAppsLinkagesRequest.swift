@@ -7,53 +7,53 @@ import Foundation
 
 public struct ASCUserVisibleAppsLinkagesRequest: AppStoreConnectBaseModel {
 
-    public var data: [DataType]
+  public var data: [DataType]
 
-    public struct DataType: AppStoreConnectBaseModel {
+  public struct DataType: AppStoreConnectBaseModel {
 
-        public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case apps = "apps"
-        }
-
-        public var _id: String
-
-        public var type: ASCType
-
-        public init(_id: String, type: ASCType) {
-            self._id = _id
-            self.type = type
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            _id = try container.decode("id")
-            type = try container.decode("type")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encode(_id, forKey: "id")
-            try container.encode(type, forKey: "type")
-        }
-
+    public enum ASCType: String, Codable, Equatable, CaseIterable {
+      case apps = "apps"
     }
 
-    public init(data: [DataType]) {
-        self.data = data
+    public var _id: String
+
+    public var type: ASCType
+
+    public init(_id: String, type: ASCType) {
+      self._id = _id
+      self.type = type
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        data = try container.decodeArray("data")
+      _id = try container.decode("id")
+      type = try container.decode("type")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(data, forKey: "data")
+      try container.encode(_id, forKey: "id")
+      try container.encode(type, forKey: "type")
     }
+
+  }
+
+  public init(data: [DataType]) {
+    self.data = data
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    data = try container.decodeArray("data")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(data, forKey: "data")
+  }
 
 }

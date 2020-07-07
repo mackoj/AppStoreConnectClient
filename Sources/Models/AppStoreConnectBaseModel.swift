@@ -5,16 +5,17 @@
 
 import Foundation
 
-public protocol AppStoreConnectBaseModel: Codable, Equatable { }
+public protocol AppStoreConnectBaseModel: Codable, Equatable {}
 
 extension AppStoreConnectBaseModel {
-    func encode() -> [String: Any] {
-        guard
-            let jsonData = try? JSONEncoder().encode(self),
-            let jsonValue = try? JSONSerialization.jsonObject(with: jsonData),
-            let jsonDictionary = jsonValue as? [String: Any] else {
-                return [:]
-        }
-        return jsonDictionary
+  func encode() -> [String: Any] {
+    guard
+      let jsonData = try? JSONEncoder().encode(self),
+      let jsonValue = try? JSONSerialization.jsonObject(with: jsonData),
+      let jsonDictionary = jsonValue as? [String: Any]
+    else {
+      return [:]
     }
+    return jsonDictionary
+  }
 }

@@ -7,215 +7,223 @@ import Foundation
 
 public struct ASCAppPreview: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-        case appPreviews = "appPreviews"
-    }
+  public enum ASCType: String, Codable, Equatable, CaseIterable {
+    case appPreviews = "appPreviews"
+  }
 
-    public var links: ASCResourceLinks
+  public var links: ASCResourceLinks
 
-    public var _id: String
+  public var _id: String
 
-    public var type: ASCType
+  public var type: ASCType
 
-    public var attributes: Attributes?
+  public var attributes: Attributes?
 
-    public var relationships: Relationships?
+  public var relationships: Relationships?
 
-    public struct Attributes: AppStoreConnectBaseModel {
+  public struct Attributes: AppStoreConnectBaseModel {
 
-        public var assetDeliveryState: ASCAppMediaAssetState?
+    public var assetDeliveryState: ASCAppMediaAssetState?
 
-        public var fileName: String?
+    public var fileName: String?
 
-        public var fileSize: Int?
+    public var fileSize: Int?
 
-        public var mimeType: String?
+    public var mimeType: String?
 
-        public var previewFrameTimeCode: String?
+    public var previewFrameTimeCode: String?
 
-        public var previewImage: ASCImageAsset?
+    public var previewImage: ASCImageAsset?
 
-        public var sourceFileChecksum: String?
+    public var sourceFileChecksum: String?
 
-        public var uploadOperations: [ASCUploadOperation]?
+    public var uploadOperations: [ASCUploadOperation]?
 
-        public var videoUrl: String?
+    public var videoUrl: String?
 
-        public init(assetDeliveryState: ASCAppMediaAssetState? = nil, fileName: String? = nil, fileSize: Int? = nil, mimeType: String? = nil, previewFrameTimeCode: String? = nil, previewImage: ASCImageAsset? = nil, sourceFileChecksum: String? = nil, uploadOperations: [ASCUploadOperation]? = nil, videoUrl: String? = nil) {
-            self.assetDeliveryState = assetDeliveryState
-            self.fileName = fileName
-            self.fileSize = fileSize
-            self.mimeType = mimeType
-            self.previewFrameTimeCode = previewFrameTimeCode
-            self.previewImage = previewImage
-            self.sourceFileChecksum = sourceFileChecksum
-            self.uploadOperations = uploadOperations
-            self.videoUrl = videoUrl
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            assetDeliveryState = try container.decodeIfPresent("assetDeliveryState")
-            fileName = try container.decodeIfPresent("fileName")
-            fileSize = try container.decodeIfPresent("fileSize")
-            mimeType = try container.decodeIfPresent("mimeType")
-            previewFrameTimeCode = try container.decodeIfPresent("previewFrameTimeCode")
-            previewImage = try container.decodeIfPresent("previewImage")
-            sourceFileChecksum = try container.decodeIfPresent("sourceFileChecksum")
-            uploadOperations = try container.decodeArrayIfPresent("uploadOperations")
-            videoUrl = try container.decodeIfPresent("videoUrl")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
-            try container.encodeIfPresent(fileName, forKey: "fileName")
-            try container.encodeIfPresent(fileSize, forKey: "fileSize")
-            try container.encodeIfPresent(mimeType, forKey: "mimeType")
-            try container.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
-            try container.encodeIfPresent(previewImage, forKey: "previewImage")
-            try container.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
-            try container.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
-            try container.encodeIfPresent(videoUrl, forKey: "videoUrl")
-        }
-
-    }
-
-    public struct Relationships: AppStoreConnectBaseModel {
-
-        public var appPreviewSet: AppPreviewSet?
-
-        public struct AppPreviewSet: AppStoreConnectBaseModel {
-
-            public var data: DataType?
-
-            public var links: Links?
-
-            public struct DataType: AppStoreConnectBaseModel {
-
-                public enum ASCType: String, Codable, Equatable, CaseIterable {
-                    case appPreviewSets = "appPreviewSets"
-                }
-
-                public var _id: String
-
-                public var type: ASCType
-
-                public init(_id: String, type: ASCType) {
-                    self._id = _id
-                    self.type = type
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    _id = try container.decode("id")
-                    type = try container.decode("type")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encode(_id, forKey: "id")
-                    try container.encode(type, forKey: "type")
-                }
-
-            }
-
-            public struct Links: AppStoreConnectBaseModel {
-
-                public var related: String?
-
-                public var _self: String?
-
-                public init(related: String? = nil, _self: String? = nil) {
-                    self.related = related
-                    self._self = _self
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    related = try container.decodeIfPresent("related")
-                    _self = try container.decodeIfPresent("self")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encodeIfPresent(related, forKey: "related")
-                    try container.encodeIfPresent(_self, forKey: "self")
-                }
-
-            }
-
-            public init(data: DataType? = nil, links: Links? = nil) {
-                self.data = data
-                self.links = links
-            }
-
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                data = try container.decodeIfPresent("data")
-                links = try container.decodeIfPresent("links")
-            }
-
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                try container.encodeIfPresent(data, forKey: "data")
-                try container.encodeIfPresent(links, forKey: "links")
-            }
-
-        }
-
-        public init(appPreviewSet: AppPreviewSet? = nil) {
-            self.appPreviewSet = appPreviewSet
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            appPreviewSet = try container.decodeIfPresent("appPreviewSet")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(appPreviewSet, forKey: "appPreviewSet")
-        }
-
-    }
-
-    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil, relationships: Relationships? = nil) {
-        self.links = links
-        self._id = _id
-        self.type = type
-        self.attributes = attributes
-        self.relationships = relationships
+    public init(
+      assetDeliveryState: ASCAppMediaAssetState? = nil, fileName: String? = nil,
+      fileSize: Int? = nil, mimeType: String? = nil, previewFrameTimeCode: String? = nil,
+      previewImage: ASCImageAsset? = nil, sourceFileChecksum: String? = nil,
+      uploadOperations: [ASCUploadOperation]? = nil, videoUrl: String? = nil
+    ) {
+      self.assetDeliveryState = assetDeliveryState
+      self.fileName = fileName
+      self.fileSize = fileSize
+      self.mimeType = mimeType
+      self.previewFrameTimeCode = previewFrameTimeCode
+      self.previewImage = previewImage
+      self.sourceFileChecksum = sourceFileChecksum
+      self.uploadOperations = uploadOperations
+      self.videoUrl = videoUrl
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        links = try container.decode("links")
-        _id = try container.decode("id")
-        type = try container.decode("type")
-        attributes = try container.decodeIfPresent("attributes")
-        relationships = try container.decodeIfPresent("relationships")
+      assetDeliveryState = try container.decodeIfPresent("assetDeliveryState")
+      fileName = try container.decodeIfPresent("fileName")
+      fileSize = try container.decodeIfPresent("fileSize")
+      mimeType = try container.decodeIfPresent("mimeType")
+      previewFrameTimeCode = try container.decodeIfPresent("previewFrameTimeCode")
+      previewImage = try container.decodeIfPresent("previewImage")
+      sourceFileChecksum = try container.decodeIfPresent("sourceFileChecksum")
+      uploadOperations = try container.decodeArrayIfPresent("uploadOperations")
+      videoUrl = try container.decodeIfPresent("videoUrl")
     }
 
     public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: StringCodingKey.self)
+
+      try container.encodeIfPresent(assetDeliveryState, forKey: "assetDeliveryState")
+      try container.encodeIfPresent(fileName, forKey: "fileName")
+      try container.encodeIfPresent(fileSize, forKey: "fileSize")
+      try container.encodeIfPresent(mimeType, forKey: "mimeType")
+      try container.encodeIfPresent(previewFrameTimeCode, forKey: "previewFrameTimeCode")
+      try container.encodeIfPresent(previewImage, forKey: "previewImage")
+      try container.encodeIfPresent(sourceFileChecksum, forKey: "sourceFileChecksum")
+      try container.encodeIfPresent(uploadOperations, forKey: "uploadOperations")
+      try container.encodeIfPresent(videoUrl, forKey: "videoUrl")
+    }
+
+  }
+
+  public struct Relationships: AppStoreConnectBaseModel {
+
+    public var appPreviewSet: AppPreviewSet?
+
+    public struct AppPreviewSet: AppStoreConnectBaseModel {
+
+      public var data: DataType?
+
+      public var links: Links?
+
+      public struct DataType: AppStoreConnectBaseModel {
+
+        public enum ASCType: String, Codable, Equatable, CaseIterable {
+          case appPreviewSets = "appPreviewSets"
+        }
+
+        public var _id: String
+
+        public var type: ASCType
+
+        public init(_id: String, type: ASCType) {
+          self._id = _id
+          self.type = type
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          _id = try container.decode("id")
+          type = try container.decode("type")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encode(_id, forKey: "id")
+          try container.encode(type, forKey: "type")
+        }
+
+      }
+
+      public struct Links: AppStoreConnectBaseModel {
+
+        public var related: String?
+
+        public var _self: String?
+
+        public init(related: String? = nil, _self: String? = nil) {
+          self.related = related
+          self._self = _self
+        }
+
+        public init(from decoder: Decoder) throws {
+          let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+          related = try container.decodeIfPresent("related")
+          _self = try container.decodeIfPresent("self")
+        }
+
+        public func encode(to encoder: Encoder) throws {
+          var container = encoder.container(keyedBy: StringCodingKey.self)
+
+          try container.encodeIfPresent(related, forKey: "related")
+          try container.encodeIfPresent(_self, forKey: "self")
+        }
+
+      }
+
+      public init(data: DataType? = nil, links: Links? = nil) {
+        self.data = data
+        self.links = links
+      }
+
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+        data = try container.decodeIfPresent("data")
+        links = try container.decodeIfPresent("links")
+      }
+
+      public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(links, forKey: "links")
-        try container.encode(_id, forKey: "id")
-        try container.encode(type, forKey: "type")
-        try container.encodeIfPresent(attributes, forKey: "attributes")
-        try container.encodeIfPresent(relationships, forKey: "relationships")
+        try container.encodeIfPresent(data, forKey: "data")
+        try container.encodeIfPresent(links, forKey: "links")
+      }
+
     }
+
+    public init(appPreviewSet: AppPreviewSet? = nil) {
+      self.appPreviewSet = appPreviewSet
+    }
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+      appPreviewSet = try container.decodeIfPresent("appPreviewSet")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: StringCodingKey.self)
+
+      try container.encodeIfPresent(appPreviewSet, forKey: "appPreviewSet")
+    }
+
+  }
+
+  public init(
+    links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil,
+    relationships: Relationships? = nil
+  ) {
+    self.links = links
+    self._id = _id
+    self.type = type
+    self.attributes = attributes
+    self.relationships = relationships
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    links = try container.decode("links")
+    _id = try container.decode("id")
+    type = try container.decode("type")
+    attributes = try container.decodeIfPresent("attributes")
+    relationships = try container.decodeIfPresent("relationships")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(links, forKey: "links")
+    try container.encode(_id, forKey: "id")
+    try container.encode(type, forKey: "type")
+    try container.encodeIfPresent(attributes, forKey: "attributes")
+    try container.encodeIfPresent(relationships, forKey: "relationships")
+  }
 
 }

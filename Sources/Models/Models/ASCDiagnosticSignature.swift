@@ -7,77 +7,79 @@ import Foundation
 
 public struct ASCDiagnosticSignature: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-        case diagnosticSignatures = "diagnosticSignatures"
+  public enum ASCType: String, Codable, Equatable, CaseIterable {
+    case diagnosticSignatures = "diagnosticSignatures"
+  }
+
+  public var links: ASCResourceLinks
+
+  public var _id: String
+
+  public var type: ASCType
+
+  public var attributes: Attributes?
+
+  public struct Attributes: AppStoreConnectBaseModel {
+
+    public enum ASCDiagnosticType: String, Codable, Equatable, CaseIterable {
+      case diskWrites = "DISK_WRITES"
     }
 
-    public var links: ASCResourceLinks
+    public var diagnosticType: ASCDiagnosticType?
 
-    public var _id: String
+    public var signature: String?
 
-    public var type: ASCType
+    public var weight: Double?
 
-    public var attributes: Attributes?
-
-    public struct Attributes: AppStoreConnectBaseModel {
-
-        public enum ASCDiagnosticType: String, Codable, Equatable, CaseIterable {
-            case diskWrites = "DISK_WRITES"
-        }
-
-        public var diagnosticType: ASCDiagnosticType?
-
-        public var signature: String?
-
-        public var weight: Double?
-
-        public init(diagnosticType: ASCDiagnosticType? = nil, signature: String? = nil, weight: Double? = nil) {
-            self.diagnosticType = diagnosticType
-            self.signature = signature
-            self.weight = weight
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            diagnosticType = try container.decodeIfPresent("diagnosticType")
-            signature = try container.decodeIfPresent("signature")
-            weight = try container.decodeIfPresent("weight")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(diagnosticType, forKey: "diagnosticType")
-            try container.encodeIfPresent(signature, forKey: "signature")
-            try container.encodeIfPresent(weight, forKey: "weight")
-        }
-
-    }
-
-    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
-        self.links = links
-        self._id = _id
-        self.type = type
-        self.attributes = attributes
+    public init(
+      diagnosticType: ASCDiagnosticType? = nil, signature: String? = nil, weight: Double? = nil
+    ) {
+      self.diagnosticType = diagnosticType
+      self.signature = signature
+      self.weight = weight
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        links = try container.decode("links")
-        _id = try container.decode("id")
-        type = try container.decode("type")
-        attributes = try container.decodeIfPresent("attributes")
+      diagnosticType = try container.decodeIfPresent("diagnosticType")
+      signature = try container.decodeIfPresent("signature")
+      weight = try container.decodeIfPresent("weight")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(links, forKey: "links")
-        try container.encode(_id, forKey: "id")
-        try container.encode(type, forKey: "type")
-        try container.encodeIfPresent(attributes, forKey: "attributes")
+      try container.encodeIfPresent(diagnosticType, forKey: "diagnosticType")
+      try container.encodeIfPresent(signature, forKey: "signature")
+      try container.encodeIfPresent(weight, forKey: "weight")
     }
+
+  }
+
+  public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
+    self.links = links
+    self._id = _id
+    self.type = type
+    self.attributes = attributes
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    links = try container.decode("links")
+    _id = try container.decode("id")
+    type = try container.decode("type")
+    attributes = try container.decodeIfPresent("attributes")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(links, forKey: "links")
+    try container.encode(_id, forKey: "id")
+    try container.encode(type, forKey: "type")
+    try container.encodeIfPresent(attributes, forKey: "attributes")
+  }
 
 }

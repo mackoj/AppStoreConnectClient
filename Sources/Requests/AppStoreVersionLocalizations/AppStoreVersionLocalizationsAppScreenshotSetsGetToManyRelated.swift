@@ -4,255 +4,287 @@
 //
 
 import Foundation
+
 #if canImport(AppStoreConnectModels)
-import AppStoreConnectModels
-import AppStoreConnectSharedCode
+  import AppStoreConnectModels
+  import AppStoreConnectSharedCode
 #endif
 
 extension AppStoreConnect.AppStoreVersionLocalizations {
 
-    public enum AppStoreVersionLocalizationsAppScreenshotSetsGetToManyRelated {
+  public enum AppStoreVersionLocalizationsAppScreenshotSetsGetToManyRelated {
 
-        public static let service = APIService<Response>(id: "appStoreVersionLocalizations-appScreenshotSets-get_to_many_related", tag: "AppStoreVersionLocalizations", method: "GET", path: "/v1/appStoreVersionLocalizations/{id}/appScreenshotSets", hasBody: false, securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+    public static let service = APIService<Response>(
+      id: "appStoreVersionLocalizations-appScreenshotSets-get_to_many_related",
+      tag: "AppStoreVersionLocalizations", method: "GET",
+      path: "/v1/appStoreVersionLocalizations/{id}/appScreenshotSets", hasBody: false,
+      securityRequirement: SecurityRequirement(type: "itc-bearer-token", scopes: []))
+
+    /** filter by attribute 'screenshotDisplayType' */
+    public enum ASCFilterscreenshotDisplayType: String, Codable, Equatable, CaseIterable {
+      case appIphone65 = "APP_IPHONE_65"
+      case appIphone58 = "APP_IPHONE_58"
+      case appIphone55 = "APP_IPHONE_55"
+      case appIphone47 = "APP_IPHONE_47"
+      case appIphone40 = "APP_IPHONE_40"
+      case appIphone35 = "APP_IPHONE_35"
+      case appIpadPro3gen129 = "APP_IPAD_PRO_3GEN_129"
+      case appIpadPro3gen11 = "APP_IPAD_PRO_3GEN_11"
+      case appIpadPro129 = "APP_IPAD_PRO_129"
+      case appIpad105 = "APP_IPAD_105"
+      case appIpad97 = "APP_IPAD_97"
+      case appDesktop = "APP_DESKTOP"
+      case appWatchSeries4 = "APP_WATCH_SERIES_4"
+      case appWatchSeries3 = "APP_WATCH_SERIES_3"
+      case appAppleTv = "APP_APPLE_TV"
+      case imessageAppIphone65 = "IMESSAGE_APP_IPHONE_65"
+      case imessageAppIphone58 = "IMESSAGE_APP_IPHONE_58"
+      case imessageAppIphone55 = "IMESSAGE_APP_IPHONE_55"
+      case imessageAppIphone47 = "IMESSAGE_APP_IPHONE_47"
+      case imessageAppIphone40 = "IMESSAGE_APP_IPHONE_40"
+      case imessageAppIpadPro3gen129 = "IMESSAGE_APP_IPAD_PRO_3GEN_129"
+      case imessageAppIpadPro3gen11 = "IMESSAGE_APP_IPAD_PRO_3GEN_11"
+      case imessageAppIpadPro129 = "IMESSAGE_APP_IPAD_PRO_129"
+      case imessageAppIpad105 = "IMESSAGE_APP_IPAD_105"
+      case imessageAppIpad97 = "IMESSAGE_APP_IPAD_97"
+    }
+
+    /** the fields to include for returned resources of type appStoreVersionLocalizations */
+    public enum ASCFieldsappStoreVersionLocalizations: String, Codable, Equatable, CaseIterable {
+      case appPreviewSets = "appPreviewSets"
+      case appScreenshotSets = "appScreenshotSets"
+      case appStoreVersion = "appStoreVersion"
+      case description = "description"
+      case keywords = "keywords"
+      case locale = "locale"
+      case marketingUrl = "marketingUrl"
+      case promotionalText = "promotionalText"
+      case supportUrl = "supportUrl"
+      case whatsNew = "whatsNew"
+    }
+
+    /** the fields to include for returned resources of type appScreenshotSets */
+    public enum ASCFieldsappScreenshotSets: String, Codable, Equatable, CaseIterable {
+      case appScreenshots = "appScreenshots"
+      case appStoreVersionLocalization = "appStoreVersionLocalization"
+      case screenshotDisplayType = "screenshotDisplayType"
+    }
+
+    /** the fields to include for returned resources of type appScreenshots */
+    public enum ASCFieldsappScreenshots: String, Codable, Equatable, CaseIterable {
+      case appScreenshotSet = "appScreenshotSet"
+      case assetDeliveryState = "assetDeliveryState"
+      case assetToken = "assetToken"
+      case assetType = "assetType"
+      case fileName = "fileName"
+      case fileSize = "fileSize"
+      case imageAsset = "imageAsset"
+      case sourceFileChecksum = "sourceFileChecksum"
+      case uploadOperations = "uploadOperations"
+      case uploaded = "uploaded"
+    }
+
+    /** comma-separated list of relationships to include */
+    public enum ASCInclude: String, Codable, Equatable, CaseIterable {
+      case appScreenshots = "appScreenshots"
+      case appStoreVersionLocalization = "appStoreVersionLocalization"
+    }
+
+    public final class Request: APIRequest<Response> {
+
+      public struct Options {
+
+        /** the id of the requested resource */
+        public var id: String
 
         /** filter by attribute 'screenshotDisplayType' */
-        public enum ASCFilterscreenshotDisplayType: String, Codable, Equatable, CaseIterable {
-            case appIphone65 = "APP_IPHONE_65"
-            case appIphone58 = "APP_IPHONE_58"
-            case appIphone55 = "APP_IPHONE_55"
-            case appIphone47 = "APP_IPHONE_47"
-            case appIphone40 = "APP_IPHONE_40"
-            case appIphone35 = "APP_IPHONE_35"
-            case appIpadPro3gen129 = "APP_IPAD_PRO_3GEN_129"
-            case appIpadPro3gen11 = "APP_IPAD_PRO_3GEN_11"
-            case appIpadPro129 = "APP_IPAD_PRO_129"
-            case appIpad105 = "APP_IPAD_105"
-            case appIpad97 = "APP_IPAD_97"
-            case appDesktop = "APP_DESKTOP"
-            case appWatchSeries4 = "APP_WATCH_SERIES_4"
-            case appWatchSeries3 = "APP_WATCH_SERIES_3"
-            case appAppleTv = "APP_APPLE_TV"
-            case imessageAppIphone65 = "IMESSAGE_APP_IPHONE_65"
-            case imessageAppIphone58 = "IMESSAGE_APP_IPHONE_58"
-            case imessageAppIphone55 = "IMESSAGE_APP_IPHONE_55"
-            case imessageAppIphone47 = "IMESSAGE_APP_IPHONE_47"
-            case imessageAppIphone40 = "IMESSAGE_APP_IPHONE_40"
-            case imessageAppIpadPro3gen129 = "IMESSAGE_APP_IPAD_PRO_3GEN_129"
-            case imessageAppIpadPro3gen11 = "IMESSAGE_APP_IPAD_PRO_3GEN_11"
-            case imessageAppIpadPro129 = "IMESSAGE_APP_IPAD_PRO_129"
-            case imessageAppIpad105 = "IMESSAGE_APP_IPAD_105"
-            case imessageAppIpad97 = "IMESSAGE_APP_IPAD_97"
-        }
+        public var filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]?
 
         /** the fields to include for returned resources of type appStoreVersionLocalizations */
-        public enum ASCFieldsappStoreVersionLocalizations: String, Codable, Equatable, CaseIterable {
-            case appPreviewSets = "appPreviewSets"
-            case appScreenshotSets = "appScreenshotSets"
-            case appStoreVersion = "appStoreVersion"
-            case description = "description"
-            case keywords = "keywords"
-            case locale = "locale"
-            case marketingUrl = "marketingUrl"
-            case promotionalText = "promotionalText"
-            case supportUrl = "supportUrl"
-            case whatsNew = "whatsNew"
-        }
+        public var fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]?
 
         /** the fields to include for returned resources of type appScreenshotSets */
-        public enum ASCFieldsappScreenshotSets: String, Codable, Equatable, CaseIterable {
-            case appScreenshots = "appScreenshots"
-            case appStoreVersionLocalization = "appStoreVersionLocalization"
-            case screenshotDisplayType = "screenshotDisplayType"
-        }
+        public var fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]?
 
         /** the fields to include for returned resources of type appScreenshots */
-        public enum ASCFieldsappScreenshots: String, Codable, Equatable, CaseIterable {
-            case appScreenshotSet = "appScreenshotSet"
-            case assetDeliveryState = "assetDeliveryState"
-            case assetToken = "assetToken"
-            case assetType = "assetType"
-            case fileName = "fileName"
-            case fileSize = "fileSize"
-            case imageAsset = "imageAsset"
-            case sourceFileChecksum = "sourceFileChecksum"
-            case uploadOperations = "uploadOperations"
-            case uploaded = "uploaded"
-        }
+        public var fieldsappScreenshots: [ASCFieldsappScreenshots]?
+
+        /** maximum resources per page */
+        public var limit: Int?
 
         /** comma-separated list of relationships to include */
-        public enum ASCInclude: String, Codable, Equatable, CaseIterable {
-            case appScreenshots = "appScreenshots"
-            case appStoreVersionLocalization = "appStoreVersionLocalization"
+        public var include: [ASCInclude]?
+
+        public init(
+          id: String, filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]? = nil,
+          fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil,
+          fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil,
+          fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil,
+          include: [ASCInclude]? = nil
+        ) {
+          self.id = id
+          self.filterscreenshotDisplayType = filterscreenshotDisplayType
+          self.fieldsappStoreVersionLocalizations = fieldsappStoreVersionLocalizations
+          self.fieldsappScreenshotSets = fieldsappScreenshotSets
+          self.fieldsappScreenshots = fieldsappScreenshots
+          self.limit = limit
+          self.include = include
         }
+      }
 
-        public final class Request: APIRequest<Response> {
+      public var options: Options
 
-            public struct Options {
+      public init(options: Options) {
+        self.options = options
+        super.init(service: AppStoreVersionLocalizationsAppScreenshotSetsGetToManyRelated.service)
+      }
 
-                /** the id of the requested resource */
-                public var id: String
+      /// convenience initialiser so an Option doesn't have to be created
+      public convenience init(
+        id: String, filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]? = nil,
+        fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil,
+        fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil,
+        fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil,
+        include: [ASCInclude]? = nil
+      ) {
+        let options = Options(
+          id: id, filterscreenshotDisplayType: filterscreenshotDisplayType,
+          fieldsappStoreVersionLocalizations: fieldsappStoreVersionLocalizations,
+          fieldsappScreenshotSets: fieldsappScreenshotSets,
+          fieldsappScreenshots: fieldsappScreenshots, limit: limit, include: include)
+        self.init(options: options)
+      }
 
-                /** filter by attribute 'screenshotDisplayType' */
-                public var filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]?
+      public override var path: String {
+        return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
+      }
 
-                /** the fields to include for returned resources of type appStoreVersionLocalizations */
-                public var fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]?
-
-                /** the fields to include for returned resources of type appScreenshotSets */
-                public var fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]?
-
-                /** the fields to include for returned resources of type appScreenshots */
-                public var fieldsappScreenshots: [ASCFieldsappScreenshots]?
-
-                /** maximum resources per page */
-                public var limit: Int?
-
-                /** comma-separated list of relationships to include */
-                public var include: [ASCInclude]?
-
-                public init(id: String, filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]? = nil, fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil, fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                    self.id = id
-                    self.filterscreenshotDisplayType = filterscreenshotDisplayType
-                    self.fieldsappStoreVersionLocalizations = fieldsappStoreVersionLocalizations
-                    self.fieldsappScreenshotSets = fieldsappScreenshotSets
-                    self.fieldsappScreenshots = fieldsappScreenshots
-                    self.limit = limit
-                    self.include = include
-                }
-            }
-
-            public var options: Options
-
-            public init(options: Options) {
-                self.options = options
-                super.init(service: AppStoreVersionLocalizationsAppScreenshotSetsGetToManyRelated.service)
-            }
-
-            /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(id: String, filterscreenshotDisplayType: [ASCFilterscreenshotDisplayType]? = nil, fieldsappStoreVersionLocalizations: [ASCFieldsappStoreVersionLocalizations]? = nil, fieldsappScreenshotSets: [ASCFieldsappScreenshotSets]? = nil, fieldsappScreenshots: [ASCFieldsappScreenshots]? = nil, limit: Int? = nil, include: [ASCInclude]? = nil) {
-                let options = Options(id: id, filterscreenshotDisplayType: filterscreenshotDisplayType, fieldsappStoreVersionLocalizations: fieldsappStoreVersionLocalizations, fieldsappScreenshotSets: fieldsappScreenshotSets, fieldsappScreenshots: fieldsappScreenshots, limit: limit, include: include)
-                self.init(options: options)
-            }
-
-            public override var path: String {
-                return super.path.replacingOccurrences(of: "{" + "id" + "}", with: "\(self.options.id)")
-            }
-
-            public override var queryParameters: [String: Any] {
-                var params: [String: Any] = [:]
-                if let filterscreenshotDisplayType = options.filterscreenshotDisplayType?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["filter[screenshotDisplayType]"] = filterscreenshotDisplayType
-                }
-                if let fieldsappStoreVersionLocalizations = options.fieldsappStoreVersionLocalizations?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appStoreVersionLocalizations]"] = fieldsappStoreVersionLocalizations
-                }
-                if let fieldsappScreenshotSets = options.fieldsappScreenshotSets?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appScreenshotSets]"] = fieldsappScreenshotSets
-                }
-                if let fieldsappScreenshots = options.fieldsappScreenshots?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["fields[appScreenshots]"] = fieldsappScreenshots
-                }
-                if let limit = options.limit {
-                  params["limit"] = limit
-                }
-                if let include = options.include?.encode().map({ String(describing: $0) }).joined(separator: ",") {
-                  params["include"] = include
-                }
-                return params
-            }
+      public override var queryParameters: [String: Any] {
+        var params: [String: Any] = [:]
+        if let filterscreenshotDisplayType = options.filterscreenshotDisplayType?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["filter[screenshotDisplayType]"] = filterscreenshotDisplayType
         }
-
-        public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = ASCAppScreenshotSetsResponse
-
-            /** List of related resources */
-            case status200(ASCAppScreenshotSetsResponse)
-
-            /** Parameter error(s) */
-            case status400(ASCErrorResponse)
-
-            /** Forbidden error */
-            case status403(ASCErrorResponse)
-
-            /** Not found error */
-            case status404(ASCErrorResponse)
-
-            public var success: ASCAppScreenshotSetsResponse? {
-                switch self {
-                case .status200(let response): return response
-                default: return nil
-                }
-            }
-
-            public var failure: ASCErrorResponse? {
-                switch self {
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                default: return nil
-                }
-            }
-
-            /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<ASCAppScreenshotSetsResponse, ASCErrorResponse> {
-                if let successValue = success {
-                    return .success(successValue)
-                } else if let failureValue = failure {
-                    return .failure(failureValue)
-                } else {
-                    fatalError("Response does not have success or failure response")
-                }
-            }
-
-            public var response: Any {
-                switch self {
-                case .status200(let response): return response
-                case .status400(let response): return response
-                case .status403(let response): return response
-                case .status404(let response): return response
-                }
-            }
-
-            public var statusCode: Int {
-                switch self {
-                case .status200: return 200
-                case .status400: return 400
-                case .status403: return 403
-                case .status404: return 404
-                }
-            }
-
-            public var successful: Bool {
-                switch self {
-                case .status200: return true
-                case .status400: return false
-                case .status403: return false
-                case .status404: return false
-                }
-            }
-
-            public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
-                switch statusCode {
-                case 200: self = try .status200(decoder.decode(ASCAppScreenshotSetsResponse.self, from: data))
-                case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
-                case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
-                case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
-                default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
-                }
-            }
-
-            public var description: String {
-                return "\(statusCode) \(successful ? "success" : "failure")"
-            }
-
-            public var debugDescription: String {
-                var string = description
-                let responseString = "\(response)"
-                if responseString != "()" {
-                    string += "\n\(responseString)"
-                }
-                return string
-            }
+        if let fieldsappStoreVersionLocalizations = options.fieldsappStoreVersionLocalizations?
+          .encode().map({ String(describing: $0) }).joined(separator: ",")
+        {
+          params["fields[appStoreVersionLocalizations]"] = fieldsappStoreVersionLocalizations
         }
+        if let fieldsappScreenshotSets = options.fieldsappScreenshotSets?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appScreenshotSets]"] = fieldsappScreenshotSets
+        }
+        if let fieldsappScreenshots = options.fieldsappScreenshots?.encode().map({
+          String(describing: $0)
+        }).joined(separator: ",") {
+          params["fields[appScreenshots]"] = fieldsappScreenshots
+        }
+        if let limit = options.limit {
+          params["limit"] = limit
+        }
+        if let include = options.include?.encode().map({ String(describing: $0) }).joined(
+          separator: ",")
+        {
+          params["include"] = include
+        }
+        return params
+      }
     }
+
+    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias SuccessType = ASCAppScreenshotSetsResponse
+
+      /** List of related resources */
+      case status200(ASCAppScreenshotSetsResponse)
+
+      /** Parameter error(s) */
+      case status400(ASCErrorResponse)
+
+      /** Forbidden error */
+      case status403(ASCErrorResponse)
+
+      /** Not found error */
+      case status404(ASCErrorResponse)
+
+      public var success: ASCAppScreenshotSetsResponse? {
+        switch self {
+        case .status200(let response): return response
+        default: return nil
+        }
+      }
+
+      public var failure: ASCErrorResponse? {
+        switch self {
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        default: return nil
+        }
+      }
+
+      /// either success or failure value. Success is anything in the 200..<300 status code range
+      public var responseResult: APIResponseResult<ASCAppScreenshotSetsResponse, ASCErrorResponse> {
+        if let successValue = success {
+          return .success(successValue)
+        } else if let failureValue = failure {
+          return .failure(failureValue)
+        } else {
+          fatalError("Response does not have success or failure response")
+        }
+      }
+
+      public var response: Any {
+        switch self {
+        case .status200(let response): return response
+        case .status400(let response): return response
+        case .status403(let response): return response
+        case .status404(let response): return response
+        }
+      }
+
+      public var statusCode: Int {
+        switch self {
+        case .status200: return 200
+        case .status400: return 400
+        case .status403: return 403
+        case .status404: return 404
+        }
+      }
+
+      public var successful: Bool {
+        switch self {
+        case .status200: return true
+        case .status400: return false
+        case .status403: return false
+        case .status404: return false
+        }
+      }
+
+      public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
+        switch statusCode {
+        case 200:
+          self = try .status200(decoder.decode(ASCAppScreenshotSetsResponse.self, from: data))
+        case 400: self = try .status400(decoder.decode(ASCErrorResponse.self, from: data))
+        case 403: self = try .status403(decoder.decode(ASCErrorResponse.self, from: data))
+        case 404: self = try .status404(decoder.decode(ASCErrorResponse.self, from: data))
+        default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
+        }
+      }
+
+      public var description: String {
+        return "\(statusCode) \(successful ? "success" : "failure")"
+      }
+
+      public var debugDescription: String {
+        var string = description
+        let responseString = "\(response)"
+        if responseString != "()" {
+          string += "\n\(responseString)"
+        }
+        return string
+      }
+    }
+  }
 }

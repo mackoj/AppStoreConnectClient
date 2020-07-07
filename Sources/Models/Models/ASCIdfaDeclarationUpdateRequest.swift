@@ -7,95 +7,103 @@ import Foundation
 
 public struct ASCIdfaDeclarationUpdateRequest: AppStoreConnectBaseModel {
 
-    public var data: DataType
+  public var data: DataType
 
-    public struct DataType: AppStoreConnectBaseModel {
+  public struct DataType: AppStoreConnectBaseModel {
 
-        public enum ASCType: String, Codable, Equatable, CaseIterable {
-            case idfaDeclarations = "idfaDeclarations"
-        }
+    public enum ASCType: String, Codable, Equatable, CaseIterable {
+      case idfaDeclarations = "idfaDeclarations"
+    }
 
-        public var _id: String
+    public var _id: String
 
-        public var type: ASCType
+    public var type: ASCType
 
-        public var attributes: Attributes?
+    public var attributes: Attributes?
 
-        public struct Attributes: AppStoreConnectBaseModel {
+    public struct Attributes: AppStoreConnectBaseModel {
 
-            public var attributesActionWithPreviousAd: Bool?
+      public var attributesActionWithPreviousAd: Bool?
 
-            public var attributesAppInstallationToPreviousAd: Bool?
+      public var attributesAppInstallationToPreviousAd: Bool?
 
-            public var honorsLimitedAdTracking: Bool?
+      public var honorsLimitedAdTracking: Bool?
 
-            public var servesAds: Bool?
+      public var servesAds: Bool?
 
-            public init(attributesActionWithPreviousAd: Bool? = nil, attributesAppInstallationToPreviousAd: Bool? = nil, honorsLimitedAdTracking: Bool? = nil, servesAds: Bool? = nil) {
-                self.attributesActionWithPreviousAd = attributesActionWithPreviousAd
-                self.attributesAppInstallationToPreviousAd = attributesAppInstallationToPreviousAd
-                self.honorsLimitedAdTracking = honorsLimitedAdTracking
-                self.servesAds = servesAds
-            }
+      public init(
+        attributesActionWithPreviousAd: Bool? = nil,
+        attributesAppInstallationToPreviousAd: Bool? = nil, honorsLimitedAdTracking: Bool? = nil,
+        servesAds: Bool? = nil
+      ) {
+        self.attributesActionWithPreviousAd = attributesActionWithPreviousAd
+        self.attributesAppInstallationToPreviousAd = attributesAppInstallationToPreviousAd
+        self.honorsLimitedAdTracking = honorsLimitedAdTracking
+        self.servesAds = servesAds
+      }
 
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: StringCodingKey.self)
+      public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-                attributesActionWithPreviousAd = try container.decodeIfPresent("attributesActionWithPreviousAd")
-                attributesAppInstallationToPreviousAd = try container.decodeIfPresent("attributesAppInstallationToPreviousAd")
-                honorsLimitedAdTracking = try container.decodeIfPresent("honorsLimitedAdTracking")
-                servesAds = try container.decodeIfPresent("servesAds")
-            }
+        attributesActionWithPreviousAd = try container.decodeIfPresent(
+          "attributesActionWithPreviousAd")
+        attributesAppInstallationToPreviousAd = try container.decodeIfPresent(
+          "attributesAppInstallationToPreviousAd")
+        honorsLimitedAdTracking = try container.decodeIfPresent("honorsLimitedAdTracking")
+        servesAds = try container.decodeIfPresent("servesAds")
+      }
 
-            public func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: StringCodingKey.self)
+      public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
 
-                try container.encodeIfPresent(attributesActionWithPreviousAd, forKey: "attributesActionWithPreviousAd")
-                try container.encodeIfPresent(attributesAppInstallationToPreviousAd, forKey: "attributesAppInstallationToPreviousAd")
-                try container.encodeIfPresent(honorsLimitedAdTracking, forKey: "honorsLimitedAdTracking")
-                try container.encodeIfPresent(servesAds, forKey: "servesAds")
-            }
-
-        }
-
-        public init(_id: String, type: ASCType, attributes: Attributes? = nil) {
-            self._id = _id
-            self.type = type
-            self.attributes = attributes
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            _id = try container.decode("id")
-            type = try container.decode("type")
-            attributes = try container.decodeIfPresent("attributes")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encode(_id, forKey: "id")
-            try container.encode(type, forKey: "type")
-            try container.encodeIfPresent(attributes, forKey: "attributes")
-        }
+        try container.encodeIfPresent(
+          attributesActionWithPreviousAd, forKey: "attributesActionWithPreviousAd")
+        try container.encodeIfPresent(
+          attributesAppInstallationToPreviousAd, forKey: "attributesAppInstallationToPreviousAd")
+        try container.encodeIfPresent(honorsLimitedAdTracking, forKey: "honorsLimitedAdTracking")
+        try container.encodeIfPresent(servesAds, forKey: "servesAds")
+      }
 
     }
 
-    public init(data: DataType) {
-        self.data = data
+    public init(_id: String, type: ASCType, attributes: Attributes? = nil) {
+      self._id = _id
+      self.type = type
+      self.attributes = attributes
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        data = try container.decode("data")
+      _id = try container.decode("id")
+      type = try container.decode("type")
+      attributes = try container.decodeIfPresent("attributes")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(data, forKey: "data")
+      try container.encode(_id, forKey: "id")
+      try container.encode(type, forKey: "type")
+      try container.encodeIfPresent(attributes, forKey: "attributes")
     }
+
+  }
+
+  public init(data: DataType) {
+    self.data = data
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    data = try container.decode("data")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(data, forKey: "data")
+  }
 
 }

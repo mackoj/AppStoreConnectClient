@@ -6,10 +6,10 @@
 import Foundation
 
 public enum ASCBrazilAgeRating: String, Codable, Equatable, CaseIterable {
-    case l = "L"
-    case ten = "TEN"
-    case twelve = "TWELVE"
-    case fourteen = "FOURTEEN"
-    case sixteen = "SIXTEEN"
-    case eighteen = "EIGHTEEN"
+  case l = "L"
+  case ten = "TEN"
+  case twelve = "TWELVE"
+  case fourteen = "FOURTEEN"
+  case sixteen = "SIXTEEN"
+  case eighteen = "EIGHTEEN"
 }

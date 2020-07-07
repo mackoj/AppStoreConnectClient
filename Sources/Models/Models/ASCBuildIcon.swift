@@ -7,68 +7,68 @@ import Foundation
 
 public struct ASCBuildIcon: AppStoreConnectBaseModel {
 
-    public enum ASCType: String, Codable, Equatable, CaseIterable {
-        case buildIcons = "buildIcons"
-    }
+  public enum ASCType: String, Codable, Equatable, CaseIterable {
+    case buildIcons = "buildIcons"
+  }
 
-    public var links: ASCResourceLinks
+  public var links: ASCResourceLinks
 
-    public var _id: String
+  public var _id: String
 
-    public var type: ASCType
+  public var type: ASCType
 
-    public var attributes: Attributes?
+  public var attributes: Attributes?
 
-    public struct Attributes: AppStoreConnectBaseModel {
+  public struct Attributes: AppStoreConnectBaseModel {
 
-        public var iconAsset: ASCImageAsset?
+    public var iconAsset: ASCImageAsset?
 
-        public var iconType: ASCIconAssetType?
+    public var iconType: ASCIconAssetType?
 
-        public init(iconAsset: ASCImageAsset? = nil, iconType: ASCIconAssetType? = nil) {
-            self.iconAsset = iconAsset
-            self.iconType = iconType
-        }
-
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-            iconAsset = try container.decodeIfPresent("iconAsset")
-            iconType = try container.decodeIfPresent("iconType")
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: StringCodingKey.self)
-
-            try container.encodeIfPresent(iconAsset, forKey: "iconAsset")
-            try container.encodeIfPresent(iconType, forKey: "iconType")
-        }
-
-    }
-
-    public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
-        self.links = links
-        self._id = _id
-        self.type = type
-        self.attributes = attributes
+    public init(iconAsset: ASCImageAsset? = nil, iconType: ASCIconAssetType? = nil) {
+      self.iconAsset = iconAsset
+      self.iconType = iconType
     }
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+      let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        links = try container.decode("links")
-        _id = try container.decode("id")
-        type = try container.decode("type")
-        attributes = try container.decodeIfPresent("attributes")
+      iconAsset = try container.decodeIfPresent("iconAsset")
+      iconType = try container.decodeIfPresent("iconType")
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+      var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(links, forKey: "links")
-        try container.encode(_id, forKey: "id")
-        try container.encode(type, forKey: "type")
-        try container.encodeIfPresent(attributes, forKey: "attributes")
+      try container.encodeIfPresent(iconAsset, forKey: "iconAsset")
+      try container.encodeIfPresent(iconType, forKey: "iconType")
     }
+
+  }
+
+  public init(links: ASCResourceLinks, _id: String, type: ASCType, attributes: Attributes? = nil) {
+    self.links = links
+    self._id = _id
+    self.type = type
+    self.attributes = attributes
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+    links = try container.decode("links")
+    _id = try container.decode("id")
+    type = try container.decode("type")
+    attributes = try container.decodeIfPresent("attributes")
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
+
+    try container.encode(links, forKey: "links")
+    try container.encode(_id, forKey: "id")
+    try container.encode(type, forKey: "type")
+    try container.encodeIfPresent(attributes, forKey: "attributes")
+  }
 
 }

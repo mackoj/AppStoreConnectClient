@@ -7,42 +7,45 @@ import Foundation
 
 public struct ASCUploadOperation: AppStoreConnectBaseModel {
 
-    public var length: Int?
+  public var length: Int?
 
-    public var method: String?
+  public var method: String?
 
-    public var offset: Int?
+  public var offset: Int?
 
-    public var requestHeaders: [ASCUploadOperationHeader]?
+  public var requestHeaders: [ASCUploadOperationHeader]?
 
-    public var url: String?
+  public var url: String?
 
-    public init(length: Int? = nil, method: String? = nil, offset: Int? = nil, requestHeaders: [ASCUploadOperationHeader]? = nil, url: String? = nil) {
-        self.length = length
-        self.method = method
-        self.offset = offset
-        self.requestHeaders = requestHeaders
-        self.url = url
-    }
+  public init(
+    length: Int? = nil, method: String? = nil, offset: Int? = nil,
+    requestHeaders: [ASCUploadOperationHeader]? = nil, url: String? = nil
+  ) {
+    self.length = length
+    self.method = method
+    self.offset = offset
+    self.requestHeaders = requestHeaders
+    self.url = url
+  }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        length = try container.decodeIfPresent("length")
-        method = try container.decodeIfPresent("method")
-        offset = try container.decodeIfPresent("offset")
-        requestHeaders = try container.decodeArrayIfPresent("requestHeaders")
-        url = try container.decodeIfPresent("url")
-    }
+    length = try container.decodeIfPresent("length")
+    method = try container.decodeIfPresent("method")
+    offset = try container.decodeIfPresent("offset")
+    requestHeaders = try container.decodeArrayIfPresent("requestHeaders")
+    url = try container.decodeIfPresent("url")
+  }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encodeIfPresent(length, forKey: "length")
-        try container.encodeIfPresent(method, forKey: "method")
-        try container.encodeIfPresent(offset, forKey: "offset")
-        try container.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
-        try container.encodeIfPresent(url, forKey: "url")
-    }
+    try container.encodeIfPresent(length, forKey: "length")
+    try container.encodeIfPresent(method, forKey: "method")
+    try container.encodeIfPresent(offset, forKey: "offset")
+    try container.encodeIfPresent(requestHeaders, forKey: "requestHeaders")
+    try container.encodeIfPresent(url, forKey: "url")
+  }
 
 }

@@ -6,7 +6,7 @@
 import Foundation
 
 public enum ASCKidsAgeBand: String, Codable, Equatable, CaseIterable {
-    case fiveAndUnder = "FIVE_AND_UNDER"
-    case sixToEight = "SIX_TO_EIGHT"
-    case nineToEleven = "NINE_TO_ELEVEN"
+  case fiveAndUnder = "FIVE_AND_UNDER"
+  case sixToEight = "SIX_TO_EIGHT"
+  case nineToEleven = "NINE_TO_ELEVEN"
 }

@@ -7,32 +7,32 @@ import Foundation
 
 public struct ASCImageAsset: AppStoreConnectBaseModel {
 
-    public var height: Int?
+  public var height: Int?
 
-    public var templateUrl: String?
+  public var templateUrl: String?
 
-    public var width: Int?
+  public var width: Int?
 
-    public init(height: Int? = nil, templateUrl: String? = nil, width: Int? = nil) {
-        self.height = height
-        self.templateUrl = templateUrl
-        self.width = width
-    }
+  public init(height: Int? = nil, templateUrl: String? = nil, width: Int? = nil) {
+    self.height = height
+    self.templateUrl = templateUrl
+    self.width = width
+  }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        height = try container.decodeIfPresent("height")
-        templateUrl = try container.decodeIfPresent("templateUrl")
-        width = try container.decodeIfPresent("width")
-    }
+    height = try container.decodeIfPresent("height")
+    templateUrl = try container.decodeIfPresent("templateUrl")
+    width = try container.decodeIfPresent("width")
+  }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encodeIfPresent(height, forKey: "height")
-        try container.encodeIfPresent(templateUrl, forKey: "templateUrl")
-        try container.encodeIfPresent(width, forKey: "width")
-    }
+    try container.encodeIfPresent(height, forKey: "height")
+    try container.encodeIfPresent(templateUrl, forKey: "templateUrl")
+    try container.encodeIfPresent(width, forKey: "width")
+  }
 
 }

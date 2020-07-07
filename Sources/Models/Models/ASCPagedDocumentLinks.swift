@@ -7,32 +7,32 @@ import Foundation
 
 public struct ASCPagedDocumentLinks: AppStoreConnectBaseModel {
 
-    public var _self: String
+  public var _self: String
 
-    public var first: String?
+  public var first: String?
 
-    public var next: String?
+  public var next: String?
 
-    public init(_self: String, first: String? = nil, next: String? = nil) {
-        self._self = _self
-        self.first = first
-        self.next = next
-    }
+  public init(_self: String, first: String? = nil, next: String? = nil) {
+    self._self = _self
+    self.first = first
+    self.next = next
+  }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: StringCodingKey.self)
 
-        _self = try container.decode("self")
-        first = try container.decodeIfPresent("first")
-        next = try container.decodeIfPresent("next")
-    }
+    _self = try container.decode("self")
+    first = try container.decodeIfPresent("first")
+    next = try container.decodeIfPresent("next")
+  }
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: StringCodingKey.self)
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: StringCodingKey.self)
 
-        try container.encode(_self, forKey: "self")
-        try container.encodeIfPresent(first, forKey: "first")
-        try container.encodeIfPresent(next, forKey: "next")
-    }
+    try container.encode(_self, forKey: "self")
+    try container.encodeIfPresent(first, forKey: "first")
+    try container.encodeIfPresent(next, forKey: "next")
+  }
 
 }
