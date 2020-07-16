@@ -1,7 +1,5 @@
 # AppStoreConnect
 
-This is an api generated from a OpenAPI 3.0 spec with [SwagGen](https://github.com/yonaskolb/SwagGen)
-
 ## Operation
 
 Each operation lives under the `AppStoreConnect` namespace and within an optional tag: `AppStoreConnect(.tagName).operationId`. If an operation doesn't have an operationId one will be generated from the path and method.
